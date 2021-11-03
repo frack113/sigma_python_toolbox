@@ -197,9 +197,20 @@ Alternately, you can set the following registry value:
 * sysmon
 Sysmon must be installed on configured.
 The basic configuration of sysmon configuration can be found on :
-- https://github.com/SwiftOnSecurity/sysmon-config
-- https://github.com/Neo23x0/sysmon-config
-- https://github.com/olafhartong/sysmon-modular
+  - https://github.com/SwiftOnSecurity/sysmon-config
+  - https://github.com/Neo23x0/sysmon-config
+  - https://github.com/olafhartong/sysmon-modular
+
+* buildin
+You must enable the Audit Process Creation audit policy so that 4688 events are generated.
+You can enable this audit policy from the following Group Policy Object (GPO) container: 
+`Computer Configuration\Windows Settings\Security Settings\Advanced Audit Policy Configuration\System Audit Policies\Detailed Tracking`.
+You must enable the Include command line in process creation events GPO setting.
+You can find this setting in the following GPO container:
+`Computer Configuration\Administrative Templates\System\Audit Process Creation`.
+
+Alternatively, you can enable this setting in the local system registry by setting the 
+`HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System\Audit\ProcessCreationIncludeCmdLine_Enabled = 1`
 """,
     "windows_file_change_None":"""
 * sysmon
@@ -392,7 +403,7 @@ for rule_file in files_list:
                 md_file.write(f'## Change History\n\n- {datetime.date.today()} file creation\n\n')
                 md_file.write(f'## Required Log Sources\n{source}\n')
                 md_file.write(f'## Required Audit Policy / Config\n{audit}\n')
-                md_file.write('## Descriptio`\n\nPlease complete the file\n\n')
+                md_file.write('## Description\n\nPlease complete the file\n\n')
                 md_file.write('## Code\n\nPlease complete the file\n\n')
                 md_file.write('## Example\n\nPlease complete the file\n\n')
 
