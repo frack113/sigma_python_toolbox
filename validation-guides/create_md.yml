@@ -44,6 +44,40 @@ windows_ps_classic_script_None:
         EventID: 800
         Channel: Windows PowerShell (%SystemRoot%\System32\Winevt\Logs\Windows PowerShell.evtx)
     audit: ""
+windows_None_taskscheduler:
+    source: |-
+        * windows build-in
+        Channel: Microsoft-Windows-TaskScheduler/Operational (%SystemRoot%\System32\Winevt\Logs\Microsoft-Windows-TaskScheduler%4Operational.evtx)
+    audit: ""
+windows_None_wmi:
+    source: |-
+        * windows build-in
+        Channel: Microsoft-Windows-WMI-Activity/Operational (%SystemRoot%\System32\Winevt\Logs\Microsoft-Windows-WMI-Activity%4Operational.evtx)
+    audit: ""
+windows_None_windefend:
+    source: |-
+        * windows defender
+        Channel:
+        Microsoft-Windows-Windows Defender/Operational (%SystemRoot%\System32\Winevt\Logs\Microsoft-Windows-Windows Defender%4Operational.evtx)
+        * windows defender
+        Channel:
+        Microsoft-Windows-Windows Defender/WHC (%SystemRoot%\System32\Winevt\Logs\Microsoft-Windows-Windows Defender%4WHC.evtx)
+    audit: ""
+windows_None_application:
+    source: |-
+        * windows build-in
+        Channel: Application (%SystemRoot%\System32\Winevt\Logs\Application.evtx)
+    audit: ""
+windows_None_system:
+    source: |-
+        * windows build-in
+        Channel: System (%SystemRoot%\System32\Winevt\Logs\System.evtx)
+    audit: ""
+windows_None_security:
+    source: |-
+        * windows build-in
+        Channel: Security (%SystemRoot%\System32\Winevt\Logs\Security.evtx)
+    audit: ""
 windows_process_creation_None:
     source: |-
         * sysmon

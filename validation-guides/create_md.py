@@ -34,11 +34,12 @@ import pathlib
 import tqdm
 import datetime
 import argparse
+from collections import OrderedDict
 
 def get_sigma_logsource(yaml_dict):
-    product = yaml_dict["logsource"]["product"] if "product" in yaml_dict["logsource"] else "None"
-    category = yaml_dict["logsource"]["category"] if "category" in yaml_dict["logsource"] else "None"
-    service = yaml_dict["logsource"]["service"] if "service" in yaml_dict["logsource"] else "None"
+    product = yaml_dict["logsource"]["product"].lower() if "product" in yaml_dict["logsource"] else "None"
+    category = yaml_dict["logsource"]["category"].lower() if "category" in yaml_dict["logsource"] else "None"
+    service = yaml_dict["logsource"]["service"].lower() if "service" in yaml_dict["logsource"] else "None"
     return f"{product}_{category}_{service}"
 
 def get_source(logsource):
@@ -55,12 +56,14 @@ with open('create_md.yml','r',encoding='UTF-8') as file:
 parser = argparse.ArgumentParser(description='Create the md file with common information for new rules')
 parser.add_argument("--input", '-i', help="Sigma rules directory", type=str, default="/../sigma/rules")
 parser.add_argument("--output", '-o', help="Output directory", default=".", type=str)
+parser.add_argument("--verbose", '-v', help="Display missing keys", default=False, action='store_true')
 args = parser.parse_args()
 
 path_rule = args.input
 output_dir = args.output
 files_list = [yml for yml in pathlib.Path(path_rule).glob('**/*.yml')]
 my_bar = tqdm.tqdm(total=len(files_list))
+missing_keys = {}
 
 for rule_file in files_list:
     my_bar.update(1)
@@ -72,6 +75,12 @@ for rule_file in files_list:
         title = yaml_dict["title"]
         id = yaml_dict["id"]
         logsource = get_sigma_logsource(yaml_dict)
+        if logsource not in full_dict:
+            if logsource in missing_keys:
+                missing_keys[logsource]["count"] = missing_keys[logsource]["count"] + 1
+                missing_keys[logsource]["rules"].append(rule_file)
+            else:
+                missing_keys[logsource] = { "count": 1, "rules": [rule_file] }
         source = get_source(logsource)
         audit = get_audit(logsource)
     if pathlib.Path(new_file).exists() != True:
@@ -88,4 +97,9 @@ for rule_file in files_list:
     else:
         pass
         #next check if the source and audit parts need to be update :)
-
+if missing_keys != {} and args.verbose:
+    missing_keys = OrderedDict(x for x in sorted(missing_keys.items()))
+    print("Missing {} keys in template:".format(len(missing_keys)))
+    print("-------------------------")
+    for k,v in missing_keys.items():
+        print("Key {} is missing and used by {} rule(s)".format(k,v["count"]))
