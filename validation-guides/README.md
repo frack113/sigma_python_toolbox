@@ -19,6 +19,14 @@ The key is the `{product}_{category}_{service}` from sigma rules
 - [ ] change the md file name if the sigma filename change (check by id)
 - [ ] fix my bugs / issues
 
+### Evolution
+
+It is not decided yet but the management in yaml and automatic generation of a md as on other project seems a relevant and perennial approach
+
+
+### Thanks
+ZikyHD  
+
 ## update_from_evtx.py
 to do on free time on day \
 Update file with evtx malware references when possible (only for file without)
