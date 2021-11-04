@@ -346,3 +346,31 @@ windows_None_sysmon:
             - https://github.com/SwiftOnSecurity/sysmon-config
             - https://github.com/Neo23x0/sysmon-config
             - https://github.com/olafhartong/sysmon-modular
+zeek_None_dce_rpc:
+    source: |-
+        log of zeek https://zeek.org/
+    audit: ""
+zeek_None_dns:
+    source: |-
+        log of zeek https://zeek.org/
+    audit: ""
+zeek_None_http:
+    source: |-
+        log of zeek https://zeek.org/
+    audit: ""
+zeek_None_kerberos:
+    source: |-
+        log of zeek https://zeek.org/
+    audit: ""
+zeek_None_rdp:
+    source: |-
+        log of zeek https://zeek.org/
+    audit: ""
+zeek_None_smb_files:
+    source: |-
+        log of zeek https://zeek.org/
+    audit: ""
+zeek_None_x509:
+    source: |-
+        log of zeek https://zeek.org/
+    audit: ""

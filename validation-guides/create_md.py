@@ -54,7 +54,7 @@ with open('create_md.yml','r',encoding='UTF-8') as file:
     full_dict = yaml.load(file, Loader=yaml.BaseLoader)
 
 parser = argparse.ArgumentParser(description='Create the md file with common information for new rules')
-parser.add_argument("--input", '-i', help="Sigma rules directory", type=str, default="/../sigma/rules")
+parser.add_argument("--input", '-i', help="Sigma rules directory", type=str, default="../sigma/rules")
 parser.add_argument("--output", '-o', help="Output directory", default=".", type=str)
 parser.add_argument("--verbose", '-v', help="Display missing keys", default=False, action='store_true')
 args = parser.parse_args()
