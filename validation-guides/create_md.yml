@@ -119,7 +119,7 @@ windows_process_terminated_None:
             - https://github.com/SwiftOnSecurity/sysmon-config
             - https://github.com/Neo23x0/sysmon-config
             - https://github.com/olafhartong/sysmon-modular
-windows_driver_loaded_None:
+windows_driver_load_None:
     source: |-
         * sysmon
         EventID: 6
@@ -131,7 +131,7 @@ windows_driver_loaded_None:
             - https://github.com/SwiftOnSecurity/sysmon-config
             - https://github.com/Neo23x0/sysmon-config
             - https://github.com/olafhartong/sysmon-modular
-windows_image_loaded_None:
+windows_image_load_None:
     source: |-
         * sysmon
         EventID: 7
@@ -296,6 +296,15 @@ windows_sysmon_error_None:
         * sysmon
         EventID: 255
         Channel: Microsoft-Windows-Sysmon/Operational (%SystemRoot%\System32\Winevt\Logs\Microsoft-Windows-Sysmon%4Operational.evtx)
+    audit: |-
+        * sysmon
+        Sysmon must be installed on configured.
+        The basic configuration of sysmon configuration can be found on :
+            - https://github.com/SwiftOnSecurity/sysmon-config
+            - https://github.com/Neo23x0/sysmon-config
+            - https://github.com/olafhartong/sysmon-modular
+windows_None_sysmon:
+    source: Please complete the file
     audit: |-
         * sysmon
         Sysmon must be installed on configured.

@@ -8,7 +8,7 @@ Date: 03/11/2021
 Author: frack113
 Version: 1.0
 Description: 
-    create the md file with commun information for new rules
+    create the md file with common information for new rules
 Requirements:
     python 3.7 min
 Todo:
@@ -33,6 +33,7 @@ import yaml
 import pathlib
 import tqdm
 import datetime
+import argparse
 
 def get_sigma_logsource(yaml_dict):
     product = yaml_dict["logsource"]["product"] if "product" in yaml_dict["logsource"] else "None"
@@ -51,13 +52,19 @@ def get_audit(logsource):
 with open('create_md.yml','r',encoding='UTF-8') as file:
     full_dict = yaml.load(file, Loader=yaml.BaseLoader)
 
-path_rule = '../sigma/rules'
+parser = argparse.ArgumentParser(description='Create the md file with common information for new rules')
+parser.add_argument("--input", '-i', help="Sigma rules directory", type=str, default="/../sigma/rules")
+parser.add_argument("--output", '-o', help="Output directory", default=".", type=str)
+args = parser.parse_args()
+
+path_rule = args.input
+output_dir = args.output
 files_list = [yml for yml in pathlib.Path(path_rule).glob('**/*.yml')]
 my_bar = tqdm.tqdm(total=len(files_list))
 
 for rule_file in files_list:
     my_bar.update(1)
-    directory = str(rule_file.parent).replace('\\','/').replace(path_rule,'.')
+    directory = str(rule_file.parent).replace('\\','/').replace(path_rule,output_dir)
     pathlib.Path(directory).mkdir(parents=True, exist_ok=True)
     new_file = f"{directory}/{rule_file.name}".replace('.yml','.md')
     with rule_file.open('r', encoding='UTF-8') as file:
