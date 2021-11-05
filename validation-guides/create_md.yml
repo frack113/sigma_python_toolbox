@@ -2,10 +2,10 @@ None_None_None:
     source: Please complete the file
     audit: Please complete the file
 windows_ps_module_None:
-    source: |-
+    source: |
         EventID: 4103
         Channel: Microsoft-Windows-PowerShell/Operational (%SystemRoot%\System32\Winevt\Logs\Microsoft-Windows-PowerShell%4Operational.evtx)"
-    audit: |-
+    audit: |
         To enable module logging:
 
         1. In the Windows PowerShell GPO settings, set Turn on Module Logging to enabled.
@@ -20,42 +20,42 @@ windows_ps_module_None:
         HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\ModuleLogging \ModuleNames → * = *
         ```
 windows_ps_script_None:
-    source: |-
+    source: |
         EventID: 4104
         Channel: Microsoft-Windows-PowerShell/Operational (%SystemRoot%\System32\Winevt\Logs\Microsoft-Windows-PowerShell%4Operational.evtx)
-    audit: |-
+    audit: |
         To enable script block logging, go to the Windows PowerShell GPO settings and set Turn on `PowerShell Script Block Logging to enabled.
 
         Alternately, you can set the following registry value:
         `HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging → EnableScriptBlockLogging = 1`
 
 windows_ps_classic_start_None:
-    source: |-
+    source: |
         EventID: 400
         Channel: Windows PowerShell (%SystemRoot%\System32\Winevt\Logs\Windows PowerShell.evtx)
     audit: ""
 windows_ps_classic_provider_start_None:
-    source: |-
+    source: |
         EventID: 600
         Channel: Windows PowerShell (%SystemRoot%\System32\Winevt\Logs\Windows PowerShell.evtx)
     audit: ""
 windows_ps_classic_script_None:
-    source: |-
+    source: |
         EventID: 800
         Channel: Windows PowerShell (%SystemRoot%\System32\Winevt\Logs\Windows PowerShell.evtx)
     audit: ""
 windows_None_taskscheduler:
-    source: |-
+    source: |
         * windows build-in
         Channel: Microsoft-Windows-TaskScheduler/Operational (%SystemRoot%\System32\Winevt\Logs\Microsoft-Windows-TaskScheduler%4Operational.evtx)
     audit: ""
 windows_None_wmi:
-    source: |-
+    source: |
         * windows build-in
         Channel: Microsoft-Windows-WMI-Activity/Operational (%SystemRoot%\System32\Winevt\Logs\Microsoft-Windows-WMI-Activity%4Operational.evtx)
     audit: ""
 windows_None_windefend:
-    source: |-
+    source: |
         * windows defender
         Channel:
         Microsoft-Windows-Windows Defender/Operational (%SystemRoot%\System32\Winevt\Logs\Microsoft-Windows-Windows Defender%4Operational.evtx)
@@ -64,22 +64,22 @@ windows_None_windefend:
         Microsoft-Windows-Windows Defender/WHC (%SystemRoot%\System32\Winevt\Logs\Microsoft-Windows-Windows Defender%4WHC.evtx)
     audit: ""
 windows_None_application:
-    source: |-
+    source: |
         * windows build-in
         Channel: Application (%SystemRoot%\System32\Winevt\Logs\Application.evtx)
     audit: ""
 windows_None_system:
-    source: |-
+    source: |
         * windows build-in
         Channel: System (%SystemRoot%\System32\Winevt\Logs\System.evtx)
     audit: ""
 windows_None_security:
-    source: |-
+    source: |
         * windows build-in
         Channel: Security (%SystemRoot%\System32\Winevt\Logs\Security.evtx)
     audit: ""
 windows_process_creation_None:
-    source: |-
+    source: |
         * sysmon
         EventID: 1
         Channel: Microsoft-Windows-Sysmon/Operational (%SystemRoot%\System32\Winevt\Logs\Microsoft-Windows-Sysmon%4Operational.evtx)
@@ -87,7 +87,7 @@ windows_process_creation_None:
         * windows build-in
         EventID: 4688
         Channel: Security (%SystemRoot%\System32\Winevt\Logs\Security.evtx)
-    audit: |-
+    audit: |
         * sysmon
         Sysmon must be installed on configured.
         The basic configuration of sysmon configuration can be found on :
@@ -106,11 +106,11 @@ windows_process_creation_None:
         Alternatively, you can enable this setting in the local system registry by setting the 
         `HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System\Audit\ProcessCreationIncludeCmdLine_Enabled = 1`
 windows_file_change_None:
-    source: |-
+    source: |
         * sysmon
         EventID: 2
         Channel: Microsoft-Windows-Sysmon/Operational (%SystemRoot%\System32\Winevt\Logs\Microsoft-Windows-Sysmon%4Operational.evtx)
-    audit: |-
+    audit: |
         * sysmon
         Sysmon must be installed on configured.
         The basic configuration of sysmon configuration can be found on :
@@ -118,11 +118,11 @@ windows_file_change_None:
             - https://github.com/Neo23x0/sysmon-config
             - https://github.com/olafhartong/sysmon-modular
 windows_network_connection_None:
-    source: |-
+    source: |
         * sysmon
         EventID: 3
         Channel: Microsoft-Windows-Sysmon/Operational (%SystemRoot%\System32\Winevt\Logs\Microsoft-Windows-Sysmon%4Operational.evtx)
-    audit: |-
+    audit: |
         * sysmon
         Sysmon must be installed on configured.
         The basic configuration of sysmon configuration can be found on :
@@ -130,11 +130,11 @@ windows_network_connection_None:
             - https://github.com/Neo23x0/sysmon-config
             - https://github.com/olafhartong/sysmon-modular
 windows_sysmon_status_None:
-    source: |-
+    source: |
         * sysmon
         EventID: 4 or 16
         Channel: Microsoft-Windows-Sysmon/Operational (%SystemRoot%\System32\Winevt\Logs\Microsoft-Windows-Sysmon%4Operational.evtx)
-    audit: |-
+    audit: |
         * sysmon
         Sysmon must be installed on configured.
         The basic configuration of sysmon configuration can be found on :
@@ -142,11 +142,11 @@ windows_sysmon_status_None:
             - https://github.com/Neo23x0/sysmon-config
             - https://github.com/olafhartong/sysmon-modular
 windows_process_terminated_None:
-    source: |-
+    source: |
         * sysmon
         EventID: 5
         Channel: Microsoft-Windows-Sysmon/Operational (%SystemRoot%\System32\Winevt\Logs\Microsoft-Windows-Sysmon%4Operational.evtx)
-    audit: |-
+    audit: |
         * sysmon
         Sysmon must be installed on configured.
         The basic configuration of sysmon configuration can be found on :
@@ -154,11 +154,11 @@ windows_process_terminated_None:
             - https://github.com/Neo23x0/sysmon-config
             - https://github.com/olafhartong/sysmon-modular
 windows_driver_load_None:
-    source: |-
+    source: |
         * sysmon
         EventID: 6
         Channel: Microsoft-Windows-Sysmon/Operational (%SystemRoot%\System32\Winevt\Logs\Microsoft-Windows-Sysmon%4Operational.evtx)
-    audit: |-
+    audit: |
         * sysmon
         Sysmon must be installed on configured.
         The basic configuration of sysmon configuration can be found on :
@@ -166,11 +166,11 @@ windows_driver_load_None:
             - https://github.com/Neo23x0/sysmon-config
             - https://github.com/olafhartong/sysmon-modular
 windows_image_load_None:
-    source: |-
+    source: |
         * sysmon
         EventID: 7
         Channel: Microsoft-Windows-Sysmon/Operational (%SystemRoot%\System32\Winevt\Logs\Microsoft-Windows-Sysmon%4Operational.evtx)
-    audit: |-
+    audit: |
         * sysmon
         Sysmon must be installed on configured.
         The basic configuration of sysmon configuration can be found on :
@@ -178,11 +178,11 @@ windows_image_load_None:
             - https://github.com/Neo23x0/sysmon-config
             - https://github.com/olafhartong/sysmon-modular
 windows_create_remote_thread_None:
-    source: |-
+    source: |
         * sysmon
         EventID: 8
         Channel: Microsoft-Windows-Sysmon/Operational (%SystemRoot%\System32\Winevt\Logs\Microsoft-Windows-Sysmon%4Operational.evtx)
-    audit: |-
+    audit: |
         * sysmon
         Sysmon must be installed on configured.
         The basic configuration of sysmon configuration can be found on :
@@ -190,11 +190,11 @@ windows_create_remote_thread_None:
             - https://github.com/Neo23x0/sysmon-config
             - https://github.com/olafhartong/sysmon-modular
 windows_raw_access_thread_None:
-    source: |-
+    source: |
         * sysmon
         EventID: 9
         Channel: Microsoft-Windows-Sysmon/Operational (%SystemRoot%\System32\Winevt\Logs\Microsoft-Windows-Sysmon%4Operational.evtx)
-    audit: |-
+    audit: |
         * sysmon
         Sysmon must be installed on configured.
         The basic configuration of sysmon configuration can be found on :
@@ -202,11 +202,11 @@ windows_raw_access_thread_None:
             - https://github.com/Neo23x0/sysmon-config
             - https://github.com/olafhartong/sysmon-modular
 windows_process_access_None:
-    source: |-
+    source: |
         * sysmon
         EventID: 10
         Channel: Microsoft-Windows-Sysmon/Operational (%SystemRoot%\System32\Winevt\Logs\Microsoft-Windows-Sysmon%4Operational.evtx)
-    audit: |-
+    audit: |
         * sysmon
         Sysmon must be installed on configured.
         The basic configuration of sysmon configuration can be found on :
@@ -214,11 +214,11 @@ windows_process_access_None:
             - https://github.com/Neo23x0/sysmon-config
             - https://github.com/olafhartong/sysmon-modular
 windows_file_creation_None:
-    source: |-
+    source: |
         * sysmon
         EventID: 11
         Channel: Microsoft-Windows-Sysmon/Operational (%SystemRoot%\System32\Winevt\Logs\Microsoft-Windows-Sysmon%4Operational.evtx)
-    audit: |-
+    audit: |
         * sysmon
         Sysmon must be installed on configured.
         The basic configuration of sysmon configuration can be found on :
@@ -226,7 +226,7 @@ windows_file_creation_None:
             - https://github.com/Neo23x0/sysmon-config
             - https://github.com/olafhartong/sysmon-modular
 windows_registry_event_None:
-    source: |-
+    source: |
         * sysmon
         EventID: 12,13 or 14
         Channel: Microsoft-Windows-Sysmon/Operational (%SystemRoot%\System32\Winevt\Logs\Microsoft-Windows-Sysmon%4Operational.evtx)
@@ -234,7 +234,7 @@ windows_registry_event_None:
         * windows build-in
         EventID: 4657
         Channel: Security (%SystemRoot%\System32\Winevt\Logs\Security.evtx)
-    audit: |-
+    audit: |
         * sysmon
         Sysmon must be installed on configured.
         The basic configuration of sysmon configuration can be found on :
@@ -242,11 +242,11 @@ windows_registry_event_None:
             - https://github.com/Neo23x0/sysmon-config
             - https://github.com/olafhartong/sysmon-modular
 windows_create_stream_hash_None:
-    source: |-
+    source: |
         * sysmon
         EventID: 15
         Channel: Microsoft-Windows-Sysmon/Operational (%SystemRoot%\System32\Winevt\Logs\Microsoft-Windows-Sysmon%4Operational.evtx)
-    audit: |-
+    audit: |
         * sysmon
         Sysmon must be installed on configured.
         The basic configuration of sysmon configuration can be found on :
@@ -254,11 +254,11 @@ windows_create_stream_hash_None:
             - https://github.com/Neo23x0/sysmon-config
             - https://github.com/olafhartong/sysmon-modular
 windows_pipe_created_None:
-    source: |-
+    source: |
         * sysmon
         EventID: 17 or 18
         Channel: Microsoft-Windows-Sysmon/Operational (%SystemRoot%\System32\Winevt\Logs\Microsoft-Windows-Sysmon%4Operational.evtx)
-    audit: |-
+    audit: |
         * sysmon
         Sysmon must be installed on configured.
         The basic configuration of sysmon configuration can be found on :
@@ -266,11 +266,11 @@ windows_pipe_created_None:
             - https://github.com/Neo23x0/sysmon-config
             - https://github.com/olafhartong/sysmon-modular
 windows_wmi_event_None:
-    source: |-
+    source: |
         * sysmon
         EventID: 19,20 or 21
         Channel: Microsoft-Windows-Sysmon/Operational (%SystemRoot%\System32\Winevt\Logs\Microsoft-Windows-Sysmon%4Operational.evtx)
-    audit: |-
+    audit: |
         * sysmon
         Sysmon must be installed on configured.
         The basic configuration of sysmon configuration can be found on :
@@ -278,11 +278,11 @@ windows_wmi_event_None:
             - https://github.com/Neo23x0/sysmon-config
             - https://github.com/olafhartong/sysmon-modular
 windows_dns_query_None:
-    source: |-
+    source: |
         * sysmon
         EventID: 22
         Channel: Microsoft-Windows-Sysmon/Operational (%SystemRoot%\System32\Winevt\Logs\Microsoft-Windows-Sysmon%4Operational.evtx)
-    audit: |-
+    audit: |
         * sysmon
         Sysmon must be installed on configured.
         The basic configuration of sysmon configuration can be found on :
@@ -290,11 +290,11 @@ windows_dns_query_None:
             - https://github.com/Neo23x0/sysmon-config
             - https://github.com/olafhartong/sysmon-modular
 windows_file_delete_None:
-    source: |-
+    source: |
         * sysmon
         EventID: 23 or 26
         Channel: Microsoft-Windows-Sysmon/Operational (%SystemRoot%\System32\Winevt\Logs\Microsoft-Windows-Sysmon%4Operational.evtx)
-    audit: |-
+    audit: |
         * sysmon
         Sysmon must be installed on configured.
         The basic configuration of sysmon configuration can be found on :
@@ -302,11 +302,11 @@ windows_file_delete_None:
             - https://github.com/Neo23x0/sysmon-config
             - https://github.com/olafhartong/sysmon-modular
 windows_clipboard_capture_None:
-    source: |-
+    source: |
         * sysmon
         EventID: 24
         Channel: Microsoft-Windows-Sysmon/Operational (%SystemRoot%\System32\Winevt\Logs\Microsoft-Windows-Sysmon%4Operational.evtx)
-    audit: |-
+    audit: |
         * sysmon
         Sysmon must be installed on configured.
         The basic configuration of sysmon configuration can be found on :
@@ -314,11 +314,11 @@ windows_clipboard_capture_None:
             - https://github.com/Neo23x0/sysmon-config
             - https://github.com/olafhartong/sysmon-modular
 windows_process_tampering_None:
-    source: |-
+    source: |
         * sysmon
         EventID: 25
         Channel: Microsoft-Windows-Sysmon/Operational (%SystemRoot%\System32\Winevt\Logs\Microsoft-Windows-Sysmon%4Operational.evtx)
-    audit: |-
+    audit: |
         * sysmon
         Sysmon must be installed on configured.
         The basic configuration of sysmon configuration can be found on :
@@ -326,11 +326,11 @@ windows_process_tampering_None:
             - https://github.com/Neo23x0/sysmon-config
             - https://github.com/olafhartong/sysmon-modular
 windows_sysmon_error_None:
-    source: |-
+    source: |
         * sysmon
         EventID: 255
         Channel: Microsoft-Windows-Sysmon/Operational (%SystemRoot%\System32\Winevt\Logs\Microsoft-Windows-Sysmon%4Operational.evtx)
-    audit: |-
+    audit: |
         * sysmon
         Sysmon must be installed on configured.
         The basic configuration of sysmon configuration can be found on :
@@ -339,7 +339,7 @@ windows_sysmon_error_None:
             - https://github.com/olafhartong/sysmon-modular
 windows_None_sysmon:
     source: Please complete the file
-    audit: |-
+    audit: |
         * sysmon
         Sysmon must be installed on configured.
         The basic configuration of sysmon configuration can be found on :
@@ -347,30 +347,30 @@ windows_None_sysmon:
             - https://github.com/Neo23x0/sysmon-config
             - https://github.com/olafhartong/sysmon-modular
 zeek_None_dce_rpc:
-    source: |-
+    source: |
         log of zeek https://zeek.org/
     audit: ""
 zeek_None_dns:
-    source: |-
+    source: |
         log of zeek https://zeek.org/
     audit: ""
 zeek_None_http:
-    source: |-
+    source: |
         log of zeek https://zeek.org/
     audit: ""
 zeek_None_kerberos:
-    source: |-
+    source: |
         log of zeek https://zeek.org/
     audit: ""
 zeek_None_rdp:
-    source: |-
+    source: |
         log of zeek https://zeek.org/
     audit: ""
 zeek_None_smb_files:
-    source: |-
+    source: |
         log of zeek https://zeek.org/
     audit: ""
 zeek_None_x509:
-    source: |-
+    source: |
         log of zeek https://zeek.org/
     audit: ""

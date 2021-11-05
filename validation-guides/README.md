@@ -1,7 +1,8 @@
 # validation-guides
 
 ## create_md.py
-I think this script to start creation of the md file for the new rules.\
+I think this script to start creation of the yml file for the new rules.\
+markdown file will be generate from the yaml.\
 Maybe one day it will be put or replaced by the official repository.
 
 ### create_md.yml 
@@ -12,21 +13,17 @@ The key is the `{product}_{category}_{service}` from sigma rules
 
 ### My todo
 
-- [ ] add a output for the missing key
+- [X] add a output for the missing key
 - [ ] add a repport of action
-- [ ] update create_md.yml
-- [ ] update the md file if create_md.yml is updated
-- [ ] change the md file name if the sigma filename change (check by id)
+- [ ] update the yml file if create_md.yml is updated
+- [ ] change the yml file name if the sigma filename change (check by id)
 - [ ] fix my bugs / issues
 
 ### Evolution
 
-It is not decided yet but the management in yaml and automatic generation of a md as on other project seems a relevant and perennial approach
+- [ ] update create_md.yml
+- [ ] add a pretty local md output
 
 
 ### Thanks
 ZikyHD  
-
-## update_from_evtx.py
-to do on free time on day \
-Update file with evtx malware references when possible (only for file without)
