@@ -1,0 +1,10 @@
+867613fb-fa60-4497-a017-a82df74a172c:
+  name: sysmon_powershell_execution_moduleload.yml
+  date: 2021/11/04
+  reason: duplicate does not contain an allow list of known processes
+  pr: 2227
+f2f01843-e7b8-4f95-a35a-d23584476423:
+  name: win_susp_security_eventlog_cleared.yml
+  date: 2021/07/22
+  reason: duplicate and not accurate
+  pr: 1722
