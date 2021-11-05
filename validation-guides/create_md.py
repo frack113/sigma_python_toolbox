@@ -16,25 +16,13 @@ Todo:
     - add more information 
 """
 
-""" Template beta
-Rule: Title
-Author
-Change History
-Required Log Sources
-Required Audit Policy / Config
-Description
-    How to trigger the rule
-Code
-    Code snippet or complete program code
-Example: Expected Event
-"""
-
 import ruamel.yaml
 import pathlib
 import tqdm
 import datetime
 import argparse
 from collections import OrderedDict
+import logging
 
 class knowledge():
     def _init_(self):
@@ -144,12 +132,14 @@ class sigma_info():
             return True
 
 #Main
+logging.basicConfig(filename='create_md.log',filemode='w',level=logging.INFO)
+logging.info("Wellcome into the log world")
 data = knowledge()
 data.load('create_md.yml')
 
 parser = argparse.ArgumentParser(description='Create the md file with common information for new rules')
 parser.add_argument("--input", '-i', help="Sigma rules directory", type=str, default="../sigma/rules")
-parser.add_argument("--output", '-o', help="Output directory", default=".", type=str)
+parser.add_argument("--output", '-o', help="Output directory", default="./rules", type=str)
 parser.add_argument("--verbose", '-v', help="Display missing keys", default=False, action='store_true')
 args = parser.parse_args()
 
@@ -158,31 +148,38 @@ output_dir = args.output
 sigma_list = [yml for yml in pathlib.Path(path_rule).glob('**/*.yml')]
 info_list = [yml for yml in pathlib.Path(output_dir).glob('**/*.yml')]
 
-print("\nGet sigma ID")
+logging.info(f"Find {len(sigma_list)} sigma rule(s)")
 sigma_id = {}
-sigma_bar = tqdm.tqdm(total=len(sigma_list))
+sigma_bar = tqdm.tqdm(total=len(sigma_list),desc="Get sigma ID")
 sigma_data = sigma_info()
 for rule_file in sigma_list:
     sigma_bar.update(1)
     sigma_data.load(rule_file)
     sigma_id[rule_file.name] = sigma_data.get_section("id")
+sigma_bar.close()
 
-
-print("\nGet info ID")
+logging.info(f"Find {len(info_list)} sigma information file(s)")
 info_id = {}
 info_data = information()
 if len(info_list)>0:
-    info_bar = tqdm.tqdm(total=len(info_list))
-    for rule_file in sigma_list:
+    info_bar = tqdm.tqdm(total=len(info_list),desc="Get info ID")
+    for info_file in info_list:
         info_bar.update(1)
-        info_data.load(rule_file)
-        info_id[rule_file.name] = info_data.get_section("id")
+        info_data.load(info_file)
+        info_id[info_file.name] = info_data.get_section("id")
+    info_bar.close()
+    check_id_bar = tqdm.tqdm(total=len(info_list),desc="Check filename")
+    for key in info_id:
+        check_id_bar.update(1)
+        if not key in sigma_id:
+            logging.error(f"{key} information file have no sigma rule")
+        elif info_id[key] != sigma_id[key]:
+            logging.error(f"{key} information file have not the same ID than the sigma rule")
+    check_id_bar.close()
 
-print("\nGenerate the file") 
 missing_keys = {}
 
-
-my_bar = tqdm.tqdm(total=len(sigma_list))
+my_bar = tqdm.tqdm(total=len(sigma_list),desc="Generate the file")
 for rule_file in sigma_list:
     sigma_data.load(rule_file)
     logsource = sigma_data.calcul_logsource_id()
@@ -204,26 +201,32 @@ for rule_file in sigma_list:
         info_data.set_section("source",data.get_section(logsource,"source"))
         info_data.set_section("audit",data.get_section(logsource,"audit"))
         info_data.save(info_file)
+        logging.warning(f"Adding new file {info_file}")
     else:
         info_data.load(info_file)
         updated = False
         if sigma_data.is_updated("title",info_data.get_section("title")):
             info_data.set_section("title",sigma_data.get_section("title"))
             updated = True
+            logging.warning(f"Update title in {info_file}")
         if sigma_data.is_updated("id",info_data.get_section("id")):
             info_data.set_section("id",sigma_data.get_section("id"))
             updated = True
+            logging.critical(f"Update id in {info_file}")
         if data.is_updated(logsource,"source",info_data.get_section("source")):
             info_data.set_section("source",data.get_section(logsource,"source"))
-            updated = True  
+            updated = True
+            logging.warning(f"Update source in {info_file}")
         if data.is_updated(logsource,"audit",info_data.get_section("audit")):
             info_data.set_section("audit",data.get_section(logsource,"audit"))
             updated = True
+            logging.warning(f"Update audit in {info_file}")
         if updated:
             info_data.update_history("auto update by frack113 script")
             info_data.save(info_file)
 
     my_bar.update(1)
+my_bar.close()
 
 if missing_keys != {} and args.verbose:
     missing_keys = OrderedDict(x for x in sorted(missing_keys.items()))

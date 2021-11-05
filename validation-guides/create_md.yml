@@ -33,16 +33,59 @@ windows_ps_classic_start_None:
     source: |
         EventID: 400
         Channel: Windows PowerShell (%SystemRoot%\System32\Winevt\Logs\Windows PowerShell.evtx)
-    audit: ""
+    audit: |
+        This log is activated by default
 windows_ps_classic_provider_start_None:
     source: |
         EventID: 600
         Channel: Windows PowerShell (%SystemRoot%\System32\Winevt\Logs\Windows PowerShell.evtx)
-    audit: ""
+    audit: |
+        This log is activated by default
 windows_ps_classic_script_None:
     source: |
         EventID: 800
         Channel: Windows PowerShell (%SystemRoot%\System32\Winevt\Logs\Windows PowerShell.evtx)
+    audit: |
+        Powershell V3 minimum
+        To enable module logging:
+
+        1. In the Windows PowerShell GPO settings, set Turn on Module Logging to enabled.
+        2. In the Options pane, click the button to show Module Name.
+        3. In the Module Names window, enter * to record all modules.
+        4. Click OK in the Module Names window.
+        5. Click OK in the Module Logging window.
+        
+        Alternately you can set the following registry values:
+        ```
+        HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\ModuleLogging → EnableModuleLogging = 1
+        HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\ModuleLogging \ModuleNames → * = *
+        ```
+windows_None_powershell-classic:
+    source: |
+        EventID: all 
+        Channel: Windows PowerShell (%SystemRoot%\System32\Winevt\Logs\Windows PowerShell.evtx)
+    audit: |
+        This log is activated by default
+        except EventID 800 (category ps_classic_script) :
+        Powershell V3 minimum
+        To enable module logging:
+
+        1. In the Windows PowerShell GPO settings, set Turn on Module Logging to enabled.
+        2. In the Options pane, click the button to show Module Name.
+        3. In the Module Names window, enter * to record all modules.
+        4. Click OK in the Module Names window.
+        5. Click OK in the Module Logging window.
+        
+        Alternately you can set the following registry values:
+        ```
+        HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\ModuleLogging → EnableModuleLogging = 1
+        HKLM\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\PowerShell\ModuleLogging \ModuleNames → * = *
+        ```
+        
+windows_None_powershell:
+    source: |
+        EventID: all 
+        Channel: Microsoft-Windows-PowerShell/Operational (%SystemRoot%\System32\Winevt\Logs\Microsoft-Windows-PowerShell%4Operational.evtx)
     audit: ""
 windows_None_taskscheduler:
     source: |
@@ -213,7 +256,7 @@ windows_process_access_None:
             - https://github.com/SwiftOnSecurity/sysmon-config
             - https://github.com/Neo23x0/sysmon-config
             - https://github.com/olafhartong/sysmon-modular
-windows_file_creation_None:
+windows_file_event_None:
     source: |
         * sysmon
         EventID: 11
