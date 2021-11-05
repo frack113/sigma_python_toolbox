@@ -41,8 +41,9 @@ class knowledge():
             return False
 
 class information():
-    def __init__(self):
+    def __init__(self,author):
         self.info = {}
+        self.author = author
 
     def clean(self):
         self.info = {
@@ -62,7 +63,7 @@ class information():
         self.info = {
             "title": "sigma title",
             "id": "sigma id",
-            "authors": ["Frack113"],
+            "authors": [self.author],
             "history": [mydate],
             "source": "update script database",
             "audit": "update script database",
@@ -138,11 +139,22 @@ parser.add_argument("--input", '-i', help="Sigma rules directory", type=str, def
 parser.add_argument("--output", '-o', help="Output directory", default="./rules", type=str)
 parser.add_argument("--verbose", '-v', help="Display missing keys", default=False, action='store_true')
 parser.add_argument("--test", '-t', help="Test only don't save",default=False, action='store_true')
+parser.add_argument("--author", '-a', help="Set the author", default="frack113", type=str)
 args = parser.parse_args()
 
 save_output = not args.test
 path_rule = args.input
+if not pathlib.Path(path_rule).is_dir():
+    print ("input must be a directory with sigma rule")
+    logging.fatal("input must be a directory with sigma rule")
+    exit(2)
+
 output_dir = args.output
+if not pathlib.Path(output_dir).is_dir():
+    print ("output must be a directory for the sigma information file")
+    logging.fatal("output must be a directory for the sigma information file")
+    exit(2)
+
 sigma_list = [yml for yml in pathlib.Path(path_rule).glob('**/*.yml')]
 info_list = [yml for yml in pathlib.Path(output_dir).glob('**/*.yml')]
 
@@ -158,7 +170,7 @@ sigma_bar.close()
 
 logging.info(f"Find {len(info_list)} sigma information file(s)")
 info_id = {}
-info_data = information()
+info_data = information(args.author)
 if len(info_list)>0:
     info_bar = tqdm.tqdm(total=len(info_list),desc="Get info ID")
     for info_file in info_list:
