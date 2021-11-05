@@ -15,7 +15,7 @@ The key is the `{product}_{category}_{service}` from sigma rules
 
 - [X] add a output for the missing key
 - [ ] add a repport of action
-- [ ] update the yml file if create_md.yml is updated
+- [X] update the yml file if create_md.yml is updated
 - [ ] change the yml file name if the sigma filename change (check by id)
 - [ ] fix my bugs / issues
 
@@ -23,7 +23,6 @@ The key is the `{product}_{category}_{service}` from sigma rules
 
 - [ ] update create_md.yml
 - [ ] add a pretty local md output
-
 
 ### Thanks
 ZikyHD  

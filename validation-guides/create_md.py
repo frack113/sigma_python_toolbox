@@ -44,13 +44,18 @@ class knowledge():
         with open(filename,'r',encoding='UTF-8') as file:
             self.ref = ruamel.yaml.load(file, Loader=ruamel.yaml.RoundTripLoader)    
 
-    def get_source(self,logsource):
-        local_logsource =  self.ref[logsource]["source"] if logsource in self.ref else self.ref["None_None_None"]["source"]
+    def get_section(self,logsource,section):
+        local_logsource =  self.ref[logsource][section] if logsource in self.ref else self.ref["None_None_None"][section]
         return local_logsource
 
-    def get_audit(self,logsource):
-        local_logsource =  self.ref[logsource]["audit"] if logsource in self.ref else self.ref["None_None_None"]["audit"]
-        return local_logsource
+    def is_updated(self,logsource,section,data):
+        if logsource in self.ref:
+            if self.ref[logsource][section] == data:
+                return False
+            else:
+                return True
+        else:
+            return False
 
 class information():
     def _init_():
@@ -60,8 +65,8 @@ class information():
         self.info = {
             "title": "",
             "id": "",
-            "author": "",
-            "history": "",
+            "authors": [],
+            "history": [],
             "source": "",
             "audit": "",
             "description": "",
@@ -74,7 +79,7 @@ class information():
         self.info = {
             "title": "sigma title",
             "id": "sigma id",
-            "author": "Frack113 autogenerator",
+            "authors": ["Frack113"],
             "history": [mydate],
             "source": "update script database",
             "audit": "update script database",
@@ -83,17 +88,11 @@ class information():
             "example": "Contribute to the updating of information"
         }
 
-    def get_sigma_logsource(self,yaml_dict):
-        product = yaml_dict["logsource"]["product"].lower() if "product" in yaml_dict["logsource"] else "None"
-        category = yaml_dict["logsource"]["category"].lower() if "category" in yaml_dict["logsource"] else "None"
-        service = yaml_dict["logsource"]["service"].lower() if "service" in yaml_dict["logsource"] else "None"
-        return f"{product}_{category}_{service}"
-
     def write_md(self,name):
         with pathlib.Path(name).open('w', encoding='UTF-8', newline='') as md_file:
             md_file.write(f'# Rule: {self.info["title"]}\n\n')
             md_file.write(f'Sigma rule ID : {self.info["id"]}\n\n')
-            md_file.write(f'## Author\n\n{self.info["author"]}\n\n')
+            md_file.write(f'## authors\n\n{self.info["authors"]}\n\n')
             md_file.write(f'## Change History\n\n- {self.info["history"]} \n\n')
             md_file.write(f'## Required Log Sources\n\n{self.info["source"]}\n\n')
             md_file.write(f'## Required Audit Policy / Config\n\n{self.info["audit"]}\n\n')
@@ -103,11 +102,22 @@ class information():
 
     def save(self,name):
         with pathlib.Path(name).open('w', encoding='UTF-8', newline='') as yaml_file:
-            ruamel.yaml.dump(self.info, yaml_file, Dumper=ruamel.yaml.RoundTripDumper)
+            ruamel.yaml.dump(self.info, yaml_file, Dumper=ruamel.yaml.RoundTripDumper,indent=2,block_seq_indent=2)
 
     def load(self,filename):
         with open(filename,'r',encoding='UTF-8') as file:
             self.info = ruamel.yaml.load(file, Loader=ruamel.yaml.RoundTripLoader)   
+ 
+    def get_section(self,name):
+        data = self.info[name] if name in self.info else None
+        return data
+    
+    def set_section(self,name,data):
+        self.info[name] = data
+
+    def update_history(self,msg):
+        mydate = f"{datetime.date.today().strftime('%Y%m%d')}: {msg}"
+        self.info["history"].insert(0,mydate)
 
 class sigma_info():
     def _init_():
@@ -120,7 +130,19 @@ class sigma_info():
     def get_section(self,name):
         data = self.info[name] if name in self.info else None
         return data
+
+    def calcul_logsource_id(self):
+        product = self.info["logsource"]["product"].lower() if "product" in self.info["logsource"] else "None"
+        category = self.info["logsource"]["category"].lower() if "category" in self.info["logsource"] else "None"
+        service = self.info["logsource"]["service"].lower() if "service" in self.info["logsource"] else "None"
+        return f"{product}_{category}_{service}"
     
+    def is_updated(self,section,data):
+        if self.info[section] == data:
+            return False
+        else:
+            return True
+
 #Main
 data = knowledge()
 data.load('create_md.yml')
@@ -136,7 +158,7 @@ output_dir = args.output
 sigma_list = [yml for yml in pathlib.Path(path_rule).glob('**/*.yml')]
 info_list = [yml for yml in pathlib.Path(output_dir).glob('**/*.yml')]
 
-print("Get sigma ID")
+print("\nGet sigma ID")
 sigma_id = {}
 sigma_bar = tqdm.tqdm(total=len(sigma_list))
 sigma_data = sigma_info()
@@ -146,46 +168,63 @@ for rule_file in sigma_list:
     sigma_id[rule_file.name] = sigma_data.get_section("id")
 
 
-print("Get info ID")
+print("\nGet info ID")
 info_id = {}
+info_data = information()
 if len(info_list)>0:
     info_bar = tqdm.tqdm(total=len(info_list))
     for rule_file in sigma_list:
         info_bar.update(1)
-        with rule_file.open('r', encoding='UTF-8') as file:
-            yaml_dict = ruamel.yaml.load(file, Loader=ruamel.yaml.RoundTripLoader)
-            info_id[rule_file.name] = yaml_dict["id"]
+        info_data.load(rule_file)
+        info_id[rule_file.name] = info_data.get_section("id")
 
-print("Generate the file") 
+print("\nGenerate the file") 
 missing_keys = {}
-yml_info = information()
+
 
 my_bar = tqdm.tqdm(total=len(sigma_list))
 for rule_file in sigma_list:
-    yml_info.new()
-    my_bar.update(1)
-    directory = str(rule_file.parent).replace('\\','/').replace(path_rule,output_dir)
-    pathlib.Path(directory).mkdir(parents=True, exist_ok=True)
-    new_file = f"{directory}/{rule_file.name}"
-    with rule_file.open('r', encoding='UTF-8') as file:
-        yaml_dict = ruamel.yaml.load(file, Loader=ruamel.yaml.RoundTripLoader)
-        yml_info.info["title"] = yaml_dict["title"]
-        yml_info.info["id"] = yaml_dict["id"]
-        logsource = yml_info.get_sigma_logsource(yaml_dict)
-        if logsource not in data.ref:
-            if logsource in missing_keys:
-                missing_keys[logsource]["count"] = missing_keys[logsource]["count"] + 1
-                missing_keys[logsource]["rules"].append(rule_file)
-            else:
-                missing_keys[logsource] = { "count": 1, "rules": [rule_file] }
-        yml_info.info["source"] = data.get_source(logsource)
-        yml_info.info["audit"] = data.get_audit(logsource)
-    if pathlib.Path(new_file).exists() != True:
-        yml_info.save(new_file)
-        yml_info.write_md(new_file.replace('.yml','.md'))
+    sigma_data.load(rule_file)
+    logsource = sigma_data.calcul_logsource_id()
+    if logsource not in data.ref:
+        if logsource in missing_keys:
+            missing_keys[logsource]["count"] = missing_keys[logsource]["count"] + 1
+            missing_keys[logsource]["rules"].append(rule_file)
+        else:
+            missing_keys[logsource] = { "count": 1, "rules": [rule_file] }
+
+    info_directory = str(rule_file.parent).replace('\\','/').replace(path_rule,output_dir)
+    pathlib.Path(info_directory).mkdir(parents=True, exist_ok=True)
+    info_file = f"{info_directory}/{rule_file.name}"
+
+    if pathlib.Path(info_file).exists() != True:
+        info_data.new()
+        info_data.set_section("title",sigma_data.get_section("title"))
+        info_data.set_section("id",sigma_data.get_section("id"))
+        info_data.set_section("source",data.get_section(logsource,"source"))
+        info_data.set_section("audit",data.get_section(logsource,"audit"))
+        info_data.save(info_file)
     else:
-        pass
-        #next check if the source and audit parts need to be update :)
+        info_data.load(info_file)
+        updated = False
+        if sigma_data.is_updated("title",info_data.get_section("title")):
+            info_data.set_section("title",sigma_data.get_section("title"))
+            updated = True
+        if sigma_data.is_updated("id",info_data.get_section("id")):
+            info_data.set_section("id",sigma_data.get_section("id"))
+            updated = True
+        if data.is_updated(logsource,"source",info_data.get_section("source")):
+            info_data.set_section("source",data.get_section(logsource,"source"))
+            updated = True  
+        if data.is_updated(logsource,"audit",info_data.get_section("audit")):
+            info_data.set_section("audit",data.get_section(logsource,"audit"))
+            updated = True
+        if updated:
+            info_data.update_history("auto update by frack113 script")
+            info_data.save(info_file)
+
+    my_bar.update(1)
+
 if missing_keys != {} and args.verbose:
     missing_keys = OrderedDict(x for x in sorted(missing_keys.items()))
     print("Missing {} keys in template:".format(len(missing_keys)))

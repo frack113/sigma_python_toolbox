@@ -4,7 +4,7 @@ None_None_None:
 windows_ps_module_None:
     source: |
         EventID: 4103
-        Channel: Microsoft-Windows-PowerShell/Operational (%SystemRoot%\System32\Winevt\Logs\Microsoft-Windows-PowerShell%4Operational.evtx)"
+        Channel: Microsoft-Windows-PowerShell/Operational (%SystemRoot%\System32\Winevt\Logs\Microsoft-Windows-PowerShell%4Operational.evtx)
     audit: |
         To enable module logging:
 
