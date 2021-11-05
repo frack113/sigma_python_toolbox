@@ -4,16 +4,11 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 Project: create_md.py
-Date: 03/11/2021
+Date: 05/11/2021
 Author: frack113
-Version: 1.0
+Version: 1.2
 Description: 
-    create the md file with common information for new rules
-Requirements:
-    python 3.7 min
-Todo:
-    - check the template
-    - add more information 
+    create the yml file with common information for new sigma rules
 """
 
 import ruamel.yaml
@@ -25,7 +20,7 @@ from collections import OrderedDict
 import logging
 
 class knowledge():
-    def _init_(self):
+    def __init__(self):
         self.ref = {}
 
     def load(self,filename):
@@ -46,7 +41,7 @@ class knowledge():
             return False
 
 class information():
-    def _init_():
+    def __init__(self):
         self.info = {}
 
     def clean(self):
@@ -88,9 +83,10 @@ class information():
             md_file.write(f'## Code\n\n{self.info["code"]}\n\n')
             md_file.write(f'## Example\n\n{self.info["example"]}\n\n')
 
-    def save(self,name):
-        with pathlib.Path(name).open('w', encoding='UTF-8', newline='') as yaml_file:
-            ruamel.yaml.dump(self.info, yaml_file, Dumper=ruamel.yaml.RoundTripDumper,indent=2,block_seq_indent=2)
+    def save(self,name,ondisk):
+        if ondisk:
+            with pathlib.Path(name).open('w', encoding='UTF-8', newline='') as yaml_file:
+                ruamel.yaml.dump(self.info, yaml_file, Dumper=ruamel.yaml.RoundTripDumper,indent=2,block_seq_indent=2)
 
     def load(self,filename):
         with open(filename,'r',encoding='UTF-8') as file:
@@ -108,7 +104,7 @@ class information():
         self.info["history"].insert(0,mydate)
 
 class sigma_info():
-    def _init_():
+    def __init__(self):
         self.info = {}
     
     def load(self,filename):
@@ -137,12 +133,14 @@ logging.info("Wellcome into the log world")
 data = knowledge()
 data.load('create_md.yml')
 
-parser = argparse.ArgumentParser(description='Create the md file with common information for new rules')
+parser = argparse.ArgumentParser(description='Create the yml informationfile with common information for new rules')
 parser.add_argument("--input", '-i', help="Sigma rules directory", type=str, default="../sigma/rules")
 parser.add_argument("--output", '-o', help="Output directory", default="./rules", type=str)
 parser.add_argument("--verbose", '-v', help="Display missing keys", default=False, action='store_true')
+parser.add_argument("--test", '-t', help="Test only don't save",default=False, action='store_true')
 args = parser.parse_args()
 
+save_output = not args.test
 path_rule = args.input
 output_dir = args.output
 sigma_list = [yml for yml in pathlib.Path(path_rule).glob('**/*.yml')]
@@ -168,14 +166,19 @@ if len(info_list)>0:
         info_data.load(info_file)
         info_id[info_file.name] = info_data.get_section("id")
     info_bar.close()
-    check_id_bar = tqdm.tqdm(total=len(info_list),desc="Check filename")
-    for key in info_id:
-        check_id_bar.update(1)
+
+    check_name_bar = tqdm.tqdm(total=len(info_list),desc="Check diff")
+    id_sigma = {v:k for k,v in sigma_id.items()}
+    for key,val_id in info_id.items():
+        check_name_bar.update(1)
         if not key in sigma_id:
             logging.error(f"{key} information file have no sigma rule")
-        elif info_id[key] != sigma_id[key]:
+        elif val_id != sigma_id[key]:
             logging.error(f"{key} information file have not the same ID than the sigma rule")
-    check_id_bar.close()
+        elif key != id_sigma[val_id]:
+            logging.error(f"{key} information file have the same ID than {id_sigma[val_id]} rule")
+    check_name_bar.close()
+
 
 missing_keys = {}
 
@@ -194,15 +197,7 @@ for rule_file in sigma_list:
     pathlib.Path(info_directory).mkdir(parents=True, exist_ok=True)
     info_file = f"{info_directory}/{rule_file.name}"
 
-    if pathlib.Path(info_file).exists() != True:
-        info_data.new()
-        info_data.set_section("title",sigma_data.get_section("title"))
-        info_data.set_section("id",sigma_data.get_section("id"))
-        info_data.set_section("source",data.get_section(logsource,"source"))
-        info_data.set_section("audit",data.get_section(logsource,"audit"))
-        info_data.save(info_file)
-        logging.warning(f"Adding new file {info_file}")
-    else:
+    if pathlib.Path(info_file).exists():
         info_data.load(info_file)
         updated = False
         if sigma_data.is_updated("title",info_data.get_section("title")):
@@ -223,8 +218,15 @@ for rule_file in sigma_list:
             logging.warning(f"Update audit in {info_file}")
         if updated:
             info_data.update_history("auto update by frack113 script")
-            info_data.save(info_file)
-
+            info_data.save(info_file,save_output)
+    else:
+        info_data.new()
+        info_data.set_section("title",sigma_data.get_section("title"))
+        info_data.set_section("id",sigma_data.get_section("id"))
+        info_data.set_section("source",data.get_section(logsource,"source"))
+        info_data.set_section("audit",data.get_section(logsource,"audit"))
+        info_data.save(info_file,save_output)
+        logging.warning(f"Adding new file {info_file}")
     my_bar.update(1)
 my_bar.close()
 

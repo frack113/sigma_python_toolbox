@@ -13,9 +13,9 @@ The key is the `{product}_{category}_{service}` from sigma rules
 
 ### use
 ```bash
-usage: create_md.py [-h] [--input INPUT] [--output OUTPUT] [--verbose]
+usage: create_md.py [-h] [--input INPUT] [--output OUTPUT] [--verbose] [--test]
 
-Create the md file with common information for new rules
+Create the yml information file with common information for new rules
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -24,19 +24,24 @@ optional arguments:
   --output OUTPUT, -o OUTPUT
                         Output directory
   --verbose, -v         Display missing keys
+  --test, -t            Test only don't save
 ```
+
+Use `--test` to deal with remove or rename sigma rule in a first time.
+
+
 ### My todo
 
 - [X] add a output for the missing key
 - [X] add a repport of action (creation_md.log)
 - [X] update the yml file if create_md.yml is updated
-- [ ] manage if the sigma filename change (check by id)
+- [X] check if missing or rename sigma rule
 - [ ] fix my bugs / issues
 
 ### Evolution
 
 - [ ] update create_md.yml
-- [ ] add a pretty local md output
+- [ ] add a pretty local md output ?
 
 ### Thanks
 ZikyHD
