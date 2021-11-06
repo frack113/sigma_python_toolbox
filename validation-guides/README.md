@@ -13,22 +13,28 @@ The key is the `{product}_{category}_{service}` from sigma rules
 
 ### use
 ```bash
-usage: create_md.py [-h] [--input INPUT] [--output OUTPUT] [--verbose] [--test]
+usage: create_md.py [-h] [--input INPUT] [--output OUTPUT] [--verbose] [--test] [--author]
 
 Create the yml information file with common information for new rules
 
 optional arguments:
   -h, --help            show this help message and exit
   --input INPUT, -i INPUT
-                        Sigma rules directory
+                        Sigma rules directory (default ../sigma/rules)
   --output OUTPUT, -o OUTPUT
-                        Output directory
+                        Output directory (default ./rules)
   --verbose, -v         Display missing keys
   --test, -t            Test only don't save
+  --author, -a          Set the author name (default frack113)
 ```
 
 Use `--test` to deal with remove or rename sigma rule in a first time.
 
+Example :
+
+- `python create_md.py -i c:\FrackSigma\sigma\rules -o .\rules -a "me or not me" `
+
+- `python create_md.py -i ../sigma/rules -o /tmp`
 
 ### My todo
 
