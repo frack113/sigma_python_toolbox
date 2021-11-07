@@ -381,7 +381,10 @@ windows_sysmon_error_None:
             - https://github.com/Neo23x0/sysmon-config
             - https://github.com/olafhartong/sysmon-modular
 windows_None_sysmon:
-    source: Please complete the file
+    source: |
+        * sysmon
+        EventID: all (see in the detection for the EventID)
+        Channel: Microsoft-Windows-Sysmon/Operational (%SystemRoot%\System32\Winevt\Logs\Microsoft-Windows-Sysmon%4Operational.evtx)
     audit: |
         * sysmon
         Sysmon must be installed on configured.
@@ -417,3 +420,28 @@ zeek_None_x509:
     source: |
         log of zeek https://zeek.org/
     audit: ""
+antivirus_None_None:
+    source: |
+        Antivirus software produces different logs:
+            - Scan report logs
+            - Action report logs
+    audit: |
+        It is necessary to check the documentation of the editor.
+        
+        * clamAV : https://docs.clamav.net/manual/Usage/Configuration.html
+windows_None_None:
+    source: |
+        EventID: all 
+        Channel: all
+    audit: |
+        As the rule use any channel or EventID, it is not possible to define a specific audit policy
+windows_None_applocker:
+    source: |
+        https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/applocker/what-is-applocker
+        Channel:
+            - Microsoft-Windows-AppLocker/MSI
+            - Microsoft-Windows-AppLocker/EXE and DLL
+            - Microsoft-Windows-AppLocker/Packaged app-Deployment
+            - Microsoft-Windows-AppLocker/Packaged app-Execution
+    audit: |
+        https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/applocker/applocker-policies-deployment-guide
