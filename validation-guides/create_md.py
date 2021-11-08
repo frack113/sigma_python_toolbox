@@ -42,10 +42,7 @@ class knowledge():
 
 class information():
     def __init__(self,author):
-        self.info = {}
         self.author = author
-
-    def clean(self):
         self.info = {
             "title": "",
             "id": "",
@@ -56,7 +53,7 @@ class information():
             "description": "",
             "code": "",
             "example": ""
-        }
+            }
 
     def new(self):
         mydate = f"{datetime.date.today().strftime('%Y%m%d')}: creation of the file"
@@ -150,6 +147,11 @@ if not pathlib.Path(path_rule).is_dir():
     exit(2)
 
 output_dir = args.output
+if not pathlib.Path(output_dir).exists():
+    print ("output root directory for the sigma information file must exist")
+    logging.fatal("output root directory for the sigma information file must exist")
+    exit(2)
+
 if not pathlib.Path(output_dir).is_dir():
     print ("output must be a directory for the sigma information file")
     logging.fatal("output must be a directory for the sigma information file")
@@ -205,7 +207,7 @@ for rule_file in sigma_list:
         else:
             missing_keys[logsource] = { "count": 1, "rules": [rule_file] }
 
-    info_directory = str(rule_file.parent).replace('\\','/').replace(path_rule,output_dir)
+    info_directory = str(rule_file.parent).replace(path_rule,output_dir)
     pathlib.Path(info_directory).mkdir(parents=True, exist_ok=True)
     info_file = f"{info_directory}/{rule_file.name}"
 
