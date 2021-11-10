@@ -110,15 +110,36 @@ None_proxy_None:
     - c-useragent
     - r-dns
 None_webserver_None:
-  valid: []
+  valid:
+    - c-ip
+    - cs-byte
+    - cs-cookie
+    - cs-host
+    - cs-method
+    - cs-referrer
+    - cs-uri-query
+    - cs-uri-stem
+    - cs-usergent
+    - cs-username
+    - cs-version
+    - date
+    - s-computername
+    - s-ip
+    - s-port
+    - s-sitename
+    - sc-byte
+    - sc-status
+    - sc-substatus
+    - sc-win32-status
+    - streamid
+    - time
+    - time-taken
   rule:
     - c-uri
     - c-useragent
-    - cs-method
     - cs-referer
     - method
     - referer
-    - sc-status
     - uri_query
     - useragent
 antivirus_None_None:
@@ -132,9 +153,7 @@ linux_None_None:
   rule:
     - USER
 linux_None_auditd:
-  valid: []
-  rule:
-    - SYSCALL
+  valid:
     - a0
     - a1
     - a2
@@ -143,14 +162,240 @@ linux_None_auditd:
     - a5
     - a6
     - a7
-    - cmdline
+    - acct
+    - acl
+    - action
+    - added
+    - addr
+    - apparmor
+    - arch
+    - argc
+    - audit_backlog_limit
+    - audit_backlog_wait_time
+    - audit_enabled
+    - audit_failure
+    - auid
+    - banners
+    - bool
+    - bus
+    - cap_fe
+    - cap_fi
+    - cap_fp
+    - cap_fver
+    - cap_pa
+    - cap_pe
+    - cap_pi
+    - cap_pp
+    - capability
+    - category
+    - cgroup
+    - changed
+    - cipher
+    - class
+    - cmd
+    - code
     - comm
+    - compat
     - cwd
+    - daddr
+    - data
+    - default-context
+    - dev
+    - device
+    - dir
+    - direction
+    - dmac
+    - dport
+    - egid
+    - enforcing
+    - entries
+    - errno
+    - euid
     - exe
+    - exit
+    - fam
+    - family
+    - fd
+    - fe
+    - feature
+    - fi
+    - file
+    - flags
+    - format
+    - fp
+    - fp
+    - fsgid
+    - fsuid
+    - fver
+    - gid
+    - grantors
+    - grp
+    - hook
+    - hostname
+    - icmp_type
+    - id
+    - igid
+    - img-ctx
+    - inif
+    - ino
+    - inode
+    - inode_gid
+    - inode_uid
+    - invalid_context
+    - ioctlcmd
+    - ip
+    - ipid
+    - ipx-net
+    - item
+    - items
+    - iuid
+    - kernel
     - key
+    - kind
+    - ksize
+    - laddr
+    - len
+    - list
+    - lport
+    - mac
+    - macproto
+    - maj
+    - major
+    - minor
+    - mode
+    - model
+    - msg
     - name
+    - nametype
+    - nargs
+    - net
+    - new
+    - new-chardev
+    - new-disk
+    - new-enabled
+    - new-fs
+    - new-level
+    - new-log_passwd
+    - new-mem
+    - new-net
+    - new-range
+    - new-rng
+    - new-role
+    - new-seuser
+    - new-vcpu
+    - new_gid
+    - new_lock
+    - new_pe
+    - new_pi
+    - new_pp
+    - nlnk-fam
+    - nlnk-grp
+    - nlnk-pid
+    - oauid
+    - obj
+    - obj_gid
+    - obj_uid
+    - ocomm
+    - oflag
+    - ogid
+    - old
+    - old-auid
+    - old-chardev
+    - old-disk
+    - old-enabled
+    - old-fs
+    - old-level
+    - old-log_passwd
+    - old-mem
+    - old-net
+    - old-range
+    - old-rng
+    - old-role
+    - old-ses
+    - old-seuser
+    - old-vcpu
+    - old_enforcing
+    - old_lock
+    - old_pa
+    - old_pe
+    - old_pi
+    - old_pp
+    - old_prom
+    - old_val
+    - op
+    - opid
+    - oses
+    - ouid
+    - outif
+    - pa
+    - parent
+    - path
+    - pe
+    - per
+    - perm
+    - perm_mask
+    - permissive
+    - pfs
+    - pi
+    - pid
+    - pp
+    - ppid
+    - printer
+    - proctitle
+    - prom
+    - proto
+    - qbytes
+    - range
+    - rdev
+    - reason
+    - removed
+    - res
+    - resrc
+    - result
+    - role
+    - rport
+    - saddr
+    - sauid
+    - scontext
+    - selected-context
+    - seperm
+    - seperms
+    - seqno
+    - seresult
+    - ses
+    - seuser
+    - sgid
+    - sig
+    - sigev_signo
+    - smac
+    - spid
+    - sport
+    - state
+    - subj
+    - success
+    - suid
+    - syscall
+    - table
+    - tclass
+    - tcontext
+    - terminal
+    - tty
     - type
     - uid
+    - unit
+    - uri
+    - user
+    - uuid
+    - val
+    - ver
+    - virt
+    - vm
+    - vm-ctx
+    - vm-pid
+    - watch
+  rule:
+    - SYSCALL
+    - cmdline
 linux_None_auth:
   valid: []
   rule:
@@ -289,15 +534,31 @@ windows_None_ntlm:
     - EventID
     - TargetName
 windows_None_powershell:
-  valid: []
-  rule:
+  valid:
+    - ContextInfo
     - EventID
+    - Payload
     - ScriptBlockText
+  rule: []
 windows_None_powershell-classic:
-  valid: []
-  rule:
+  valid:
+    - CommandLine
+    - CommandName
+    - CommandPath
+    - CommandType
+    - EngineVersion
     - HostApplication
+    - HostId
+    - HostName
+    - HostVersion
+    - NewEngineState
+    - PipelineId
+    - PreviousEngineState
     - ProviderName
+    - RunspaceId
+    - ScriptName
+    - SequenceNumber
+  rule: []
 windows_None_printservice-admin:
   valid: []
   rule:
@@ -460,14 +721,14 @@ windows_create_stream_hash_None:
     - CreationUtcTime
     - Hash
     - Image
+    - Imphash
     - ProcessGuid
     - ProcessId
     - RuleName
     - TargetFilename
     - User
     - UtcTime
-  rule:
-    - Imphash
+  rule: []
 windows_defender_None_None:
   valid: []
   rule:
@@ -495,8 +756,7 @@ windows_driver_load_None:
     - SignatureStatus
     - Signed
     - UtcTime
-  rule:
-    - ImagePath
+  rule: []
 windows_edr_None:
   valid: []
   rule:
@@ -539,11 +799,7 @@ windows_file_event_None:
     - TargetFilename
     - User
     - UtcTime
-  rule:
-    - FileMagicBytes
-    - FileName
-    - IntegrityLevel
-    - TargetFileName
+  rule: []
 windows_image_load_None:
   valid:
     - Company
@@ -583,8 +839,7 @@ windows_network_connection_None:
     - SourcePortName
     - User
     - UtcTime
-  rule:
-    - ParentImage
+  rule: []
 windows_pipe_created_None:
   valid:
     - EventType
@@ -621,6 +876,7 @@ windows_process_creation_None:
     - FileVersion
     - Hashes
     - Image
+    - Imphash
     - IntegrityLevel
     - LogonGuid
     - LogonId
@@ -637,11 +893,8 @@ windows_process_creation_None:
     - TerminalSessionId
     - User
     - UtcTime
-  rule:
-    - Imphash
-    - ParentPrcessName
-    - SubjectLogonId
     - sha1
+  rule: []
 windows_process_tampering_application:
   valid:
     - Image
@@ -662,16 +915,41 @@ windows_process_termination_None:
     - UtcTime
   rule: []
 windows_ps_classic_provider_start_None:
-  valid: []
-  rule:
-    - HostApplication
-windows_ps_classic_start_None:
-  valid: []
-  rule:
+  valid:
+    - CommandLine
+    - CommandName
+    - CommandPath
+    - CommandType
     - EngineVersion
     - HostApplication
+    - HostId
     - HostName
     - HostVersion
+    - NewProviderState
+    - PipelineId
+    - ProviderName
+    - RunspaceId
+    - ScriptName
+    - SequenceNumber
+  rule: []
+windows_ps_classic_start_None:
+  valid:
+    - CommandLine
+    - CommandName
+    - CommandPath
+    - CommandType
+    - EngineVersion
+    - HostApplication
+    - HostId
+    - HostName
+    - HostVersion
+    - NewEngineState
+    - PipelineId
+    - PreviousEngineState
+    - RunspaceId
+    - ScriptName
+    - SequenceNumber
+  rule: []
 windows_ps_module_None:
   valid:
     - ContextInfo
@@ -694,6 +972,7 @@ windows_raw_access_thread_None:
 windows_registry_event_None:
   valid:
     - Details
+    - EventID
     - EventType
     - Image
     - NewName
@@ -703,8 +982,7 @@ windows_registry_event_None:
     - TargetObject
     - User
     - UtcTime
-  rule:
-    - EventID
+  rule: []
 windows_sysmon_error_None:
   valid:
     - Description
