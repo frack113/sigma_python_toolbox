@@ -1,0 +1,797 @@
+None_None_AzureActivity:
+  valid: []
+  rule:
+    - CategoryValue
+    - OperationNameValue
+    - ResourceId
+    - ResourceProviderValue
+None_None_azure.activitylogs:
+  valid: []
+  rule:
+    - ModifiedProperties{}.NewValue
+    - Operation
+    - Workload
+    - properties.message
+None_None_azure.auditlogs:
+  valid: []
+  rule:
+    - Category
+    - LoggedByService
+    - OperationName
+None_None_azure.signinlogs:
+  valid: []
+  rule:
+    - ResultDescription
+    - ResultType
+    - properties.message
+None_None_cloudtrail:
+  valid: []
+  rule:
+    - errorCode
+    - errorMessage
+    - eventName
+    - eventSource
+    - eventType
+    - requestParameters.attribute
+    - requestParameters.userData
+    - responseElements
+    - responseElements.pendingModifiedValues.masterUserPassword
+    - responseElements.publiclyAccessible
+    - userIdentity.arn
+    - userIdentity.sessionContext.sessionIssuer.type
+    - userIdentity.type
+None_None_gcp.audit:
+  valid: []
+  rule:
+    - gcp.audit.method_name
+None_None_google_workspace.admin:
+  valid: []
+  rule:
+    - eventName
+    - eventService
+    - new_value
+None_None_okta:
+  valid: []
+  rule:
+    - displaymessage
+    - eventtype
+None_None_onelogin.events:
+  valid: []
+  rule:
+    - event_type_id
+None_authentication_None:
+  valid: []
+  rule:
+    - action
+None_dns_None:
+  valid: []
+  rule:
+    - answer
+    - parent_domain
+    - query
+    - record_type
+None_firewall_None:
+  valid: []
+  rule:
+    - action
+    - destination.port
+    - dst_ip
+    - dst_port
+    - src_ip
+None_proxy_None:
+  valid:
+    - c-ip
+    - cs-byte
+    - cs-cookie
+    - cs-host
+    - cs-method
+    - cs-referrer
+    - cs-uri-query
+    - cs-uri-stem
+    - cs-usergent
+    - cs-username
+    - cs-version
+    - date
+    - s-computername
+    - s-ip
+    - s-port
+    - s-sitename
+    - sc-byte
+    - sc-status
+    - sc-substatus
+    - sc-win32-status
+    - streamid
+    - time
+    - time-taken
+  rule:
+    - c-uri
+    - c-uri-extension
+    - c-uri-stem
+    - c-useragent
+    - r-dns
+None_webserver_None:
+  valid: []
+  rule:
+    - c-uri
+    - c-useragent
+    - cs-method
+    - cs-referer
+    - method
+    - referer
+    - sc-status
+    - uri_query
+    - useragent
+antivirus_None_None:
+  valid: []
+  rule:
+    - FileName
+    - Filename
+    - Signature
+linux_None_None:
+  valid: []
+  rule:
+    - USER
+linux_None_auditd:
+  valid: []
+  rule:
+    - SYSCALL
+    - a0
+    - a1
+    - a2
+    - a3
+    - a4
+    - a5
+    - a6
+    - a7
+    - cmdline
+    - comm
+    - cwd
+    - exe
+    - key
+    - name
+    - type
+    - uid
+linux_None_auth:
+  valid: []
+  rule:
+    - pam_message
+    - pam_rhost
+    - pam_user
+linux_file_create_None:
+  valid:
+    - CreationUtcTime
+    - Image
+    - PreviousCreationUtcTime
+    - ProcessGuid
+    - ProcessId
+    - RuleName
+    - TargetFilename
+    - User
+    - UtcTime
+  rule: []
+linux_network_connection_None:
+  valid:
+    - DestinationHostname
+    - DestinationIp
+    - DestinationIsIpv6
+    - DestinationPort
+    - DestinationPortName
+    - Image
+    - Initiated
+    - ProcessGuid
+    - ProcessId
+    - Protocol
+    - RuleName
+    - SourceHostname
+    - SourceIp
+    - SourceIsIpv6
+    - SourcePort
+    - SourcePortName
+    - User
+    - UtcTime
+  rule: []
+linux_process_creation_None:
+  valid:
+    - CommandLine
+    - Company
+    - CurrentDirectory
+    - Description
+    - FileVersion
+    - Hashes
+    - Image
+    - IntegrityLevel
+    - LogonGuid
+    - LogonId
+    - OriginalFileName
+    - ParentCommandLine
+    - ParentImage
+    - ParentProcessGuid
+    - ParentProcessId
+    - ParentUser
+    - ProcessGuid
+    - ProcessId
+    - Product
+    - RuleName
+    - TerminalSessionId
+    - User
+    - UtcTime
+  rule:
+    - user
+m365_ThreatDetection_None:
+  valid: []
+  rule:
+    - eventName
+    - eventSource
+    - status
+m365_ThreatManagement_None:
+  valid: []
+  rule:
+    - eventName
+    - eventSource
+    - status
+macos_file_event_None:
+  valid: []
+  rule:
+    - TargetFilename
+macos_process_creation_None:
+  valid: []
+  rule:
+    - CommandLine
+    - Commandline
+    - Image
+netflow_None_None:
+  valid: []
+  rule:
+    - destination.port
+qualys_None_None:
+  valid: []
+  rule:
+    - event.category
+    - host.scan.vuln
+    - host.scan.vuln_name
+windows_None_application:
+  valid: []
+  rule:
+    - EventID
+    - Level
+    - Message
+    - Provider_Name
+windows_None_applocker:
+  valid: []
+  rule:
+    - EventID
+windows_None_dns-server:
+  valid: []
+  rule:
+    - EventID
+    - QNAME
+windows_None_driver-framework:
+  valid: []
+  rule:
+    - EventID
+windows_None_ldap_debug:
+  valid: []
+  rule:
+    - EventID
+    - SearchFilter
+windows_None_microsoft-servicebus-client:
+  valid: []
+  rule:
+    - EventID
+windows_None_msexchange-management:
+  valid: []
+  rule:
+    - EventID
+windows_None_ntlm:
+  valid: []
+  rule:
+    - CallingProcessName
+    - EventID
+    - TargetName
+windows_None_powershell:
+  valid: []
+  rule:
+    - EventID
+    - ScriptBlockText
+windows_None_powershell-classic:
+  valid: []
+  rule:
+    - HostApplication
+    - ProviderName
+windows_None_printservice-admin:
+  valid: []
+  rule:
+    - ErrorCode
+    - EventID
+windows_None_printservice-operational:
+  valid: []
+  rule:
+    - EventID
+windows_None_security:
+  valid: []
+  rule:
+    - AccessList
+    - AccessMask
+    - Accesses
+    - AccountName
+    - AllowedToDelegateTo
+    - AttributeLDAPDisplayName
+    - AttributeValue
+    - AuditPolicyChanges
+    - AuditSourceName
+    - AuthenticationPackageName
+    - CallerProcessName
+    - CertThumbprint
+    - ClassName
+    - CommandLine
+    - ComputerName
+    - DestAddress
+    - DestPort
+    - DestinationPort
+    - DeviceDescription
+    - EventID
+    - FailureCode
+    - FilePath
+    - Image
+    - IpAddress
+    - Keywords
+    - LayerRTID
+    - LogonProcessName
+    - LogonType
+    - NewUacValue
+    - NewValue
+    - ObjectClass
+    - ObjectName
+    - ObjectServer
+    - ObjectType
+    - ObjectValueName
+    - OldUacValue
+    - PasswordLastSet
+    - PrivilegeList
+    - ProcessName
+    - Properties
+    - Provider_Name
+    - RelativeTargetName
+    - SamAccountName
+    - Service
+    - ServiceFileName
+    - ServiceName
+    - ServicePrincipalNames
+    - ServiceStartType
+    - ServiceType
+    - ShareName
+    - SidHistory
+    - SourceAddress
+    - SourcePort
+    - Status
+    - SubjectDomainName
+    - SubjectLogonId
+    - SubjectUserName
+    - SubjectUserSid
+    - TargetLogonId
+    - TargetServerName
+    - TargetSid
+    - TargetUserName
+    - TaskName
+    - TicketEncryptionType
+    - TicketOptions
+    - Workstation
+    - WorkstationName
+windows_None_smbclient-security:
+  valid: []
+  rule:
+    - Description
+    - EventID
+    - ServerName
+    - UserName
+windows_None_sysmon:
+  valid: []
+  rule:
+    - EventID
+    - Image
+    - ImageLoaded
+    - SourceImage
+    - TargetFilename
+    - TargetImage
+windows_None_system:
+  valid: []
+  rule:
+    - AccountName
+    - Description
+    - DeviceName
+    - EventID
+    - HiveName
+    - ImagePath
+    - Origin
+    - Provider_Name
+    - ServiceFileName
+    - ServiceName
+windows_None_taskscheduler:
+  valid: []
+  rule:
+    - EventID
+windows_None_windefend:
+  valid: []
+  rule:
+    - EventID
+    - EventType
+    - New_Value
+    - Source_Name
+    - Value
+windows_None_wmi:
+  valid: []
+  rule:
+    - EventID
+windows_clipboard_capture_None:
+  valid:
+    - Archived
+    - ClientInfo
+    - Hashes
+    - Image
+    - ProcessGuid
+    - ProcessId
+    - RuleName
+    - Session
+    - User
+    - UtcTime
+  rule: []
+windows_create_remote_thread_None:
+  valid:
+    - NewThreadId
+    - RuleName
+    - SourceImage
+    - SourceProcessGuid
+    - SourceProcessId
+    - SourceUser
+    - StartAddress
+    - StartFunction
+    - StartModule
+    - TargetImage
+    - TargetProcessGuid
+    - TargetProcessId
+    - TargetUser
+    - UtcTime
+  rule:
+    - EventID
+    - TargetProcessAddress
+windows_create_stream_hash_None:
+  valid:
+    - Contents
+    - CreationUtcTime
+    - Hash
+    - Image
+    - ProcessGuid
+    - ProcessId
+    - RuleName
+    - TargetFilename
+    - User
+    - UtcTime
+  rule:
+    - Imphash
+windows_defender_None_None:
+  valid: []
+  rule:
+    - EventID
+    - Path
+    - ProcessName
+windows_dns_query_None:
+  valid:
+    - Image
+    - ProcessGuid
+    - ProcessId
+    - QueryName
+    - QueryResults
+    - QueryStatus
+    - RuleName
+    - User
+    - UtcTime
+  rule: []
+windows_driver_load_None:
+  valid:
+    - Hashes
+    - ImageLoaded
+    - RuleName
+    - Signature
+    - SignatureStatus
+    - Signed
+    - UtcTime
+  rule:
+    - ImagePath
+windows_edr_None:
+  valid: []
+  rule:
+    - EventLog
+    - EventType
+    - Image
+    - WMIcommand
+windows_file_create_None:
+  valid:
+    - CreationUtcTime
+    - Image
+    - PreviousCreationUtcTime
+    - ProcessGuid
+    - ProcessId
+    - RuleName
+    - TargetFilename
+    - User
+    - UtcTime
+  rule: []
+windows_file_delete_None:
+  valid:
+    - Archived
+    - Hashes
+    - Image
+    - IsExecutable
+    - ProcessGuid
+    - ProcessId
+    - RuleName
+    - TargetFilename
+    - User
+    - UtcTime
+  rule: []
+windows_file_event_None:
+  valid:
+    - CreationUtcTime
+    - Image
+    - ProcessGuid
+    - ProcessId
+    - RuleName
+    - TargetFilename
+    - User
+    - UtcTime
+  rule:
+    - FileMagicBytes
+    - FileName
+    - IntegrityLevel
+    - TargetFileName
+windows_image_load_None:
+  valid:
+    - Company
+    - Description
+    - FileVersion
+    - Hashes
+    - Image
+    - ImageLoaded
+    - OriginalFileName
+    - ProcessGuid
+    - ProcessId
+    - Product
+    - RuleName
+    - Signature
+    - SignatureStatus
+    - Signed
+    - User
+    - UtcTime
+  rule: []
+windows_network_connection_None:
+  valid:
+    - DestinationHostname
+    - DestinationIp
+    - DestinationIsIpv6
+    - DestinationPort
+    - DestinationPortName
+    - Image
+    - Initiated
+    - ProcessGuid
+    - ProcessId
+    - Protocol
+    - RuleName
+    - SourceHostname
+    - SourceIp
+    - SourceIsIpv6
+    - SourcePort
+    - SourcePortName
+    - User
+    - UtcTime
+  rule:
+    - ParentImage
+windows_pipe_created_None:
+  valid:
+    - EventType
+    - Image
+    - PipeName
+    - ProcessGuid
+    - ProcessId
+    - RuleName
+    - User
+    - UtcTime
+  rule: []
+windows_process_access_None:
+  valid:
+    - CallTrace
+    - GrantedAccess
+    - RuleName
+    - SourceImage
+    - SourceProcessGUID
+    - SourceProcessId
+    - SourceThreadId
+    - SourceUser
+    - TargetImage
+    - TargetProcessGUID
+    - TargetProcessId
+    - TargetUser
+    - UtcTime
+  rule: []
+windows_process_creation_None:
+  valid:
+    - CommandLine
+    - Company
+    - CurrentDirectory
+    - Description
+    - FileVersion
+    - Hashes
+    - Image
+    - IntegrityLevel
+    - LogonGuid
+    - LogonId
+    - OriginalFileName
+    - ParentCommandLine
+    - ParentImage
+    - ParentProcessGuid
+    - ParentProcessId
+    - ParentUser
+    - ProcessGuid
+    - ProcessId
+    - Product
+    - RuleName
+    - TerminalSessionId
+    - User
+    - UtcTime
+  rule:
+    - Imphash
+    - ParentPrcessName
+    - SubjectLogonId
+    - sha1
+windows_process_tampering_application:
+  valid:
+    - Image
+    - ProcessGuid
+    - ProcessId
+    - RuleName
+    - Type
+    - User
+    - UtcTime
+  rule: []
+windows_process_termination_None:
+  valid:
+    - Image
+    - ProcessGuid
+    - ProcessId
+    - RuleName
+    - User
+    - UtcTime
+  rule: []
+windows_ps_classic_provider_start_None:
+  valid: []
+  rule:
+    - HostApplication
+windows_ps_classic_start_None:
+  valid: []
+  rule:
+    - EngineVersion
+    - HostApplication
+    - HostName
+    - HostVersion
+windows_ps_module_None:
+  valid:
+    - ContextInfo
+    - Payload
+  rule: []
+windows_ps_script_None:
+  valid:
+    - ScriptBlockText
+  rule: []
+windows_raw_access_thread_None:
+  valid:
+    - Device
+    - Image
+    - ProcessGuid
+    - ProcessId
+    - RuleName
+    - User
+    - UtcTime
+  rule: []
+windows_registry_event_None:
+  valid:
+    - Details
+    - EventType
+    - Image
+    - NewName
+    - ProcessGuid
+    - ProcessId
+    - RuleName
+    - TargetObject
+    - User
+    - UtcTime
+  rule:
+    - EventID
+windows_sysmon_error_None:
+  valid:
+    - Description
+    - ID
+    - UtcTime
+  rule: []
+windows_sysmon_status_None:
+  valid:
+    - Configuration
+    - ConfigurationFileHash
+    - SchemaVersion
+    - State
+    - UtcTime
+    - Version
+  rule: []
+windows_webserver_None:
+  valid: []
+  rule:
+    - cs-method
+    - cs-uri-query
+    - cs-uri-stem
+    - cs-username
+    - sc-status
+windows_wmi_event_None:
+  valid:
+    - Consumer
+    - Destination
+    - EventNamespace
+    - EventType
+    - Filter
+    - Name
+    - Operation
+    - Query
+    - RuleName
+    - Type
+    - User
+    - UtcTime
+  rule:
+    - EventID
+zeek_None_dce_rpc:
+  valid: []
+  rule:
+    - endpoint
+    - operation
+zeek_None_dns:
+  valid: []
+  rule:
+    - Z
+    - answers
+    - id.resp_p
+    - qtype_name
+    - query
+    - rejected
+zeek_None_http:
+  valid: []
+  rule:
+    - client_header_names
+    - filetype
+    - http.bodyMagic
+    - http.method
+    - id_resp_h
+    - method
+    - mime_types
+    - request_body_len
+    - status_code
+    - uri
+    - user_agent
+zeek_None_kerberos:
+  valid: []
+  rule:
+    - cipher
+    - request_type
+    - service
+zeek_None_rdp:
+  valid: []
+  rule:
+    - src_ip
+zeek_None_smb_files:
+  valid: []
+  rule:
+    - name
+    - path
+zeek_None_x509:
+  valid: []
+  rule:
+    - certificate.serial
+zoho_manageengine_webserver_None:
+  valid: []
+  rule:
+    - c-uri

@@ -4,10 +4,10 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 Project: check-logsource.py
-Date: 2021/11/08
+Date: 03/11/2021
 Author: frack113
 Version: 0.1
-Description: find error in the section logsource in rule
+Description: 
     
 Requirements:
     python :)
@@ -101,9 +101,10 @@ for sigma in sigma_list:
         logsource = rule["logsource"]
         valid = True
         msg = {
-            "product":  "ok",
-            "category": "ok",
-            "service":  "ok"
+            "path": str(sigma.parent),
+            "product":  "-",
+            "category": "-",
+            "service":  "-"
             }
         if "product" in logsource:
             if not logsource["product"] in product_list:
@@ -112,13 +113,17 @@ for sigma in sigma_list:
                 else:
                     msg["product"] = f"No found {logsource['product']}"
                 valid = False
+            else:
+                msg["product"] = f"{logsource['product']} ok"
         if "category" in logsource:
             if not logsource["category"] in category_list:
                 if logsource["category"].lower() in category_list:
                     msg["category"] = f"Case error for {logsource['category']}"
                 else:
-                    msg["category"] = f"No found {logsource['category']}"                
+                    msg["category"] = f"No found {logsource['category']}"            
                 valid = False
+            else:
+                msg["category"] = f"{logsource['category']} ok"
         if "service" in logsource:
             if not logsource["service"] in service_list:
                 if logsource["service"].lower() in service_list:
@@ -126,7 +131,8 @@ for sigma in sigma_list:
                 else:
                     msg["service"] = f"No found {logsource['service']}"   
                 valid = False        
-        
+            else:
+                msg["service"] = f"{logsource['service']} ok"
         if not valid:
             invalid[sigma.name] = msg
 
