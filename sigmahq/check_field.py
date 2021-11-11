@@ -52,6 +52,14 @@ class DataBase():
                 }
             return False
 
+    def update_default(self):
+        for index in self.data:
+            if index[:8]=="windows_":
+                if not "EventID" in self.data[index]["valid"]:
+                    self.data[index]["valid"].append("EventID")
+                if not "Provider_Name" in self.data[index]["valid"]:
+                    self.data[index]["valid"].append("Provider_Name")                   
+
     def save(self):
         out_dict ={}
         for k in sorted(self.data):
@@ -70,7 +78,8 @@ class MySigma():
             "category": "None",
             "service":  "None"
             }
-        self.index = "None_None_None"    
+        self.index = "None_None_None"
+        self.subindex = None  
         self.field = []
 
     def load(self,filename):
@@ -81,6 +90,7 @@ class MySigma():
                 "category": "None",
                 "service":  "None"
                 }
+            self.subindex = None
             self.field = []
             logsource = yml_rule["logsource"]
             if "product" in logsource:
@@ -102,9 +112,18 @@ class MySigma():
                     if isinstance(detection[item],OrderedDict):
                         for sub_item in detection[item]:
                             if "|" in sub_item:
-                                self.field.append(sub_item.split("|")[0])
+                                name = sub_item.split("|")[0]
                             else:
-                                self.field.append(sub_item)
+                                name = sub_item
+                            self.field.append(name)
+                            if name == "EventID":
+                                eventid = detection[item]["EventID"]
+                                if isinstance(eventid,str):
+                                    self.subindex = eventid
+                                elif isinstance(eventid,int):
+                                    self.subindex = str(eventid)
+            if self.subindex != None:
+                self.index = f"{self.index}_{self.subindex}"
 
 parser = argparse.ArgumentParser(description='Create the md file with common information for new rules')
 parser.add_argument("--input", '-i', help="Sigma rules directory", type=str, default="../sigma")
@@ -114,8 +133,13 @@ args = parser.parse_args()
 path_sigma = args.input
 output_yml = args.output
 
+print ("Load database")
 info = DataBase("check_field.yml")
 
+print("Update default field")
+info.update_default()
+
+print("Processing :")
 invalid = {}
 rule = MySigma()
 sigma_list = [yml for yml in pathlib.Path(f"{path_sigma}/rules").glob('**/*.yml')]
@@ -136,7 +160,8 @@ for sigma_file in sigma_list:
 
 sigma_bar.close()
 
-print("Save database...")
+
+print("Save database")
 info.save()
 print(f"find {len(invalid)} elements to be considered")
 if len(invalid)>0:
@@ -151,4 +176,5 @@ if len(invalid)>0:
             invalid_log[rule_info["logsource"]] = [{rule_name:rule_info["field"]}]
     with pathlib.Path(f"log_{output_yml}").open('w',encoding='UTF-8') as file:
         ruamel.yaml.dump(invalid_log, file, Dumper=ruamel.yaml.RoundTripDumper,indent=2,block_seq_indent=2)
-    
+
+print("Bye")

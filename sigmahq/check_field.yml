@@ -41,9 +41,9 @@ None_None_cloudtrail:
     - userIdentity.sessionContext.sessionIssuer.type
     - userIdentity.type
 None_None_gcp.audit:
-  valid: []
-  rule:
+  valid:
     - gcp.audit.method_name
+  rule: []
 None_None_google_workspace.admin:
   valid: []
   rule:
@@ -397,11 +397,19 @@ linux_None_auditd:
     - SYSCALL
     - cmdline
 linux_None_auth:
-  valid: []
-  rule:
+  valid:
     - pam_message
     - pam_rhost
     - pam_user
+  rule: []
+linux_None_sudo:
+  valid:
+    - COMMAND
+    - CWD
+    - TSID
+    - TTY
+    - USER
+  rule: []
 linux_file_create_None:
   valid:
     - CreationUtcTime
@@ -463,27 +471,55 @@ linux_process_creation_None:
   rule:
     - user
 m365_ThreatDetection_None:
-  valid: []
-  rule:
+  valid:
     - eventName
     - eventSource
     - status
+  rule: []
 m365_ThreatManagement_None:
-  valid: []
-  rule:
+  valid:
     - eventName
     - eventSource
     - status
+  rule: []
 macos_file_event_None:
-  valid: []
-  rule:
-    - TargetFilename
-macos_process_creation_None:
-  valid: []
-  rule:
-    - CommandLine
-    - Commandline
+  valid:
+    - CreationUtcTime
     - Image
+    - ProcessGuid
+    - ProcessId
+    - RuleName
+    - TargetFilename
+    - User
+    - UtcTime
+  rule: []
+macos_process_creation_None:
+  valid:
+    - CommandLine
+    - Company
+    - CurrentDirectory
+    - Description
+    - FileVersion
+    - Hashes
+    - Image
+    - IntegrityLevel
+    - LogonGuid
+    - LogonId
+    - OriginalFileName
+    - ParentCommandLine
+    - ParentImage
+    - ParentProcessGuid
+    - ParentProcessId
+    - ParentUser
+    - ProcessGuid
+    - ProcessId
+    - Product
+    - RuleName
+    - TerminalSessionId
+    - User
+    - UtcTime
+  rule:
+    - Commandline
 netflow_None_None:
   valid: []
   rule:
@@ -495,49 +531,102 @@ qualys_None_None:
     - host.scan.vuln
     - host.scan.vuln_name
 windows_None_application:
-  valid: []
-  rule:
+  valid:
     - EventID
-    - Level
-    - Message
     - Provider_Name
+  rule: []
+windows_None_application_1001:
+  valid:
+    - EventID
+    - Provider_Name
+  rule: []
+windows_None_application_1033:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
+    - Message
+windows_None_application_4:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
+    - Level
+windows_None_application_524:
+  valid:
+    - EventID
+    - Provider_Name
+  rule: []
 windows_None_applocker:
-  valid: []
-  rule:
+  valid:
     - EventID
+    - Provider_Name
+  rule: []
 windows_None_dns-server:
-  valid: []
-  rule:
+  valid:
     - EventID
+    - Provider_Name
+  rule: []
+windows_None_dns-server_257:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
     - QNAME
 windows_None_driver-framework:
-  valid: []
-  rule:
+  valid:
     - EventID
+    - Provider_Name
+  rule: []
 windows_None_ldap_debug:
-  valid: []
-  rule:
+  valid:
     - EventID
+    - Provider_Name
+  rule: []
+windows_None_ldap_debug_30:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
     - SearchFilter
 windows_None_microsoft-servicebus-client:
-  valid: []
-  rule:
+  valid:
     - EventID
+    - Provider_Name
+  rule: []
 windows_None_msexchange-management:
-  valid: []
-  rule:
+  valid:
     - EventID
+    - Provider_Name
+  rule: []
+windows_None_msexchange-management_6:
+  valid:
+    - EventID
+    - Provider_Name
+  rule: []
 windows_None_ntlm:
-  valid: []
+  valid:
+    - EventID
+    - Provider_Name
+  rule: []
+windows_None_ntlm_8001:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
+    - TargetName
+windows_None_ntlm_8002:
+  valid:
+    - EventID
+    - Provider_Name
   rule:
     - CallingProcessName
-    - EventID
-    - TargetName
 windows_None_powershell:
   valid:
     - ContextInfo
     - EventID
     - Payload
+    - Provider_Name
     - ScriptBlockText
   rule: []
 windows_None_powershell-classic:
@@ -547,6 +636,7 @@ windows_None_powershell-classic:
     - CommandPath
     - CommandType
     - EngineVersion
+    - EventID
     - HostApplication
     - HostId
     - HostName
@@ -555,142 +645,609 @@ windows_None_powershell-classic:
     - PipelineId
     - PreviousEngineState
     - ProviderName
+    - Provider_Name
     - RunspaceId
     - ScriptName
     - SequenceNumber
   rule: []
+windows_None_powershell_4104:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
+    - ScriptBlockText
 windows_None_printservice-admin:
-  valid: []
+  valid:
+    - EventID
+    - Provider_Name
   rule:
     - ErrorCode
-    - EventID
 windows_None_printservice-operational:
-  valid: []
-  rule:
+  valid:
     - EventID
+    - Provider_Name
+  rule: []
+windows_None_printservice-operational_316:
+  valid:
+    - EventID
+    - Provider_Name
+  rule: []
 windows_None_security:
-  valid: []
+  valid:
+    - EventID
+    - Provider_Name
   rule:
-    - AccessList
     - AccessMask
-    - Accesses
     - AccountName
-    - AllowedToDelegateTo
-    - AttributeLDAPDisplayName
-    - AttributeValue
-    - AuditPolicyChanges
-    - AuditSourceName
-    - AuthenticationPackageName
-    - CallerProcessName
-    - CertThumbprint
-    - ClassName
     - CommandLine
     - ComputerName
-    - DestAddress
-    - DestPort
-    - DestinationPort
-    - DeviceDescription
-    - EventID
     - FailureCode
     - FilePath
-    - Image
-    - IpAddress
-    - Keywords
-    - LayerRTID
     - LogonProcessName
     - LogonType
-    - NewUacValue
-    - NewValue
-    - ObjectClass
     - ObjectName
-    - ObjectServer
     - ObjectType
-    - ObjectValueName
-    - OldUacValue
-    - PasswordLastSet
-    - PrivilegeList
     - ProcessName
-    - Properties
-    - Provider_Name
-    - RelativeTargetName
     - SamAccountName
-    - Service
-    - ServiceFileName
-    - ServiceName
-    - ServicePrincipalNames
-    - ServiceStartType
-    - ServiceType
-    - ShareName
-    - SidHistory
-    - SourceAddress
-    - SourcePort
     - Status
+    - SubjectUserName
+    - SubjectUserSid
+    - TargetUserName
+    - WorkstationName
+windows_None_security_1102:
+  valid:
+    - EventID
+    - Provider_Name
+  rule: []
+windows_None_security_4611:
+  valid:
+    - EventID
+    - LogonProcessName
+    - Provider_Name
     - SubjectDomainName
     - SubjectLogonId
     - SubjectUserName
     - SubjectUserSid
+  rule: []
+windows_None_security_4616:
+  valid:
+    - EventID
+    - NewTime
+    - PreviousTime
+    - ProcessId
+    - ProcessName
+    - Provider_Name
+    - SubjectDomainName
+    - SubjectLogonId
+    - SubjectUserName
+    - SubjectUserSid
+  rule: []
+windows_None_security_4624:
+  valid:
+    - AuthenticationPackageName
+    - ElevatedToken
+    - EventID
+    - ImpersonationLevel
+    - IpAddress
+    - IpPort
+    - KeyLength
+    - LmPackageName
+    - LogonGuid
+    - LogonProcessName
+    - LogonType
+    - ProcessId
+    - ProcessName
+    - Provider_Name
+    - RestrictedAdminMode
+    - SubjectDomainName
+    - SubjectLogonId
+    - SubjectUserName
+    - SubjectUserSid
+    - TargetDomainName
+    - TargetLinkedLogonId
     - TargetLogonId
+    - TargetOutboundDomainName
+    - TargetOutboundUserName
+    - TargetUserName
+    - TargetUserSid
+    - TransmittedServices
+    - VirtualAccount
+    - WorkstationName
+  rule: []
+windows_None_security_4625:
+  valid:
+    - AuthenticationPackageName
+    - EventID
+    - FailureReason
+    - IpAddress
+    - IpPort
+    - KeyLength
+    - LmPackageName
+    - LogonProcessName
+    - LogonType
+    - ProcessId
+    - ProcessName
+    - Provider_Name
+    - Status
+    - SubStatus
+    - SubjectDomainName
+    - SubjectLogonId
+    - SubjectUserName
+    - SubjectUserSid
+    - TargetDomainName
+    - TargetUserName
+    - TargetUserSid
+    - TransmittedServices
+    - WorkstationName
+  rule:
+    - AccountName
+windows_None_security_4648:
+  valid:
+    - EventID
+    - IpAddress
+    - IpPort
+    - LogonGuid
+    - ProcessId
+    - ProcessName
+    - Provider_Name
+    - SubjectDomainName
+    - SubjectLogonId
+    - SubjectUserName
+    - SubjectUserSid
+    - TargetDomainName
+    - TargetInfo
+    - TargetLogonGuid
     - TargetServerName
+    - TargetUserName
+  rule:
+    - Image
+windows_None_security_4656:
+  valid:
+    - AccessList
+    - AccessMask
+    - AccessReason
+    - EventID
+    - HandleId
+    - ObjectName
+    - ObjectServer
+    - ObjectType
+    - PrivilegeList
+    - ProcessId
+    - ProcessName
+    - Provider_Name
+    - ResourceAttributes
+    - RestrictedSidCount
+    - SubjectDomainName
+    - SubjectLogonId
+    - SubjectUserName
+    - SubjectUserSid
+    - TransactionId
+  rule:
+    - Keywords
+windows_None_security_4657:
+  valid:
+    - EventID
+    - HandleId
+    - NewValue
+    - NewValueType
+    - ObjectName
+    - ObjectValueName
+    - OldValue
+    - OldValueType
+    - OperationType
+    - ProcessId
+    - ProcessName
+    - Provider_Name
+    - SubjectDomainName
+    - SubjectLogonId
+    - SubjectUserName
+    - SubjectUserSid
+  rule: []
+windows_None_security_4661:
+  valid:
+    - AccessList
+    - AccessMask
+    - EventID
+    - HandleId
+    - ObjectName
+    - ObjectServer
+    - ObjectType
+    - PrivilegeList
+    - ProcessId
+    - ProcessName
+    - Properties
+    - Provider_Name
+    - RestrictedSidCount
+    - SubjectDomainName
+    - SubjectLogonId
+    - SubjectUserName
+    - SubjectUserSid
+    - TransactionId
+  rule: []
+windows_None_security_4662:
+  valid:
+    - AccessList
+    - AccessMask
+    - AdditionalInfo
+    - AdditionalInfo2
+    - EventID
+    - HandleId
+    - ObjectName
+    - ObjectServer
+    - ObjectType
+    - OperationType
+    - Properties
+    - Provider_Name
+    - SubjectDomainName
+    - SubjectLogonId
+    - SubjectUserName
+    - SubjectUserSid
+  rule: []
+windows_None_security_4663:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
+    - AccessList
+    - AccessMask
+    - Keywords
+    - NewValue
+    - ObjectName
+    - ObjectServer
+    - ObjectType
+    - ObjectValueName
+    - ProcessName
+windows_None_security_4673:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
+    - Keywords
+    - PrivilegeList
+    - ProcessName
+    - Service
+windows_None_security_4674:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
+    - ObjectName
+    - ObjectServer
+    - ObjectType
+    - PrivilegeList
+    - SubjectLogonId
+windows_None_security_4689:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
+    - ProcessName
+    - Status
+windows_None_security_4692:
+  valid:
+    - EventID
+    - Provider_Name
+  rule: []
+windows_None_security_4697:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
+    - ServiceFileName
+    - ServiceName
+    - ServiceStartType
+    - ServiceType
+windows_None_security_4698:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
+    - TaskName
+windows_None_security_4699:
+  valid:
+    - EventID
+    - Provider_Name
+  rule: []
+windows_None_security_4701:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
+    - TaskName
+windows_None_security_4704:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
+    - PrivilegeList
+windows_None_security_4706:
+  valid:
+    - EventID
+    - Provider_Name
+  rule: []
+windows_None_security_4719:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
+    - AuditPolicyChanges
+windows_None_security_4720:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
+    - SamAccountName
+    - TargetUserName
+windows_None_security_4732:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
+    - SubjectUserName
     - TargetSid
     - TargetUserName
-    - TaskName
+windows_None_security_4738:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
+    - NewUacValue
+    - OldUacValue
+    - PasswordLastSet
+    - RelativeTargetName
+    - SidHistory
+windows_None_security_4742:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
+    - PasswordLastSet
+    - SubjectUserName
+    - TargetUserName
+windows_None_security_4768:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
+    - CertThumbprint
+    - IpAddress
+    - Status
+    - TargetUserName
+windows_None_security_4769:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
+    - ServiceName
     - TicketEncryptionType
     - TicketOptions
+windows_None_security_4771:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
+    - Status
+    - TargetUserName
+windows_None_security_4776:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
+    - AuthenticationPackageName
+    - LogonType
+    - ProcessName
+    - Status
+    - TargetUserName
     - Workstation
     - WorkstationName
+windows_None_security_4794:
+  valid:
+    - EventID
+    - Provider_Name
+  rule: []
+windows_None_security_4799:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
+    - CallerProcessName
+    - TargetUserName
+windows_None_security_4825:
+  valid:
+    - EventID
+    - Provider_Name
+  rule: []
+windows_None_security_4905:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
+    - AuditSourceName
+windows_None_security_5136:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
+    - AllowedToDelegateTo
+    - AttributeLDAPDisplayName
+    - AttributeValue
+    - ObjectClass
+    - ServicePrincipalNames
+windows_None_security_5140:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
+    - ShareName
+    - SubjectUserName
+windows_None_security_5145:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
+    - AccessMask
+    - Accesses
+    - IpAddress
+    - ObjectType
+    - RelativeTargetName
+    - ShareName
+    - SubjectUserName
+windows_None_security_5156:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
+    - DestAddress
+    - DestPort
+    - DestinationPort
+    - Image
+    - LayerRTID
+    - SourceAddress
+    - SourcePort
+windows_None_security_6416:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
+    - ClassName
+    - DeviceDescription
 windows_None_smbclient-security:
-  valid: []
+  valid:
+    - EventID
+    - Provider_Name
+  rule: []
+windows_None_smbclient-security_31017:
+  valid:
+    - EventID
+    - Provider_Name
   rule:
     - Description
-    - EventID
     - ServerName
     - UserName
 windows_None_sysmon:
-  valid: []
-  rule:
+  valid:
     - EventID
+    - Provider_Name
+  rule:
+    - SourceImage
+    - TargetImage
+windows_None_sysmon_7:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
     - Image
     - ImageLoaded
-    - SourceImage
     - TargetFilename
-    - TargetImage
 windows_None_system:
-  valid: []
-  rule:
-    - AccountName
-    - Description
-    - DeviceName
+  valid:
     - EventID
-    - HiveName
-    - ImagePath
-    - Origin
     - Provider_Name
+  rule: []
+windows_None_system_1033:
+  valid:
+    - EventID
+    - Provider_Name
+  rule: []
+windows_None_system_104:
+  valid:
+    - EventID
+    - Provider_Name
+  rule: []
+windows_None_system_16:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
+    - HiveName
+windows_None_system_55:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
+    - Description
+    - Origin
+windows_None_system_5829:
+  valid:
+    - EventID
+    - Provider_Name
+  rule: []
+windows_None_system_7036:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
     - ServiceFileName
     - ServiceName
+windows_None_system_7045:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
+    - AccountName
+    - ImagePath
+    - ServiceFileName
+    - ServiceName
+windows_None_system_98:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
+    - DeviceName
 windows_None_taskscheduler:
-  valid: []
-  rule:
+  valid:
     - EventID
+    - Provider_Name
+  rule: []
+windows_None_taskscheduler_106:
+  valid:
+    - EventID
+    - Provider_Name
+  rule: []
 windows_None_windefend:
-  valid: []
-  rule:
+  valid:
     - EventID
-    - EventType
-    - New_Value
-    - Source_Name
+    - Provider_Name
+  rule:
     - Value
-windows_None_wmi:
-  valid: []
-  rule:
+windows_None_windefend_1013:
+  valid:
     - EventID
+    - Provider_Name
+  rule:
+    - EventType
+windows_None_windefend_1116:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
+    - Source_Name
+windows_None_windefend_5007:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
+    - New_Value
+windows_None_wmi:
+  valid:
+    - EventID
+    - Provider_Name
+  rule: []
+windows_None_wmi_5859:
+  valid:
+    - EventID
+    - Provider_Name
+  rule: []
 windows_clipboard_capture_None:
   valid:
     - Archived
     - ClientInfo
+    - EventID
     - Hashes
     - Image
     - ProcessGuid
     - ProcessId
+    - Provider_Name
     - RuleName
     - Session
     - User
@@ -698,7 +1255,9 @@ windows_clipboard_capture_None:
   rule: []
 windows_create_remote_thread_None:
   valid:
+    - EventID
     - NewThreadId
+    - Provider_Name
     - RuleName
     - SourceImage
     - SourceProcessGuid
@@ -713,33 +1272,50 @@ windows_create_remote_thread_None:
     - TargetUser
     - UtcTime
   rule:
-    - EventID
     - TargetProcessAddress
+windows_create_remote_thread_None_8:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
+    - SourceImage
+    - StartModule
+    - TargetImage
 windows_create_stream_hash_None:
   valid:
     - Contents
     - CreationUtcTime
+    - EventID
     - Hash
     - Image
     - Imphash
     - ProcessGuid
     - ProcessId
+    - Provider_Name
     - RuleName
     - TargetFilename
     - User
     - UtcTime
   rule: []
 windows_defender_None_None:
-  valid: []
-  rule:
+  valid:
     - EventID
+    - Provider_Name
+  rule: []
+windows_defender_None_None_1121:
+  valid:
+    - EventID
+    - Provider_Name
+  rule:
     - Path
     - ProcessName
 windows_dns_query_None:
   valid:
+    - EventID
     - Image
     - ProcessGuid
     - ProcessId
+    - Provider_Name
     - QueryName
     - QueryResults
     - QueryStatus
@@ -749,8 +1325,10 @@ windows_dns_query_None:
   rule: []
 windows_driver_load_None:
   valid:
+    - EventID
     - Hashes
     - ImageLoaded
+    - Provider_Name
     - RuleName
     - Signature
     - SignatureStatus
@@ -758,7 +1336,9 @@ windows_driver_load_None:
     - UtcTime
   rule: []
 windows_edr_None:
-  valid: []
+  valid:
+    - EventID
+    - Provider_Name
   rule:
     - EventLog
     - EventType
@@ -767,10 +1347,12 @@ windows_edr_None:
 windows_file_create_None:
   valid:
     - CreationUtcTime
+    - EventID
     - Image
     - PreviousCreationUtcTime
     - ProcessGuid
     - ProcessId
+    - Provider_Name
     - RuleName
     - TargetFilename
     - User
@@ -779,11 +1361,13 @@ windows_file_create_None:
 windows_file_delete_None:
   valid:
     - Archived
+    - EventID
     - Hashes
     - Image
     - IsExecutable
     - ProcessGuid
     - ProcessId
+    - Provider_Name
     - RuleName
     - TargetFilename
     - User
@@ -792,9 +1376,11 @@ windows_file_delete_None:
 windows_file_event_None:
   valid:
     - CreationUtcTime
+    - EventID
     - Image
     - ProcessGuid
     - ProcessId
+    - Provider_Name
     - RuleName
     - TargetFilename
     - User
@@ -804,6 +1390,7 @@ windows_image_load_None:
   valid:
     - Company
     - Description
+    - EventID
     - FileVersion
     - Hashes
     - Image
@@ -812,6 +1399,7 @@ windows_image_load_None:
     - ProcessGuid
     - ProcessId
     - Product
+    - Provider_Name
     - RuleName
     - Signature
     - SignatureStatus
@@ -826,11 +1414,13 @@ windows_network_connection_None:
     - DestinationIsIpv6
     - DestinationPort
     - DestinationPortName
+    - EventID
     - Image
     - Initiated
     - ProcessGuid
     - ProcessId
     - Protocol
+    - Provider_Name
     - RuleName
     - SourceHostname
     - SourceIp
@@ -842,11 +1432,13 @@ windows_network_connection_None:
   rule: []
 windows_pipe_created_None:
   valid:
+    - EventID
     - EventType
     - Image
     - PipeName
     - ProcessGuid
     - ProcessId
+    - Provider_Name
     - RuleName
     - User
     - UtcTime
@@ -854,7 +1446,9 @@ windows_pipe_created_None:
 windows_process_access_None:
   valid:
     - CallTrace
+    - EventID
     - GrantedAccess
+    - Provider_Name
     - RuleName
     - SourceImage
     - SourceProcessGUID
@@ -873,6 +1467,7 @@ windows_process_creation_None:
     - Company
     - CurrentDirectory
     - Description
+    - EventID
     - FileVersion
     - Hashes
     - Image
@@ -889,6 +1484,7 @@ windows_process_creation_None:
     - ProcessGuid
     - ProcessId
     - Product
+    - Provider_Name
     - RuleName
     - TerminalSessionId
     - User
@@ -897,9 +1493,11 @@ windows_process_creation_None:
   rule: []
 windows_process_tampering_application:
   valid:
+    - EventID
     - Image
     - ProcessGuid
     - ProcessId
+    - Provider_Name
     - RuleName
     - Type
     - User
@@ -907,9 +1505,11 @@ windows_process_tampering_application:
   rule: []
 windows_process_termination_None:
   valid:
+    - EventID
     - Image
     - ProcessGuid
     - ProcessId
+    - Provider_Name
     - RuleName
     - User
     - UtcTime
@@ -921,6 +1521,7 @@ windows_ps_classic_provider_start_None:
     - CommandPath
     - CommandType
     - EngineVersion
+    - EventID
     - HostApplication
     - HostId
     - HostName
@@ -928,6 +1529,7 @@ windows_ps_classic_provider_start_None:
     - NewProviderState
     - PipelineId
     - ProviderName
+    - Provider_Name
     - RunspaceId
     - ScriptName
     - SequenceNumber
@@ -939,6 +1541,7 @@ windows_ps_classic_start_None:
     - CommandPath
     - CommandType
     - EngineVersion
+    - EventID
     - HostApplication
     - HostId
     - HostName
@@ -946,6 +1549,7 @@ windows_ps_classic_start_None:
     - NewEngineState
     - PipelineId
     - PreviousEngineState
+    - Provider_Name
     - RunspaceId
     - ScriptName
     - SequenceNumber
@@ -953,18 +1557,24 @@ windows_ps_classic_start_None:
 windows_ps_module_None:
   valid:
     - ContextInfo
+    - EventID
     - Payload
+    - Provider_Name
   rule: []
 windows_ps_script_None:
   valid:
+    - EventID
+    - Provider_Name
     - ScriptBlockText
   rule: []
 windows_raw_access_thread_None:
   valid:
     - Device
+    - EventID
     - Image
     - ProcessGuid
     - ProcessId
+    - Provider_Name
     - RuleName
     - User
     - UtcTime
@@ -978,6 +1588,7 @@ windows_registry_event_None:
     - NewName
     - ProcessGuid
     - ProcessId
+    - Provider_Name
     - RuleName
     - TargetObject
     - User
@@ -986,20 +1597,26 @@ windows_registry_event_None:
 windows_sysmon_error_None:
   valid:
     - Description
+    - EventID
     - ID
+    - Provider_Name
     - UtcTime
   rule: []
 windows_sysmon_status_None:
   valid:
     - Configuration
     - ConfigurationFileHash
+    - EventID
+    - Provider_Name
     - SchemaVersion
     - State
     - UtcTime
     - Version
   rule: []
 windows_webserver_None:
-  valid: []
+  valid:
+    - EventID
+    - Provider_Name
   rule:
     - cs-method
     - cs-uri-query
@@ -1010,18 +1627,19 @@ windows_wmi_event_None:
   valid:
     - Consumer
     - Destination
+    - EventID
     - EventNamespace
     - EventType
     - Filter
     - Name
     - Operation
+    - Provider_Name
     - Query
     - RuleName
     - Type
     - User
     - UtcTime
-  rule:
-    - EventID
+  rule: []
 zeek_None_dce_rpc:
   valid: []
   rule:
