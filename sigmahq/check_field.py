@@ -103,6 +103,7 @@ class MySigma():
             self.index = f'{self.logsource["product"]}_{self.logsource["category"]}_{self.logsource["service"]}'
 
             detection = yml_rule["detection"]
+            unique = True
             for item in detection:
                 if item == "condition":
                     continue
@@ -116,13 +117,15 @@ class MySigma():
                             else:
                                 name = sub_item
                             self.field.append(name)
-                            if name == "EventID":
+                            if name == "EventID" and unique:
+                                if self.subindex!= None:
+                                    unique = False 
                                 eventid = detection[item]["EventID"]
                                 if isinstance(eventid,str):
                                     self.subindex = eventid
                                 elif isinstance(eventid,int):
                                     self.subindex = str(eventid)
-            if self.subindex != None:
+            if self.subindex != None and unique:
                 self.index = f"{self.index}_{self.subindex}"
 
 parser = argparse.ArgumentParser(description='Create the md file with common information for new rules')
@@ -165,8 +168,11 @@ print("Save database")
 info.save()
 print(f"find {len(invalid)} elements to be considered")
 if len(invalid)>0:
+    order_invalid ={}
+    for index in sorted(invalid):
+        order_invalid[index]=invalid[index]
     with pathlib.Path(output_yml).open('w',encoding='UTF-8') as file:
-        ruamel.yaml.dump(invalid, file, Dumper=ruamel.yaml.RoundTripDumper,indent=2,block_seq_indent=2)
+        ruamel.yaml.dump(order_invalid, file, Dumper=ruamel.yaml.RoundTripDumper,indent=2,block_seq_indent=2)
     
     invalid_log = {}
     for rule_name,rule_info in invalid.items():
@@ -174,7 +180,11 @@ if len(invalid)>0:
             invalid_log[rule_info["logsource"]].append({rule_name:rule_info["field"]})
         else:
             invalid_log[rule_info["logsource"]] = [{rule_name:rule_info["field"]}]
+    order_invalid_log ={}
+    for index in sorted(invalid_log):
+        order_invalid_log[index]=invalid_log[index]
+
     with pathlib.Path(f"log_{output_yml}").open('w',encoding='UTF-8') as file:
-        ruamel.yaml.dump(invalid_log, file, Dumper=ruamel.yaml.RoundTripDumper,indent=2,block_seq_indent=2)
+        ruamel.yaml.dump(order_invalid_log, file, Dumper=ruamel.yaml.RoundTripDumper,indent=2,block_seq_indent=2)
 
 print("Bye")
