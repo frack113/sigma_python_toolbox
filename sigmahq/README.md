@@ -18,8 +18,13 @@ Find :
 ## check_field.py
 Try to find errors in fields use in SigmaHQ rule
 
+### Prerequisites
+local repro of :
+- [sigmaHQ](https://github.com/SigmaHQ/sigma)
+- [OSSEM-DB](https://github.com/OTRF/OSSEM-DD)
+
 ### use
-run it
+run it (should run)
 check:
 - check_field.yml for new name find in rule
 - rule_rapport for information by rule
@@ -29,10 +34,14 @@ Update or fix check_field.yml
 fix sigma rule and make a PR 
 
 ### My todo
+- add more data from OSSEM-DB
+- order the yml save
 
 ### Evolution
+- be cool to use
 
 ### Thanks
+https://github.com/OTRF/OSSEM-DD
 
 ## rule_history.yml
 Keep track of remove rule from SigmaHQ

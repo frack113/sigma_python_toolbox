@@ -4,9 +4,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 Project: check_field.py
-Date: 2021/11/10
+Date: 2021/11/13
 Author: frack113
-Version: 1.0
+Version: 1.1
 Description: 
     Check field name use in sigma rule
     Add fields from sysmon 13.30 schemas 4.81
@@ -32,43 +32,97 @@ class DataBase():
             with pathlib.Path(filename).open('r',encoding='UTF-8') as file:
                 yml_rule = ruamel.yaml.load(file, Loader=ruamel.yaml.RoundTripLoader)
             self.data = yml_rule
-            for index in self.data.keys():
-                self.data[index]["rule"] = []
         else:
             self.data = {}
-
-    def check(self,index,value):
-        if index in self.data:
-            if value in self.data[index]["valid"]:
-                return True
-            else:
-                if not value in self.data[index]["rule"]:
-                    self.data[index]["rule"].append(value)
-                return False
+    
+    def update(self,product,category,service,eventid,state,value):
+        if eventid == None:
+            order_list = self.data[product][category][service][state]
+            order_list.append(value)
+            order_list = sorted(set(order_list))
+            self.data[product][category][service][state] = order_list
         else:
-            self.data[index] = {
-                "valid": [],
-                "rule":  [value]
-                }
-            return False
+            order_list = self.data[product][category][service][eventid][state]
+            order_list.append(value)
+            order_list = sorted(set(order_list))
+            self.data[product][category][service][eventid][state] = order_list           
+    
+    def create(self,product,category,service,eventid):
+        if product not in self.data.keys():
+            self.data[product] = {}
+        if category not in self.data[product].keys():
+            self.data[product][category] = {}
+        if service not in self.data[product][category].keys():
+            self.data[product][category][service] = {}
+        if eventid == None:
+            self.data[product][category][service] = {"valid":[],"rule":[]}
+        else:
+            if eventid not in self.data[product][category][service].keys():
+                self.data[product][category][service][eventid] = {"valid":[],"rule":[]}
+
+    def check(self,logsource,value):
+        product = logsource["product"]
+        if product in self.data.keys():
+            category = logsource["category"]
+            if category in self.data[product].keys():
+                service = logsource["service"]
+                if service in self.data[product][category].keys():
+                    eventid = logsource["eventid"]
+                    if eventid == None:
+                        if value in self.data[product][category][service]["valid"]:
+                            return True
+                        else:
+                            self.update(product,category,service,None,"rule",value)
+                    else:
+                        if eventid in self.data[product][category][service].keys():
+                            if value in self.data[product][category][service][eventid]["valid"]:
+                                return True
+                            else:
+                              self.update(product,category,service,eventid,"rule",value)
+                        else:
+                            self.create(product,category,service,eventid)
+                else: #service
+                    if product == "windows" and category == "None" :
+                        self.create(product,category,service,"any")
+                    else:
+                        self.create(product,category,service,None)         
+            else: # category
+                self.create(product,category,"None",None)
+        else: # product
+            self.create(product,"None","None",None)
+        return False
 
     def update_default(self):
-        for index in self.data:
-            if index[:8]=="windows_":
-                if not "EventID" in self.data[index]["valid"]:
-                    self.data[index]["valid"].append("EventID")
-                if not "Provider_Name" in self.data[index]["valid"]:
-                    self.data[index]["valid"].append("Provider_Name")                   
+        if "windows" in self.data.keys():  #error 1st lanch with with data empty 
+            if "None" in self.data["windows"]:
+                if "None" in self.data["windows"]["None"].keys():
+                    self.data["windows"]["None"].pop("None",None)
+
+                for service in self.data["windows"]["None"]:
+                    if not "any" in self.data["windows"]["None"][service].keys():
+                        self.create("windows","None",service,"any")
+                        self.update("windows","None",service,"any","valid","EventID")
+                        self.update("windows","None",service,"any","valid","Provider_Name")
+                    if len(self.data["windows"]["None"][service])>1:
+                        valid =[]
+                        for eventid in self.data["windows"]["None"][service]:
+                            valid.extend(self.data["windows"]["None"][service][eventid]["valid"])
+                        self.data["windows"]["None"][service]["any"]["valid"] = sorted(set(valid))
 
     def save(self):
+        """
         out_dict ={}
         for k in sorted(self.data):
             out_dict[k] = {
                 "valid":sorted(self.data[k]["valid"]),
                 "rule":sorted(self.data[k]["rule"])               
             }
+        """    
         with pathlib.Path(self.filename).open('w',encoding='UTF-8') as file:
-            ruamel.yaml.dump(out_dict, file, Dumper=ruamel.yaml.RoundTripDumper,indent=2,block_seq_indent=2)
+            ruamel.yaml.dump(self.data, file, Dumper=ruamel.yaml.RoundTripDumper,indent=4,block_seq_indent=4)
+
+
+
 
 class MySigma():
 
@@ -76,11 +130,11 @@ class MySigma():
         self.logsource = {
             "product":  "None",
             "category": "None",
-            "service":  "None"
+            "service":  "None",
+            "eventid": None
             }
-        self.index = "None_None_None"
-        self.subindex = None  
         self.field = []
+        self.index = ""
 
     def load(self,filename):
         with filename.open('r',encoding='UTF-8') as file:
@@ -88,9 +142,9 @@ class MySigma():
             self.logsource= {
                 "product":  "None",
                 "category": "None",
-                "service":  "None"
+                "service":  "None",
+                "eventid": None
                 }
-            self.subindex = None
             self.field = []
             logsource = yml_rule["logsource"]
             if "product" in logsource:
@@ -100,10 +154,9 @@ class MySigma():
             if "service" in logsource:
                 self.logsource["service"] = logsource["service"]
             
-            self.index = f'{self.logsource["product"]}_{self.logsource["category"]}_{self.logsource["service"]}'
-
             detection = yml_rule["detection"]
             unique = True
+            event_id = None
             for item in detection:
                 if item == "condition":
                     continue
@@ -111,6 +164,7 @@ class MySigma():
                     continue
                 else:
                     if isinstance(detection[item],OrderedDict):
+                        
                         for sub_item in detection[item]:
                             if "|" in sub_item:
                                 name = sub_item.split("|")[0]
@@ -118,40 +172,90 @@ class MySigma():
                                 name = sub_item
                             self.field.append(name)
                             if name == "EventID" and unique:
-                                if self.subindex!= None:
-                                    unique = False 
-                                eventid = detection[item]["EventID"]
-                                if isinstance(eventid,str):
-                                    self.subindex = eventid
-                                elif isinstance(eventid,int):
-                                    self.subindex = str(eventid)
-            if self.subindex != None and unique:
-                self.index = f"{self.index}_{self.subindex}"
+                                if event_id!= None:
+                                    unique = False
+                                else:
+                                    detection_event_id = detection[item]["EventID"]
+                                    if isinstance(detection_event_id,str):
+                                        event_id = detection_event_id
+                                    elif isinstance(detection_event_id,int):
+                                        event_id = str(detection_event_id)
+            self.index = f'{self.logsource["product"]}_{self.logsource["category"]}_{self.logsource["service"]}'
+            if self.logsource["product"] == "windows" and self.logsource["category"] == "None":
+                if unique:
+                    if event_id == None:
+                        self.logsource["eventid"] = "any"
+                    else:
+                        self.logsource["eventid"] = event_id
+                else:
+                    self.logsource["eventid"] = "any"
+                self.index = f'{self.index}_{self.logsource["eventid"]}'
+
+class OSSEM_DD():
+    def __init__(self,path,database):
+        self.path = path
+        self.database = database
+    
+    def update_zeek(self):
+        zeek_list = [yml for yml in pathlib.Path(f"{self.path}/zeek").glob('**/events/*.yml')]
+        zeek_bar = tqdm.tqdm(total=len(zeek_list),unit='file',desc="zeek ")
+        for zeek in zeek_list:
+            zeek_bar.update(1)
+            with zeek.open('r',encoding='UTF-8') as file:
+                yml_zeek = ruamel.yaml.load(file, Loader=ruamel.yaml.RoundTripLoader)
+                service = yml_zeek["event_code"]
+                self.database.create("zeek","None",service,None)
+                for field in yml_zeek["event_fields"]:
+                    self.database.update("zeek","None",service,None,"valid",str(field["name"]))
+        zeek_bar.close()
+
+    def update_windows(self,rep,product,category,service):
+        win_list = [yml for yml in pathlib.Path(f"{self.path}/windows/etw-providers/{rep}").glob('**/events/*.yml')]
+        win_bar = tqdm.tqdm(total=len(win_list),unit='file',desc=f"{rep} ")
+        for win_file in win_list:
+            win_bar.update(1)
+            with win_file.open('r',encoding='UTF-8') as file:
+                yml_win = ruamel.yaml.load(file, Loader=ruamel.yaml.RoundTripLoader)
+                eventid = yml_win["event_code"]
+                self.database.create(product,category,service,eventid)
+                for field in yml_win["event_fields"]:
+                    self.database.update(product,category,service,eventid,"valid",str(field["name"]).replace(" ","_"))
+        win_bar.close()
 
 parser = argparse.ArgumentParser(description='Create the md file with common information for new rules')
-parser.add_argument("--input", '-i', help="Sigma rules directory", type=str, default="../sigma")
-parser.add_argument("--output", '-o', help="Output rapport yml name", default="rule_rapport.yml", type=str)
+parser.add_argument("--sigma", '-s', help="Sigma base directory", type=str, default="../sigma")
+parser.add_argument("--ossemdb", '-o', help="Ossem-db base directory", type=str, default="../OSSEM-DD")
+parser.add_argument("--rapport", '-r', help="Output rapport yml name", default="rule_rapport.yml", type=str)
 args = parser.parse_args()
 
-path_sigma = args.input
-output_yml = args.output
+path_sigma = args.sigma
+path_ossemdb = args.ossemdb
+output_yml = args.rapport
+
 
 print ("Load database")
 info = DataBase("check_field.yml")
 
+print ("Load OSSEM-DB")
+ossem = OSSEM_DD(path_ossemdb,info)
+ossem.update_zeek()
+ossem.update_windows("Microsoft-Windows-Security-Auditing","windows","None","security")
+
 print("Update default field")
 info.update_default()
+
 
 print("Processing :")
 invalid = {}
 rule = MySigma()
 sigma_list = [yml for yml in pathlib.Path(f"{path_sigma}/rules").glob('**/*.yml')]
 sigma_bar = tqdm.tqdm(total=len(sigma_list),unit='file',desc="Parse sigma rule")
+
 for sigma_file in sigma_list:
     sigma_bar.update(1)
     rule.load(sigma_file)
     for item in rule.field:
-        if info.check(rule.index,item) != True:
+        if info.check(rule.logsource,item) != True:
             if  sigma_file.name in invalid:
                 if not item in invalid[sigma_file.name]["field"]:
                     invalid[sigma_file.name]["field"].append(item)
@@ -160,12 +264,12 @@ for sigma_file in sigma_list:
                                             "logsource": rule.index,
                                             "field": [item]
                 }
-
 sigma_bar.close()
-
 
 print("Save database")
 info.save()
+
+
 print(f"find {len(invalid)} elements to be considered")
 if len(invalid)>0:
     order_invalid ={}
