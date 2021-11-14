@@ -35,10 +35,10 @@ fix sigma rule and make a PR
 
 ### My todo
 - add more data from OSSEM-DB
-- order the yml save
+- remove the "any" in yaml
 
 ### Evolution
-- be cool to use
+- be more cool to use
 
 ### Thanks
 https://github.com/OTRF/OSSEM-DD

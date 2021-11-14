@@ -24,6 +24,8 @@ import argparse
 from collections import OrderedDict
 import logging
 
+
+
 class DataBase():
 
     def __init__(self,filename):
@@ -47,7 +49,7 @@ class DataBase():
             order_list = sorted(set(order_list))
             self.data[product][category][service][eventid][state] = order_list           
     
-    def create(self,product,category,service,eventid):
+    def create(self,product,category,service,eventid = None):
         if product not in self.data.keys():
             self.data[product] = {}
         if category not in self.data[product].keys():
@@ -59,6 +61,7 @@ class DataBase():
         else:
             if eventid not in self.data[product][category][service].keys():
                 self.data[product][category][service][eventid] = {"valid":[],"rule":[]}
+
 
     def check(self,logsource,value):
         product = logsource["product"]
@@ -85,11 +88,11 @@ class DataBase():
                     if product == "windows" and category == "None" :
                         self.create(product,category,service,"any")
                     else:
-                        self.create(product,category,service,None)         
+                        self.create(product,category,service)         
             else: # category
-                self.create(product,category,"None",None)
+                self.create(product,category,"None")
         else: # product
-            self.create(product,"None","None",None)
+            self.create(product,"None","None")
         return False
 
     def update_default(self):
@@ -110,19 +113,8 @@ class DataBase():
                         self.data["windows"]["None"][service]["any"]["valid"] = sorted(set(valid))
 
     def save(self):
-        """
-        out_dict ={}
-        for k in sorted(self.data):
-            out_dict[k] = {
-                "valid":sorted(self.data[k]["valid"]),
-                "rule":sorted(self.data[k]["rule"])               
-            }
-        """    
         with pathlib.Path(self.filename).open('w',encoding='UTF-8') as file:
             ruamel.yaml.dump(self.data, file, Dumper=ruamel.yaml.RoundTripDumper,indent=4,block_seq_indent=4)
-
-
-
 
 class MySigma():
 
@@ -204,7 +196,7 @@ class OSSEM_DD():
             with zeek.open('r',encoding='UTF-8') as file:
                 yml_zeek = ruamel.yaml.load(file, Loader=ruamel.yaml.RoundTripLoader)
                 service = yml_zeek["event_code"]
-                self.database.create("zeek","None",service,None)
+                self.database.create("zeek","None",service)
                 for field in yml_zeek["event_fields"]:
                     self.database.update("zeek","None",service,None,"valid",str(field["name"]))
         zeek_bar.close()
@@ -217,10 +209,38 @@ class OSSEM_DD():
             with win_file.open('r',encoding='UTF-8') as file:
                 yml_win = ruamel.yaml.load(file, Loader=ruamel.yaml.RoundTripLoader)
                 eventid = yml_win["event_code"]
+               # etw = yml_win["log_source"]
                 self.database.create(product,category,service,eventid)
                 for field in yml_win["event_fields"]:
                     self.database.update(product,category,service,eventid,"valid",str(field["name"]).replace(" ","_"))
         win_bar.close()
+
+    def update_cloud(self,rep):
+        cloud_list = [yml for yml in pathlib.Path(f"{self.path}/{rep}").glob('**/events/*.yml')]
+        cloud_bar = tqdm.tqdm(total=len(cloud_list),unit='file',desc=f"{rep} ")
+        for cloud_file in cloud_list:
+            cloud_bar.update(1)
+            with cloud_file.open('r',encoding='UTF-8') as file:
+                try:
+                    yml_cloud = ruamel.yaml.load(file, Loader=ruamel.yaml.RoundTripLoader)
+                except:
+                    continue
+                product = yml_cloud["platform"]
+                category = "None"
+                service = yml_cloud["event_code"]
+                self.database.create(product,category,service)
+                for field in yml_cloud["event_fields"]:
+                    self.database.update(product,category,service,None,"valid",str(field["name"]).replace(" ","_").replace(":","_"))
+        cloud_bar.close()
+
+def order_dict(mydict):
+    out_dict ={}
+    for k in sorted(mydict.keys()):
+        value = mydict[k]
+        if isinstance(value,dict):
+            value = order_dict(value)
+        out_dict[k] = value
+    return out_dict
 
 parser = argparse.ArgumentParser(description='Create the md file with common information for new rules')
 parser.add_argument("--sigma", '-s', help="Sigma base directory", type=str, default="../sigma")
@@ -239,11 +259,15 @@ info = DataBase("check_field.yml")
 print ("Load OSSEM-DB")
 ossem = OSSEM_DD(path_ossemdb,info)
 ossem.update_zeek()
+ossem.update_cloud("aws")
+ossem.update_cloud("azure")
 ossem.update_windows("Microsoft-Windows-Security-Auditing","windows","None","security")
+ossem.update_windows("Microsoft-Windows-AppLocker","windows","None","applocker")
+ossem.update_windows("Microsoft-Windows-SMBClient","windows","None","smbclient-security")
+
 
 print("Update default field")
 info.update_default()
-
 
 print("Processing :")
 invalid = {}
@@ -267,14 +291,12 @@ for sigma_file in sigma_list:
 sigma_bar.close()
 
 print("Save database")
+info.data = order_dict(info.data)
 info.save()
-
 
 print(f"find {len(invalid)} elements to be considered")
 if len(invalid)>0:
-    order_invalid ={}
-    for index in sorted(invalid):
-        order_invalid[index]=invalid[index]
+    order_invalid = order_dict(invalid)
     with pathlib.Path(output_yml).open('w',encoding='UTF-8') as file:
         ruamel.yaml.dump(order_invalid, file, Dumper=ruamel.yaml.RoundTripDumper,indent=2,block_seq_indent=2)
     
