@@ -1,0 +1,1785 @@
+None:
+    authentication:
+        None:
+            rule:
+                - action
+            valid: []
+    dns:
+        None:
+            rule:
+                - answer
+                - parent_domain
+                - query
+                - record_type
+            valid: []
+    firewall:
+        None:
+            rule:
+                - action
+                - destination.port
+                - dst_ip
+                - dst_port
+                - src_ip
+            valid: []
+    proxy:
+        None:
+            rule:
+                - c-uri
+                - c-uri-extension
+                - c-uri-stem
+                - c-useragent
+                - cs-cookie
+                - cs-host
+                - cs-method
+                - cs-uri-query
+                - r-dns
+                - sc-status
+            valid: []
+    webserver:
+        None:
+            rule:
+                - c-uri
+                - c-useragent
+                - cs-method
+                - cs-referer
+                - method
+                - referer
+                - sc-status
+                - uri_query
+                - useragent
+            valid: []
+antivirus:
+    None:
+        None:
+            rule:
+                - FileName
+                - Filename
+                - Signature
+            valid: []
+aws:
+    None:
+        cloudtrail:
+            rule:
+                - requestParameters.attribute
+                - requestParameters.userData
+                - responseElements.pendingModifiedValues.masterUserPassword
+                - responseElements.publiclyAccessible
+                - userIdentity.arn
+                - userIdentity.sessionContext.sessionIssuer.type
+                - userIdentity.type
+            valid:
+                - additionalEventData
+                - apiVersion
+                - awsRegion
+                - errorCode
+                - errorMessage
+                - eventID
+                - eventName
+                - eventSource
+                - eventTime
+                - eventType
+                - eventVersion
+                - managementEvent
+                - readOnly
+                - recipientAccountId
+                - requestID
+                - requestParameters
+                - resources
+                - responseElements
+                - serviceEventDetails
+                - sharedEventID
+                - sourceIPAddress
+                - userAgent
+                - userIdentity
+                - vpcEndpointId
+        elb_access:
+            rule: []
+            valid:
+                - backend_port
+                - backend_processing_time
+                - backend_status_code
+                - client_port
+                - elb
+                - elb_status_code
+                - received_bytes
+                - request
+                - request_processing_time
+                - response_processing_time
+                - sent_bytes
+                - ssl_cipher
+                - ssl_protocol
+                - timestamp
+                - user_agent
+        route53_dns:
+            rule: []
+            valid:
+                - edns_client_subnet
+                - hosted_zone_id
+                - layer_4_protocol
+                - log_format_version
+                - query_name
+                - query_timestamp
+                - query_type
+                - resolver_ip_address
+                - response_code
+                - route53_edge_location
+        s3_server_access:
+            rule: []
+            valid:
+                - Authentication_Type
+                - Bucket
+                - Bucket_Owner
+                - Bytes_Sent
+                - Cipher_Suite
+                - Error_Code
+                - HTTP_status
+                - Host_Header
+                - Host_Id
+                - Key
+                - Object_Size
+                - Operation
+                - Referer
+                - Remote_IP
+                - Request-URI
+                - RequestID
+                - Requester
+                - Signature_Version
+                - TLS_version
+                - Time
+                - Total_Time
+                - Turn-Around_Time
+                - User-Agent
+                - Version_Id
+        security_finding_format:
+            rule: []
+            valid:
+                - AwsAccountId
+                - Compliance
+                - Confidence
+                - CreatedAt
+                - Criticality
+                - Description
+                - FirstObservedAt
+                - GeneratorId
+                - Id
+                - LastObservedAt
+                - Malware
+                - Network
+                - Note
+                - Process
+                - ProductArn
+                - ProductFields
+                - RecordState
+                - RelatedFindings
+                - Remediation
+                - Resources
+                - SchemaVersion
+                - Severity
+                - SourceUrl
+                - ThreatIntelIndicators
+                - Title
+                - Types
+                - UpdatedAt
+                - UserDefinedFields
+                - VerificationState
+                - Workflow
+                - WorkflowState_(deprecated)
+        vpc_flow:
+            rule: []
+            valid:
+                - account-id
+                - action
+                - bytes
+                - dstaddr
+                - dstport
+                - end
+                - instance-id
+                - interface-id
+                - log-status
+                - packets
+                - pkt-dstaddr
+                - pkt-srcaddr
+                - protocol
+                - srcaddr
+                - srcport
+                - start
+                - subnet-id
+                - tcp-flags
+                - type
+                - version
+                - vpc-id
+azure:
+    None:
+        AzureActivity:
+            rule:
+                - CategoryValue
+                - OperationNameValue
+                - ResourceId
+                - ResourceProviderValue
+            valid: []
+        aadmanagedidentitysigninlogs:
+            rule: []
+            valid:
+                - AppId
+                - Category
+                - CorrelationId
+                - DurationMs
+                - IPAddress
+                - Id
+                - Identity
+                - Level
+                - Location
+                - LocationDetails
+                - OperationName
+                - OperationVersion
+                - ResourceDisplayName
+                - ResourceGroup
+                - ResourceIdentity
+                - ResultDescription
+                - ResultSignature
+                - ResultType
+                - ServicePrincipalId
+                - ServicePrincipalName
+                - SourceSystem
+                - TenantId
+                - TimeGenerated
+                - Type
+        aadnoninteractiveuserigninlogs:
+            rule: []
+            valid:
+                - AlternateSignInName
+                - AppDisplayName
+                - AppId
+                - AuthenticationDetails
+                - AuthenticationMethodsUsed
+                - AuthenticationProcessingDetails
+                - AuthenticationRequirement
+                - AuthenticationRequirementPolicies
+                - Category
+                - ClientAppUsed
+                - ConditionalAccessPolicies
+                - ConditionalAccessStatus
+                - CorrelationId
+                - CreatedDateTime
+                - DeviceDetail
+                - DurationMs
+                - IPAddress
+                - Id
+                - Identity
+                - IsInteractive
+                - IsRisky
+                - Level
+                - Location
+                - LocationDetails
+                - MfaDetail
+                - NetworkLocationDetails
+                - OperationName
+                - OperationVersion
+                - OriginalRequestId
+                - ProcessingTimeInMilliseconds
+                - ResourceDisplayName
+                - ResourceGroup
+                - ResourceIdentity
+                - ResourceTenantId
+                - ResultDescription
+                - ResultSignature
+                - ResultType
+                - RiskDetail
+                - RiskEventTypes
+                - RiskEventTypes_V2
+                - RiskLevelAggregated
+                - RiskLevelDuringSignIn
+                - RiskState
+                - SignInEventTypes
+                - SourceSystem
+                - Status
+                - TenantId
+                - TimeGenerated
+                - TokenIssuerName
+                - TokenIssuerType
+                - Type
+                - UserAgent
+                - UserDisplayName
+                - UserId
+                - UserPrincipalName
+        aadserviceprincipalsigninlogs:
+            rule: []
+            valid:
+                - AppId
+                - Category
+                - CorrelationId
+                - IPAddress
+                - Id
+                - Identity
+                - Level
+                - Location
+                - LocationDetails
+                - OperationName
+                - OperationVersion
+                - ResourceDisplayName
+                - ResourceGroup
+                - ResourceIdentity
+                - ResultDescription
+                - ResultSignature
+                - ResultType
+                - ServicePrincipalId
+                - ServicePrincipalName
+                - SourceSystem
+                - TenantId
+                - TimeGenerated
+                - Type
+        auditlogs:
+            rule: []
+            valid:
+                - AADOperationType
+                - AADTenantId
+                - ActivityDateTime
+                - ActivityDisplayName
+                - AdditionalDetails
+                - Category
+                - CorrelationId
+                - DurationMs
+                - Id
+                - Identity
+                - InitiatedBy
+                - Level
+                - Location
+                - LoggedByService
+                - OperationName
+                - OperationVersion
+                - Resource
+                - ResourceGroup
+                - ResourceId
+                - Result
+                - ResultDescription
+                - ResultReason
+                - ResultSignature
+                - ResultType
+                - SourceSystem
+                - TargetResources
+                - TimeGenerated
+                - Type
+        azure.activitylogs:
+            rule:
+                - ModifiedProperties{}.NewValue
+                - Operation
+                - Workload
+                - properties.message
+            valid: []
+        azure.auditlogs:
+            rule:
+                - Category
+                - LoggedByService
+                - OperationName
+            valid: []
+        azure.signinlogs:
+            rule:
+                - ResultDescription
+                - ResultType
+                - properties.message
+            valid: []
+        signinlogs:
+            rule: []
+            valid:
+                - AADTenantId
+                - AlternateSignInName
+                - AppDisplayName
+                - AppId
+                - AuthenticationDetails
+                - AuthenticationMethodsUsed
+                - AuthenticationProcessingDetails
+                - AuthenticationRequirement
+                - AuthenticationRequirementPolicies
+                - Category
+                - ClientAppUsed
+                - ConditionalAccessPolicies
+                - ConditionalAccessStatus
+                - CorrelationId
+                - CreatedDateTime
+                - DeviceDetail
+                - DurationMs
+                - FlaggedForReview
+                - HomeTenantId
+                - IPAddress
+                - IPAddressFromResourceProvider
+                - Id
+                - Identity
+                - IsInteractive
+                - IsRisky
+                - Level
+                - Location
+                - LocationDetails
+                - MfaDetail
+                - NetworkLocationDetails
+                - OperationName
+                - OperationVersion
+                - OriginalRequestId
+                - ProcessingTimeInMilliseconds
+                - Resource
+                - ResourceDisplayName
+                - ResourceGroup
+                - ResourceId
+                - ResourceIdentity
+                - ResourceProvider
+                - ResourceTenantId
+                - ResultDescription
+                - ResultSignature
+                - ResultType
+                - RiskDetail
+                - RiskEventTypes
+                - RiskEventTypes_V2
+                - RiskLevelAggregated
+                - RiskLevelDuringSignIn
+                - RiskState
+                - ServicePrincipalId
+                - ServicePrincipalName
+                - SignInIdentifier
+                - SignInIdentifierType
+                - SourceSystem
+                - Status
+                - TimeGenerated
+                - TokenIssuerName
+                - TokenIssuerType
+                - Type
+                - UserAgent
+                - UserDisplayName
+                - UserId
+                - UserPrincipalName
+                - UserType
+gcp:
+    None:
+        gcp.audit:
+            rule:
+                - gcp.audit.method_name
+            valid: []
+google_workspace:
+    None:
+        google_workspace.admin:
+            rule:
+                - eventName
+                - eventService
+                - new_value
+            valid: []
+linux:
+    None:
+        auditd:
+            rule: []
+            valid:
+                - a0
+                - a1
+                - a2
+                - a3
+                - a4
+                - a5
+                - a6
+                - a7
+                - acct
+                - acl
+                - action
+                - added
+                - addr
+                - apparmor
+                - arch
+                - argc
+                - audit_backlog_limit
+                - audit_backlog_wait_time
+                - audit_enabled
+                - audit_failure
+                - auid
+                - banners
+                - bool
+                - bus
+                - cap_fe
+                - cap_fi
+                - cap_fp
+                - cap_fver
+                - cap_pa
+                - cap_pe
+                - cap_pi
+                - cap_pp
+                - capability
+                - category
+                - cgroup
+                - changed
+                - cipher
+                - class
+                - cmd
+                - code
+                - comm
+                - compat
+                - cwd
+                - daddr
+                - data
+                - default-context
+                - dev
+                - device
+                - dir
+                - direction
+                - dmac
+                - dport
+                - egid
+                - enforcing
+                - entries
+                - errno
+                - euid
+                - exe
+                - exit
+                - fam
+                - family
+                - fd
+                - fe
+                - feature
+                - fi
+                - file
+                - flags
+                - format
+                - fp
+                - fp
+                - fsgid
+                - fsuid
+                - fver
+                - gid
+                - grantors
+                - grp
+                - hook
+                - hostname
+                - icmp_type
+                - id
+                - igid
+                - img-ctx
+                - inif
+                - ino
+                - inode
+                - inode_gid
+                - inode_uid
+                - invalid_context
+                - ioctlcmd
+                - ip
+                - ipid
+                - ipx-net
+                - item
+                - items
+                - iuid
+                - kernel
+                - key
+                - kind
+                - ksize
+                - laddr
+                - len
+                - list
+                - lport
+                - mac
+                - macproto
+                - maj
+                - major
+                - minor
+                - mode
+                - model
+                - msg
+                - name
+                - nametype
+                - nargs
+                - net
+                - new
+                - new-chardev
+                - new-disk
+                - new-enabled
+                - new-fs
+                - new-level
+                - new-log_passwd
+                - new-mem
+                - new-net
+                - new-range
+                - new-rng
+                - new-role
+                - new-seuser
+                - new-vcpu
+                - new_gid
+                - new_lock
+                - new_pe
+                - new_pi
+                - new_pp
+                - nlnk-fam
+                - nlnk-grp
+                - nlnk-pid
+                - oauid
+                - obj
+                - obj_gid
+                - obj_uid
+                - ocomm
+                - oflag
+                - ogid
+                - old
+                - old-auid
+                - old-chardev
+                - old-disk
+                - old-enabled
+                - old-fs
+                - old-level
+                - old-log_passwd
+                - old-mem
+                - old-net
+                - old-range
+                - old-rng
+                - old-role
+                - old-ses
+                - old-seuser
+                - old-vcpu
+                - old_enforcing
+                - old_lock
+                - old_pa
+                - old_pe
+                - old_pi
+                - old_pp
+                - old_prom
+                - old_val
+                - op
+                - opid
+                - oses
+                - ouid
+                - outif
+                - pa
+                - parent
+                - path
+                - pe
+                - per
+                - perm
+                - perm_mask
+                - permissive
+                - pfs
+                - pi
+                - pid
+                - pp
+                - ppid
+                - printer
+                - proctitle
+                - prom
+                - proto
+                - qbytes
+                - range
+                - rdev
+                - reason
+                - removed
+                - res
+                - resrc
+                - result
+                - role
+                - rport
+                - saddr
+                - sauid
+                - scontext
+                - selected-context
+                - seperm
+                - seperms
+                - seqno
+                - seresult
+                - ses
+                - seuser
+                - sgid
+                - sig
+                - sigev_signo
+                - smac
+                - spid
+                - sport
+                - state
+                - subj
+                - success
+                - suid
+                - syscall
+                - table
+                - tclass
+                - tcontext
+                - terminal
+                - tty
+                - type
+                - uid
+                - unit
+                - uri
+                - user
+                - uuid
+                - val
+                - ver
+                - virt
+                - vm
+                - vm-ctx
+                - vm-pid
+                - watch
+        auth:
+            rule: []
+            valid:
+                - pam_message
+                - pam_rhost
+                - pam_user
+        sudo:
+            rule: []
+            valid:
+                - COMMAND
+                - CWD
+                - TSID
+                - TTY
+                - USER
+    file_create:
+        None:
+            rule: []
+            valid:
+                - CreationUtcTime
+                - Image
+                - PreviousCreationUtcTime
+                - ProcessGuid
+                - ProcessId
+                - RuleName
+                - TargetFilename
+                - User
+                - UtcTime
+    network_connection:
+        None:
+            rule: []
+            valid:
+                - DestinationHostname
+                - DestinationIp
+                - DestinationIsIpv6
+                - DestinationPort
+                - DestinationPortName
+                - Image
+                - Initiated
+                - ProcessGuid
+                - ProcessId
+                - Protocol
+                - RuleName
+                - SourceHostname
+                - SourceIp
+                - SourceIsIpv6
+                - SourcePort
+                - SourcePortName
+                - User
+                - UtcTime
+    process_creation:
+        None:
+            rule: []
+            valid:
+                - CommandLine
+                - Company
+                - CurrentDirectory
+                - Description
+                - FileVersion
+                - Hashes
+                - Image
+                - IntegrityLevel
+                - LogonGuid
+                - LogonId
+                - OriginalFileName
+                - ParentCommandLine
+                - ParentImage
+                - ParentProcessGuid
+                - ParentProcessId
+                - ParentUser
+                - ProcessGuid
+                - ProcessId
+                - Product
+                - RuleName
+                - TerminalSessionId
+                - User
+                - UtcTime
+m365:
+    ThreatDetection:
+        None:
+            rule:
+                - eventName
+                - eventSource
+                - status
+            valid: []
+    ThreatManagement:
+        None:
+            rule:
+                - eventName
+                - eventSource
+                - status
+            valid: []
+macos:
+    file_event:
+        None:
+            rule: []
+            valid:
+                - CreationUtcTime
+                - Image
+                - ProcessGuid
+                - ProcessId
+                - RuleName
+                - TargetFilename
+                - User
+                - UtcTime
+    process_creation:
+        None:
+            rule: []
+            valid:
+                - CommandLine
+                - Company
+                - CurrentDirectory
+                - Description
+                - FileVersion
+                - Hashes
+                - Image
+                - IntegrityLevel
+                - LogonGuid
+                - LogonId
+                - OriginalFileName
+                - ParentCommandLine
+                - ParentImage
+                - ParentProcessGuid
+                - ParentProcessId
+                - ParentUser
+                - ProcessGuid
+                - ProcessId
+                - Product
+                - RuleName
+                - TerminalSessionId
+                - User
+                - UtcTime
+netflow:
+    None:
+        None:
+            rule:
+                - destination.port
+            valid: []
+okta:
+    None:
+        okta:
+            rule:
+                - displaymessage
+                - eventtype
+            valid: []
+onelogin:
+    None:
+        onelogin.events:
+            rule:
+                - event_type_id
+            valid: []
+qualys:
+    None:
+        None:
+            rule:
+                - event.category
+                - host.scan.vuln
+                - host.scan.vuln_name
+            valid: []
+windows:
+    create_remote_thread:
+        None:
+            rule: []
+            valid: []
+    create_stream_hash:
+        None:
+            rule: []
+            valid: []
+    dns_query:
+        None:
+            rule: []
+            valid: []
+    driver_load:
+        None:
+            rule: []
+            valid: []
+    edr:
+        None:
+            rule: []
+            valid: []
+    file_delete:
+        None:
+            rule: []
+            valid: []
+    file_event:
+        None:
+            rule: []
+            valid: []
+    image_load:
+        None:
+            rule: []
+            valid: []
+    network_connection:
+        None:
+            rule: []
+            valid: []
+    pipe_created:
+        None:
+            rule: []
+            valid: []
+    process_access:
+        None:
+            rule: []
+            valid: []
+    process_creation:
+        None:
+            rule: []
+            valid: []
+    ps_classic_provider_start:
+        None:
+            rule: []
+            valid: []
+    ps_classic_start:
+        None:
+            rule: []
+            valid: []
+    ps_module:
+        None:
+            rule: []
+            valid: []
+    ps_script:
+        None:
+            rule: []
+            valid: []
+    raw_access_thread:
+        None:
+            rule: []
+            valid: []
+    registry_event:
+        None:
+            rule: []
+            valid: []
+    sysmon_error:
+        None:
+            rule: []
+            valid: []
+    sysmon_status:
+        None:
+            rule: []
+            valid: []
+    webserver:
+        None:
+            rule: []
+            valid: []
+    wmi_event:
+        None:
+            rule: []
+            valid: []
+zeek:
+    None:
+        conn:
+            rule: []
+            valid:
+                - conn_state
+                - duration
+                - history
+                - id.orig_h
+                - id.orig_p
+                - id.resp_h
+                - id.resp_p
+                - inner_vlan
+                - local_orig
+                - local_resp
+                - missed_bytes
+                - orig_bytes
+                - orig_ip_bytes
+                - orig_l2_addr
+                - orig_pkts
+                - proto
+                - resp_bytes
+                - resp_ip_bytes
+                - resp_l2_addr
+                - resp_pkts
+                - service
+                - ts
+                - tunnel_parents
+                - uid
+                - vlan
+        dce_rpc:
+            rule: []
+            valid:
+                - endpoint
+                - id.orig_h
+                - id.orig_p
+                - id.resp_h
+                - id.resp_p
+                - named_pipe
+                - operation
+                - rtt
+                - ts
+                - uid
+        dhcp:
+            rule: []
+            valid:
+                - agent_remote_id
+                - assigned_addr
+                - circuit_id
+                - client_addr
+                - client_fqdn
+                - client_message
+                - client_software
+                - domain
+                - duration
+                - host_name
+                - lease_time
+                - mac
+                - msg_orig
+                - msg_types
+                - requested_addr
+                - server_addr
+                - server_message
+                - server_software
+                - subscriber_id
+                - ts
+                - uids
+        dnp3:
+            rule: []
+            valid:
+                - fc_reply
+                - fc_request
+                - id.orig_h
+                - id.orig_p
+                - id.resp_h
+                - id.resp_p
+                - iin
+                - proto
+                - ts
+                - uid
+        dns:
+            rule: []
+            valid:
+                - AA
+                - RA
+                - RD
+                - TC
+                - TTLs
+                - Z
+                - addl
+                - answers
+                - auth
+                - id.orig_h
+                - id.orig_p
+                - id.resp_h
+                - id.resp_p
+                - proto
+                - qclass
+                - qclass_name
+                - qtype
+                - qtype_name
+                - query
+                - rcode
+                - rcode_name
+                - rejected
+                - rtt
+                - trans_id
+                - ts
+                - uid
+        dpd:
+            rule: []
+            valid:
+                - analyzer
+                - failure_reason
+                - id.orig_h
+                - id.orig_p
+                - id.resp_h
+                - id.resp_p
+                - packet_segment
+                - proto
+                - ts
+                - uid
+        files:
+            rule: []
+            valid:
+                - analyzers
+                - conn_uids
+                - depth
+                - duration
+                - entropy
+                - extracted
+                - extracted_cutoff
+                - extracted_size
+                - filename
+                - fuid
+                - is_orig
+                - local_orig
+                - md5
+                - mime_type
+                - missing_bytes
+                - overflow_bytes
+                - parent_fuid
+                - rx_hosts
+                - seen_bytes
+                - sha1
+                - sha256
+                - source
+                - timedout
+                - total_bytes
+                - ts
+                - tx_hosts
+                - x509
+        ftp:
+            rule: []
+            valid:
+                - arg
+                - command
+                - cwd
+                - data_channel.orig_h
+                - data_channel.passive
+                - data_channel.resp_h
+                - data_channel.resp_p
+                - file_size
+                - ftp_passive
+                - fuid
+                - id.orig_h
+                - id.orig_p
+                - id.resp_h
+                - id.resp_p
+                - mime_type
+                - password
+                - reply_code
+                - reply_msg
+                - ts
+                - uid
+                - user
+        gquic:
+            rule: []
+            valid:
+                - cyu
+                - cyutags
+                - id.orig_h
+                - id.orig_p
+                - id.resp_h
+                - id.resp_p
+                - server_name
+                - tag_count
+                - ts
+                - uid
+                - user_agent
+                - version
+        http:
+            rule:
+                - filetype
+                - http.bodyMagic
+                - http.method
+                - id_resp_h
+                - mime_types
+            valid:
+                - client_header_names
+                - cookie_vars
+                - flash_version
+                - host
+                - id.orig_h
+                - id.orig_p
+                - id.resp_h
+                - id.resp_p
+                - info_code
+                - info_msg
+                - method
+                - omniture
+                - orig_filenames
+                - orig_fuids
+                - orig_mime_types
+                - origin
+                - password
+                - post_body
+                - proxied
+                - referrer
+                - request_body_len
+                - resp_filenames
+                - resp_fuids
+                - resp_mime_types
+                - response_body_len
+                - server_header_names
+                - status_code
+                - status_msg
+                - tags
+                - trans_depth
+                - ts
+                - uid
+                - uri
+                - uri_vars
+                - user_agent
+                - username
+                - version
+        imap:
+            rule: []
+            valid:
+                - id.orig_h
+                - id.orig_p
+                - id.resp_h
+                - id.resp_p
+                - ts
+                - uid
+        intel:
+            rule: []
+            valid:
+                - file_desc
+                - file_mime_type
+                - fuid
+                - host
+                - id.orig_h
+                - id.orig_p
+                - id.resp_h
+                - id.resp_p
+                - indicator
+                - indicator_type
+                - matched
+                - node
+                - seen.
+                - seen_
+                - sources
+                - ts
+                - uid
+                - where
+        irc:
+            rule: []
+            valid:
+                - addl
+                - command
+                - dcc_file_name
+                - dcc_file_size
+                - dcc_mime_type
+                - fuid
+                - id.orig_h
+                - id.orig_p
+                - id.resp_h
+                - id.resp_p
+                - nick
+                - ts
+                - uid
+                - user
+                - value
+        kerberos:
+            rule: []
+            valid:
+                - auth_ticket
+                - cipher
+                - client
+                - client_cert_fuid
+                - client_cert_subject
+                - error_code
+                - error_msg
+                - forwardable
+                - from
+                - id.orig_h
+                - id.orig_p
+                - id.resp_h
+                - id.resp_p
+                - new_ticket
+                - renewable
+                - request_type
+                - server_cert_fuid
+                - server_cert_subject
+                - service
+                - success
+                - till
+                - ts
+                - uid
+        known_certs:
+            rule: []
+            valid:
+                - host
+                - issuer_subject
+                - port_num
+                - serial
+                - subject
+                - ts
+        known_hosts:
+            rule: []
+            valid:
+                - host
+                - ts
+        known_modbus:
+            rule: []
+            valid:
+                - device_type
+                - host
+                - ts
+        known_services:
+            rule: []
+            valid:
+                - host
+                - port_network_protocol
+                - port_num
+                - service
+                - ts
+        modbus:
+            rule: []
+            valid:
+                - delta
+                - exception
+                - function
+                - id.orig_h
+                - id.orig_p
+                - id.resp_h
+                - id.resp_p
+                - new_val
+                - old_val
+                - proto
+                - register
+                - track_address
+                - ts
+                - uid
+        modbus_register_change:
+            rule: []
+            valid:
+                - delta
+                - id.orig_h
+                - id.orig_p
+                - id.resp_h
+                - id.resp_p
+                - new_val
+                - old_val
+                - proto
+                - register
+                - ts
+                - uid
+        mqtt:
+            rule: []
+            valid:
+                - id.orig_h
+                - id.orig_p
+                - id.resp_h
+                - id.resp_p
+                - ts
+                - uid
+        mysql:
+            rule: []
+            valid:
+                - arg
+                - cmd
+                - id.orig_h
+                - id.orig_p
+                - id.resp_h
+                - id.resp_p
+                - response
+                - rows
+                - ts
+                - uid
+        notice:
+            rule: []
+            valid:
+                - actions
+                - dropped
+                - dst
+                - email_body_sections
+                - file_desc
+                - file_mime_type
+                - fuid
+                - msg
+                - n
+                - note
+                - p
+                - peer_descr
+                - proto
+                - remote_location.city
+                - remote_location.country_code
+                - remote_location.latitude
+                - remote_location.longitude
+                - remote_location.region
+                - src
+                - sub
+                - subpress_for
+                - ts
+                - uid
+        ntlm:
+            rule: []
+            valid:
+                - domainname
+                - hostname
+                - id.orig_h
+                - id.orig_p
+                - id.resp_h
+                - id.resp_p
+                - server_dns_computer_name
+                - server_nb_computer_name
+                - server_tree_name
+                - success
+                - ts
+                - uid
+                - username
+        ntp:
+            rule: []
+            valid:
+                - id.orig_h
+                - id.orig_p
+                - id.resp_h
+                - id.resp_p
+                - mode
+                - num_exts
+                - org_time
+                - poll
+                - precision
+                - rec_time
+                - ref_id
+                - ref_time
+                - root_delay
+                - root_disp
+                - stratum
+                - ts
+                - uid
+                - version
+                - xmt_time
+        pe:
+            rule: []
+            valid:
+                - compile_ts
+                - fuid
+                - has_cert_table
+                - has_debug_data
+                - has_export_table
+                - has_import_table
+                - is_64bit
+                - is_exe
+                - machine
+                - os
+                - section_names
+                - subsystem
+                - ts
+                - uses_aslr
+                - uses_code_integrity
+                - uses_dep
+                - uses_seh
+        pop3:
+            rule: []
+            valid:
+                - '@stream'
+                - successful_commands
+                - ts
+                - username
+        radius:
+            rule: []
+            valid:
+                - connect_info
+                - framed_addr
+                - id.orig_h
+                - id.orig_p
+                - id.resp_h
+                - id.resp_p
+                - mac
+                - reply_msg
+                - result
+                - ts
+                - ttl
+                - tunnel_client
+                - uid
+                - username
+        rdp:
+            rule:
+                - src_ip
+            valid:
+                - cert_count
+                - cert_permanent
+                - cert_type
+                - client_build
+                - client_dig_product_id
+                - client_name
+                - cookie
+                - desktop_height
+                - desktop_width
+                - encryption_level
+                - encryption_method
+                - id.orig_h
+                - id.orig_p
+                - id.resp_h
+                - id.resp_p
+                - keyboard_layout
+                - requested_color_depth
+                - result
+                - security_protocol
+                - ssl
+                - ts
+                - uid
+        rfb:
+            rule: []
+            valid:
+                - auth
+                - authentication_method
+                - client_major_version
+                - client_minor_version
+                - desktop_name
+                - height
+                - id.orig_h
+                - id.orig_p
+                - id.resp_h
+                - id.resp_p
+                - server_major_version
+                - server_minor_version
+                - share_flag
+                - ts
+                - uid
+                - width
+        sip:
+            rule: []
+            valid:
+                - call_id
+                - content_type
+                - date
+                - id.orig_h
+                - id.orig_p
+                - id.resp_h
+                - id.resp_p
+                - method
+                - reply_to
+                - request_body_len
+                - request_from
+                - request_path
+                - request_to
+                - response_body_len
+                - response_from
+                - response_path
+                - response_to
+                - seq
+                - status_code
+                - status_msg
+                - subject
+                - trans_depth
+                - ts
+                - uid
+                - uri
+                - user_agent
+                - warning
+        smb_files:
+            rule: []
+            valid:
+                - action
+                - fuid
+                - id.orig_h
+                - id.orig_p
+                - id.resp_h
+                - id.resp_p
+                - name
+                - path
+                - prev_name
+                - size
+                - times_accessed
+                - times_changed
+                - times_created
+                - times_modified
+                - ts
+                - uid
+        smb_mapping:
+            rule: []
+            valid:
+                - id.orig_h
+                - id.orig_p
+                - id.resp_h
+                - id.resp_p
+                - native_file_system
+                - path
+                - service
+                - share_type
+                - ts
+                - uid
+        smtp:
+            rule: []
+            valid:
+                - cc
+                - date
+                - first_received
+                - from
+                - fuids
+                - helo
+                - id.orig_h
+                - id.orig_p
+                - id.resp_h
+                - id.resp_p
+                - in_reply_to
+                - is_webmail
+                - last_reply
+                - mailfrom
+                - msg_id
+                - path
+                - rcptto
+                - reply_to
+                - second_received
+                - subject
+                - tls
+                - to
+                - trans_depth
+                - ts
+                - uid
+                - user_agent
+                - x_originating_ip
+        snmp:
+            rule: []
+            valid:
+                - community
+                - display_string
+                - duration
+                - get_bulk_requests
+                - get_requests
+                - get_responses
+                - id.orig_h
+                - id.orig_p
+                - id.resp_h
+                - id.resp_p
+                - set_requests
+                - ts
+                - uid
+                - up_since        date_time
+                - version
+        socks:
+            rule: []
+            valid:
+                - bound_
+                - bound_host
+                - bound_name
+                - bound_p
+                - id.orig_h
+                - id.orig_p
+                - id.resp_h
+                - id.resp_p
+                - password
+                - request_
+                - request_host
+                - request_name
+                - request_p
+                - status
+                - ts
+                - uid
+                - user
+                - version
+        software:
+            rule: []
+            valid:
+                - host
+                - host_p
+                - name
+                - software_type
+                - ts
+                - unparsed_version
+                - url
+                - version_
+                - version_addl
+                - version_major
+                - version_minor
+                - version_minor2
+                - version_minor3
+        ssh:
+            rule: []
+            valid:
+                - auth_attempts
+                - auth_success
+                - cipher_alg
+                - client
+                - compression_alg
+                - cshka
+                - direction
+                - hassh
+                - hasshAlgorithms
+                - hasshServer
+                - hasshServerAlgorithms
+                - hasshVersion
+                - host_key
+                - host_key_alg
+                - id.orig_h
+                - id.orig_p
+                - id.resp_h
+                - id.resp_p
+                - kex_alg
+                - mac_alg
+                - remote_location.city
+                - remote_location.country_code
+                - remote_location.latitude
+                - remote_location.longitude
+                - remote_location.region
+                - server
+                - ts
+                - uid
+                - version
+        ssl:
+            rule: []
+            valid:
+                - cert_chain_fuids
+                - cipher
+                - client_cert_chain_fuids
+                - client_issuer
+                - client_subject
+                - curve
+                - established
+                - id.orig_h
+                - id.orig_p
+                - id.resp_h
+                - id.resp_p
+                - issuer
+                - ja3
+                - ja3s
+                - last_alert
+                - next_protocol
+                - notary
+                - ocsp_status
+                - orig_certificate_sha1
+                - resp_certificate_sha1
+                - resumed
+                - server_name
+                - subject
+                - ts
+                - uid
+                - valid_ct_logs
+                - valid_ct_operators
+                - valid_ct_operators_list
+                - validation_status
+                - version
+                - version_num
+        syslog:
+            rule: []
+            valid:
+                - facility
+                - id.orig_h
+                - id.orig_p
+                - id.resp_h
+                - id.resp_p
+                - message
+                - proto
+                - severity
+                - ts
+                - uid
+        traceroute:
+            rule: []
+            valid:
+                - dst
+                - proto
+                - src
+                - ts
+        tunnel:
+            rule: []
+            valid:
+                - action
+                - id.orig_h
+                - id.orig_p
+                - id.resp_h
+                - id.resp_p
+                - ts
+                - tunnel_type
+                - uid
+        weird:
+            rule: []
+            valid: []
+        x509:
+            rule:
+                - certificate.serial
+            valid:
+                - basic_constraints_ca
+                - basic_constraints_path_len
+                - certificate_cn
+                - certificate_curve
+                - certificate_exponent
+                - certificate_issuer
+                - certificate_key_alg
+                - certificate_key_length
+                - certificate_key_type
+                - certificate_not_valid_after
+                - certificate_not_valid_before
+                - certificate_serial
+                - certificate_sig_alg
+                - certificate_subject
+                - certificate_version
+                - id
+                - logcert
+                - san_dns
+                - san_email
+                - san_ip
+                - san_uri
+                - ts
+        xmpp:
+            rule: []
+            valid:
+                - id.orig_h
+                - id.orig_p
+                - id.resp_h
+                - id.resp_p
+                - ts
+                - uid
+zoho_manageengine:
+    webserver:
+        None:
+            rule:
+                - c-uri
+            valid: []
