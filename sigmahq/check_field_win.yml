@@ -3,24 +3,20 @@ windows:
         application:
             default:
                 '0':
-                    rule:
-                        - Provider_Name
+                    rule: []
                     valid:
                         - EventID
-                        - provider_name
+                        - Provider_Name
                 '1033':
                     rule:
                         - Message
-                        - Provider_Name
                     valid: []
                 '4':
                     rule:
                         - Level
-                        - Provider_Name
                     valid: []
                 '524':
-                    rule:
-                        - Provider_Name
+                    rule: []
                     valid: []
         applocker:
             Microsoft-Windows-AppLocker:
@@ -442,7 +438,7 @@ windows:
                     rule: []
                     valid:
                         - EventID
-                        - provider_name
+                        - Provider_Name
         dhcp:
             Microsoft-Windows-Dhcp-Client:
                 '1000':
@@ -1083,14 +1079,14 @@ windows:
                     rule: []
                     valid:
                         - EventID
-                        - provider_name
+                        - Provider_Name
         dns-server:
             default:
                 '0':
                     rule: []
                     valid:
                         - EventID
-                        - provider_name
+                        - Provider_Name
                 '257':
                     rule:
                         - QNAME
@@ -1532,7 +1528,7 @@ windows:
                     rule: []
                     valid:
                         - EventID
-                        - provider_name
+                        - Provider_Name
         ldap_debug:
             default:
                 '0':
@@ -1540,21 +1536,21 @@ windows:
                         - SearchFilter
                     valid:
                         - EventID
-                        - provider_name
+                        - Provider_Name
         microsoft-servicebus-client:
             default:
                 '0':
                     rule: []
                     valid:
                         - EventID
-                        - provider_name
+                        - Provider_Name
         msexchange-management:
             default:
                 '0':
                     rule: []
                     valid:
                         - EventID
-                        - provider_name
+                        - Provider_Name
                 '6':
                     rule: []
                     valid: []
@@ -1682,13 +1678,12 @@ windows:
                     rule: []
                     valid:
                         - EventID
-                        - provider_name
+                        - Provider_Name
                 '8001':
                     rule: []
                     valid: []
                 '8002':
-                    rule:
-                        - CallingProcessName
+                    rule: []
                     valid: []
         powershell:
             default:
@@ -1700,7 +1695,6 @@ windows:
                         - Payload
                         - Provider_Name
                         - ScriptBlockText
-                        - provider_name
         powershell-classic:
             default:
                 '0':
@@ -1724,7 +1718,6 @@ windows:
                         - RunspaceId
                         - ScriptName
                         - SequenceNumber
-                        - provider_name
                         - vSwitchID
         printservice-admin:
             Microsoft-Windows-PrintService:
@@ -2988,11 +2981,10 @@ windows:
                         - OperationCode
             default:
                 '0':
-                    rule:
-                        - ErrorCode
+                    rule: []
                     valid:
                         - EventID
-                        - provider_name
+                        - Provider_Name
         printservice-operational:
             Microsoft-Windows-PrintService:
                 '100':
@@ -4258,11 +4250,226 @@ windows:
                     rule: []
                     valid:
                         - EventID
-                        - provider_name
+                        - Provider_Name
                 '316':
                     rule: []
                     valid: []
         security:
+            Microsoft-Windows-Eventlog:
+                '100':
+                    rule: []
+                    valid:
+                        - ErrorCode
+                        - EventID
+                        - PubID
+                '102':
+                    rule: []
+                    valid:
+                        - ErrorCode
+                        - EventID
+                        - ProcessID
+                        - PublisherGuid
+                        - PublisherName
+                '103':
+                    rule: []
+                    valid:
+                        - Reason
+                        - SessionName
+                '104':
+                    rule: []
+                    valid:
+                        - BackupPath
+                        - Channel
+                        - SubjectDomainName
+                        - SubjectUserName
+                '105':
+                    rule: []
+                    valid:
+                        - BackupPath
+                        - Channel
+                '106':
+                    rule: []
+                    valid:
+                        - Channel
+                '107':
+                    rule: []
+                    valid:
+                        - ErrorCode
+                        - ProviderName
+                        - PublisherGuid
+                '108':
+                    rule: []
+                    valid:
+                        - ActualMaxInterval
+                        - BiasValid
+                        - DiskPmDisabledMaxInterval
+                        - DiskPmEnabledFlag
+                        - DiskPmEnabledMaxInterval
+                        - DiskPmPolicy
+                        - ShutdownTime
+                        - StartBias
+                        - TimestampForced
+                '109':
+                    rule: []
+                    valid:
+                        - ErrorCode
+                        - EventID
+                        - EventName
+                        - ProcessID
+                        - PublisherGuid
+                        - PublisherName
+                '110':
+                    rule: []
+                    valid:
+                        - PublisherGuid
+                        - PublisherName
+                '1101':
+                    rule: []
+                    valid:
+                        - Reason
+                '1102':
+                    rule: []
+                    valid:
+                        - SubjectDomainName
+                        - SubjectLogonId
+                        - SubjectUserName
+                        - SubjectUserSid
+                '1103':
+                    rule: []
+                    valid:
+                        - PercentFull
+                '1105':
+                    rule: []
+                    valid:
+                        - BackupPath
+                        - Channel
+                '1106':
+                    rule: []
+                    valid:
+                        - Reason
+                '1107':
+                    rule: []
+                    valid:
+                        - ErrorCode
+                        - EventID
+                        - ProcessID
+                        - PublisherGuid
+                        - PublisherName
+                '1108':
+                    rule: []
+                    valid:
+                        - ErrorCode
+                        - EventID
+                        - PubID
+                '111':
+                    rule: []
+                    valid:
+                        - EventMetaDataCount
+                        - PublisherGuid
+                        - PublisherName
+                '112':
+                    rule: []
+                    valid:
+                        - ErrorCode
+                        - PublisherGuid
+                        - PublisherName
+                '20':
+                    rule: []
+                    valid:
+                        - ErrorCode
+                        - Path
+                '200':
+                    rule: []
+                    valid:
+                        - ChannelName
+                        - ChannelType
+                        - Enabled
+                '201':
+                    rule: []
+                    valid:
+                        - ChannelName
+                        - Query
+                '202':
+                    rule: []
+                    valid:
+                        - ChannelName
+                        - Query
+                '203':
+                    rule: []
+                    valid:
+                        - ModuleName
+                        - ModuleNameLen
+                '204':
+                    rule: []
+                    valid:
+                        - ModuleName
+                        - ModuleNameLen
+                '205':
+                    rule: []
+                    valid:
+                        - ModuleName
+                        - ModuleNameLen
+                '21':
+                    rule: []
+                    valid:
+                        - ChannelPath
+                        - ConfigProperty
+                        - ErrorCode
+                '22':
+                    rule: []
+                    valid:
+                        - ErrorCode
+                        - Path
+                '23':
+                    rule: []
+                    valid:
+                        - ErrorCode
+                        - Path
+                '25':
+                    rule: []
+                    valid:
+                        - ChannelPath
+                '26':
+                    rule: []
+                    valid:
+                        - ChannelPath
+                '27':
+                    rule: []
+                    valid:
+                        - ChannelPath
+                        - ErrorCode
+                        - FailedLogFilePath
+                        - NewLogFilePath
+                '28':
+                    rule: []
+                    valid:
+                        - ChannelPath
+                        - ErrorCode
+                '29':
+                    rule: []
+                    valid:
+                        - ChannelPath
+                        - ErrorCode
+                '30':
+                    rule: []
+                    valid:
+                        - ChannelPath
+                        - ErrorCode
+                        - PublisherGuid
+                '31':
+                    rule: []
+                    valid:
+                        - ChannelPath
+                        - ErrorCode
+                '40':
+                    rule: []
+                    valid:
+                        - ChannelPath
+                        - ErrorCode
+                '6000':
+                    rule: []
+                    valid:
+                        - Channel
             Microsoft-Windows-Security-Auditing:
                 '4610':
                     rule: []
@@ -8649,43 +8856,12 @@ windows:
             default:
                 '0':
                     rule:
-                        - AccessList
-                        - AccessMask
-                        - AccountName
-                        - AllowedToDelegateTo
-                        - AttributeLDAPDisplayName
-                        - AttributeValue
-                        - AuditSourceName
-                        - CommandLine
-                        - ComputerName
-                        - FailureCode
                         - FilePath
-                        - LogonProcessName
-                        - LogonType
-                        - NewValue
-                        - ObjectClass
-                        - ObjectName
-                        - ObjectType
-                        - ObjectValueName
-                        - PasswordLastSet
-                        - ProcessName
-                        - Provider_Name
-                        - RelativeTargetName
-                        - SamAccountName
-                        - ServicePrincipalNames
-                        - ShareName
-                        - Status
-                        - SubjectUserName
-                        - SubjectUserSid
-                        - TargetUserName
-                        - Workstation
-                        - WorkstationName
                     valid:
                         - EventID
-                        - provider_name
-                '1102':
-                    rule:
                         - Provider_Name
+                '1102':
+                    rule: []
                     valid: []
                 '4611':
                     rule: []
@@ -8803,6 +8979,9 @@ windows:
                     rule:
                         - DestinationPort
                         - Image
+                    valid: []
+                '6000':
+                    rule: []
                     valid: []
                 '6416':
                     rule: []
@@ -9735,7 +9914,7 @@ windows:
                     rule: []
                     valid:
                         - EventID
-                        - provider_name
+                        - Provider_Name
                 '31017':
                     rule:
                         - Description
@@ -9743,32 +9922,29 @@ windows:
         sysmon:
             default:
                 '0':
-                    rule:
+                    rule: []
+                    valid:
+                        - EventID
                         - Image
                         - ImageLoaded
+                        - Provider_Name
                         - SourceImage
                         - TargetFilename
                         - TargetImage
-                    valid:
-                        - EventID
-                        - provider_name
         system:
             default:
                 '0':
                     rule:
-                        - Provider_Name
                         - ServiceFileName
                         - ServiceName
                     valid:
                         - EventID
-                        - provider_name
-                '1033':
-                    rule:
                         - Provider_Name
+                '1033':
+                    rule: []
                     valid: []
                 '104':
-                    rule:
-                        - Provider_Name
+                    rule: []
                     valid: []
                 '16':
                     rule:
@@ -9795,7 +9971,6 @@ windows:
                 '98':
                     rule:
                         - DeviceName
-                        - Provider_Name
                     valid: []
         taskscheduler:
             default:
@@ -9803,7 +9978,7 @@ windows:
                     rule: []
                     valid:
                         - EventID
-                        - provider_name
+                        - Provider_Name
                 '106':
                     rule: []
                     valid: []
@@ -9814,7 +9989,7 @@ windows:
                         - Value
                     valid:
                         - EventID
-                        - provider_name
+                        - Provider_Name
                 '1013':
                     rule:
                         - EventType
@@ -9851,7 +10026,6 @@ windows:
                         - Type
                         - User
                         - UtcTime
-                        - provider_name
     clipboard_capture:
         None:
             default:
@@ -9870,13 +10044,11 @@ windows:
                         - Session
                         - User
                         - UtcTime
-                        - provider_name
     create_remote_thread:
         None:
             default:
                 '0':
-                    rule:
-                        - TargetProcessAddress
+                    rule: []
                     valid:
                         - EventID
                         - NewThreadId
@@ -9894,7 +10066,6 @@ windows:
                         - TargetProcessId
                         - TargetUser
                         - UtcTime
-                        - provider_name
     create_stream_hash:
         None:
             default:
@@ -9914,7 +10085,6 @@ windows:
                         - TargetFilename
                         - User
                         - UtcTime
-                        - provider_name
     dns_query:
         None:
             default:
@@ -9932,7 +10102,6 @@ windows:
                         - RuleName
                         - User
                         - UtcTime
-                        - provider_name
     driver_load:
         None:
             default:
@@ -9948,7 +10117,6 @@ windows:
                         - SignatureStatus
                         - Signed
                         - UtcTime
-                        - provider_name
     edr:
         None:
             default:
@@ -9960,7 +10128,7 @@ windows:
                         - WMIcommand
                     valid:
                         - EventID
-                        - provider_name
+                        - Provider_Name
     file_create:
         None:
             default:
@@ -9978,7 +10146,6 @@ windows:
                         - TargetFilename
                         - User
                         - UtcTime
-                        - provider_name
     file_delete:
         None:
             default:
@@ -9997,7 +10164,6 @@ windows:
                         - TargetFilename
                         - User
                         - UtcTime
-                        - provider_name
     file_event:
         None:
             default:
@@ -10014,12 +10180,12 @@ windows:
                         - TargetFilename
                         - User
                         - UtcTime
-                        - provider_name
     image_load:
         None:
             default:
                 '0':
-                    rule: []
+                    rule:
+                        - CommandLine
                     valid:
                         - Company
                         - Description
@@ -10039,7 +10205,6 @@ windows:
                         - Signed
                         - User
                         - UtcTime
-                        - provider_name
     network_connection:
         None:
             default:
@@ -10066,7 +10231,6 @@ windows:
                         - SourcePortName
                         - User
                         - UtcTime
-                        - provider_name
     pipe_created:
         None:
             default:
@@ -10083,7 +10247,6 @@ windows:
                         - RuleName
                         - User
                         - UtcTime
-                        - provider_name
     process_access:
         None:
             default:
@@ -10105,7 +10268,6 @@ windows:
                         - TargetProcessId
                         - TargetUser
                         - UtcTime
-                        - provider_name
     process_creation:
         None:
             default:
@@ -10138,7 +10300,6 @@ windows:
                         - TerminalSessionId
                         - User
                         - UtcTime
-                        - provider_name
                         - sha1
     process_tampering:
         None:
@@ -10155,7 +10316,6 @@ windows:
                         - Type
                         - User
                         - UtcTime
-                        - provider_name
     process_termination:
         none:
             default:
@@ -10170,7 +10330,6 @@ windows:
                         - RuleName
                         - User
                         - UtcTime
-                        - provider_name
     ps_classic_provider_start:
         None:
             default:
@@ -10194,7 +10353,6 @@ windows:
                         - RunspaceId
                         - ScriptName
                         - SequenceNumber
-                        - provider_name
     ps_classic_start:
         None:
             default:
@@ -10218,7 +10376,6 @@ windows:
                         - RunspaceId
                         - ScriptName
                         - SequenceNumber
-                        - provider_name
     ps_module:
         None:
             default:
@@ -10229,7 +10386,6 @@ windows:
                         - EventID
                         - Payload
                         - Provider_Name
-                        - provider_name
     ps_script:
         None:
             default:
@@ -10239,7 +10395,6 @@ windows:
                         - EventID
                         - Provider_Name
                         - ScriptBlockText
-                        - provider_name
     raw_access_thread:
         None:
             default:
@@ -10255,7 +10410,6 @@ windows:
                         - RuleName
                         - User
                         - UtcTime
-                        - provider_name
     registry_event:
         None:
             default:
@@ -10274,7 +10428,6 @@ windows:
                         - TargetObject
                         - User
                         - UtcTime
-                        - provider_name
     sysmon_error:
         None:
             default:
@@ -10286,7 +10439,6 @@ windows:
                         - ID
                         - Provider_Name
                         - UtcTime
-                        - provider_name
     sysmon_status:
         None:
             default:
@@ -10301,7 +10453,6 @@ windows:
                         - State
                         - UtcTime
                         - Version
-                        - provider_name
     webserver:
         None:
             default:
@@ -10314,13 +10465,24 @@ windows:
                         - sc-status
                     valid:
                         - EventID
-                        - provider_name
+                        - Provider_Name
     wmi_event:
         None:
             default:
                 '0':
-                    rule:
-                        - Destination
+                    rule: []
                     valid:
+                        - Consumer
+                        - Destination
                         - EventID
-                        - provider_name
+                        - EventNamespace
+                        - EventType
+                        - Filter
+                        - Name
+                        - Operation
+                        - Provider_Name
+                        - Query
+                        - RuleName
+                        - Type
+                        - User
+                        - UtcTime

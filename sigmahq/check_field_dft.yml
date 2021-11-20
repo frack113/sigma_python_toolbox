@@ -1143,12 +1143,7 @@ zeek:
                 - user_agent
                 - version
         http:
-            rule:
-                - filetype
-                - http.bodyMagic
-                - http.method
-                - id_resp_h
-                - mime_types
+            rule: []
             valid:
                 - client_header_names
                 - cookie_vars
@@ -1451,8 +1446,7 @@ zeek:
                 - uid
                 - username
         rdp:
-            rule:
-                - src_ip
+            rule: []
             valid:
                 - cert_count
                 - cert_permanent

@@ -4,7 +4,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 Project: check_field.py
-Date: 2021/11/13
+Date: 2021/11/20
 Author: frack113
 Version: 1.1
 Description: 
@@ -12,8 +12,10 @@ Description:
     Add fields from sysmon 13.30 schemas 4.81
 Requirements:
     python :)
-Todo:
-
+change:
+    1.1
+        - if no EventID look into all etw from service
+        - Update some win field name
 """
 
 import ruamel.yaml
@@ -120,8 +122,12 @@ class DataBase():
                         if eventid in self.data_win[product][category][service][etw].keys():
                             if value in self.data_win[product][category][service][etw][eventid]["valid"]:
                                 valid = True
+                        elif eventid == '0':
+                            for local_id in self.data_win[product][category][service][etw].keys():
+                                if value in self.data_win[product][category][service][etw][local_id]["valid"]:
+                                    valid = True
                     if not valid:
-                        if value in self.data_win[product][category][service]["default"]["0"]["valid"]:
+                       if value in self.data_win[product][category][service]["default"]["0"]["valid"]:
                             valid = True
                     
                     if valid:
@@ -157,7 +163,7 @@ class DataBase():
             for service in self.data_win["windows"][category]:
                 self.create_win("windows",category,service,"default","0")
                 self.update("valid","EventID","windows",category,service,"default","0")
-                self.update("valid","provider_name","windows",category,service,"default","0")
+                self.update("valid","Provider_Name","windows",category,service,"default","0")
 
     def save(self):
         with pathlib.Path(self.filename_dft).open('w',encoding='UTF-8') as file:
@@ -315,6 +321,7 @@ ossem.update_zeek()
 ossem.update_cloud("aws")
 ossem.update_cloud("azure")
 ossem.update_windows("Microsoft-Windows-Security-Auditing","windows","None","security")
+ossem.update_windows("Microsoft-Windows-Eventlog","windows","None","security")
 ossem.update_windows("Microsoft-Windows-AppLocker","windows","None","applocker")
 ossem.update_windows("Microsoft-Windows-SMBClient","windows","None","smbclient-security")
 ossem.update_windows("Microsoft-Windows-NTLM","windows","None","ntlm")
