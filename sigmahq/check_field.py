@@ -4,29 +4,33 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 Project: check_field.py
-Date: 2021/11/20
+Date: 2021/11/21
 Author: frack113
-Version: 1.1
+Version: 1.2
 Description: 
     Check field name use in sigma rule
-    Add fields from sysmon 13.30 schemas 4.81
 Requirements:
     python :)
 change:
+    next challange 
+        - rebuild how manage eventid
+        - remove empty eventid
+        - create custom OSSEM-DB
+    1.2
+        - add ask_me
+        - fix sigma extract field name (deeper)
     1.1
         - if no EventID look into all etw from service
         - Update some win field name
+    1.x 
+        - Add fields from sysmon 13.30 schemas 4.81
+        - And many bugs
 """
 
 import ruamel.yaml
 import pathlib
 import tqdm
-import datetime
-import argparse
 from collections import OrderedDict
-import logging
-
-
 
 class DataBase():
 
@@ -184,6 +188,24 @@ class MySigma():
         self.index = ""
 
     def load(self,filename):
+        def extract_field(the_dict,unique,event_id=None):
+            for sub_item in the_dict:
+                if "|" in sub_item:
+                    name = sub_item.split("|")[0]
+                else:
+                    name = sub_item
+                self.field.append(name)
+                if name == "EventID" and unique:
+                    if event_id!= None:
+                        unique = False
+                    else:
+                        detection_event_id = the_dict["EventID"]
+                        if isinstance(detection_event_id,str):
+                            event_id = detection_event_id
+                        elif isinstance(detection_event_id,int):
+                            event_id = str(detection_event_id)
+            return unique, event_id
+
         with filename.open('r',encoding='UTF-8') as file:
             yml_rule = ruamel.yaml.load(file, Loader=ruamel.yaml.RoundTripLoader)
             self.logsource= {
@@ -210,23 +232,13 @@ class MySigma():
                 elif item == "timeframe":
                     continue
                 else:
-                    if isinstance(detection[item],OrderedDict):
-                        
-                        for sub_item in detection[item]:
-                            if "|" in sub_item:
-                                name = sub_item.split("|")[0]
-                            else:
-                                name = sub_item
-                            self.field.append(name)
-                            if name == "EventID" and unique:
-                                if event_id!= None:
-                                    unique = False
-                                else:
-                                    detection_event_id = detection[item]["EventID"]
-                                    if isinstance(detection_event_id,str):
-                                        event_id = detection_event_id
-                                    elif isinstance(detection_event_id,int):
-                                        event_id = str(detection_event_id)
+                    if isinstance(detection[item],dict):
+                        unique, event_id = extract_field(detection[item],unique, event_id)
+                    elif isinstance(detection[item],list):
+                        if not isinstance(detection[item][0], str): #Keywords search
+                            for list_or in detection[item]:
+                                unique, event_id = extract_field(list_or,unique, event_id)
+
             self.index = f'{self.logsource["product"]}_{self.logsource["category"]}_{self.logsource["service"]}'
             if self.logsource["product"] == "windows":
                 if unique:
@@ -294,19 +306,27 @@ def order_dict(mydict):
         value = mydict[k]
         if isinstance(value,dict):
             value = order_dict(value)
+        elif isinstance(value,list):
+            value = sorted(set(value))
         out_dict[k] = value
     return out_dict
 
-parser = argparse.ArgumentParser(description='Create the md file with common information for new rules')
-parser.add_argument("--sigma", '-s', help="Sigma base directory", type=str, default="../sigma")
-parser.add_argument("--ossemdb", '-o', help="Ossem-db base directory", type=str, default="../OSSEM-DD")
-parser.add_argument("--rapport", '-r', help="Output rapport yml name", default="rule_rapport.yml", type=str)
-args = parser.parse_args()
+def ask_me(question,default,valid= None):
+    get_rep = False
+    while get_rep == False:
+        rep = input(f"{question} ? (empty = {default}) :")
+        if rep == '':
+            rep = default
+            get_rep = True
+        elif valid == None:
+            get_rep = True
+        else:
+            if rep in valid:
+                get_rep = True
+    return rep
 
-path_sigma = args.sigma
-path_ossemdb = args.ossemdb
-output_yml = args.rapport
-
+print("Hello ready to check some sigma rule")
+path_sigma = ask_me("Sigma base directory","../sigma")
 
 print("Load database")
 info = DataBase("check_field_dft.yml","check_field_win.yml")
@@ -315,26 +335,29 @@ info.clean_rule(info.data_dft)
 info.clean_rule(info.data_win)
 
 
-print ("Load OSSEM-DB")
-ossem = OSSEM_DD(path_ossemdb,info)
-ossem.update_zeek()
-ossem.update_cloud("aws")
-ossem.update_cloud("azure")
-ossem.update_windows("Microsoft-Windows-Security-Auditing","windows","None","security")
-ossem.update_windows("Microsoft-Windows-Eventlog","windows","None","security")
-ossem.update_windows("Microsoft-Windows-AppLocker","windows","None","applocker")
-ossem.update_windows("Microsoft-Windows-SMBClient","windows","None","smbclient-security")
-ossem.update_windows("Microsoft-Windows-NTLM","windows","None","ntlm")
-ossem.update_windows("Microsoft-Windows-Dhcp-Client","windows","None","dhcp")
-ossem.update_windows("Microsoft-Windows-DriverFrameworks-UserMode","windows","None","driver-framework")
-ossem.update_windows("Microsoft-Windows-PrintService","windows","None","printservice-admin")  # ?
-ossem.update_windows("Microsoft-Windows-PrintService","windows","None","printservice-operational") # ?
-ossem.update_windows("Microsoft-Windows-SMBClient","windows","None","smbclient-security") # ?
+update_ossem = ask_me("Update database from OSSEM_DB","n",["y","n"])
+if update_ossem == "y":
+    path_ossemdb = ask_me("Ossem-db base directory","../OSSEM-DD")
+    print ("Works with OSSEM-DB")
+    ossem = OSSEM_DD(path_ossemdb,info)
+    ossem.update_zeek()
+    ossem.update_cloud("aws")
+    ossem.update_cloud("azure")
+    ossem.update_windows("Microsoft-Windows-Security-Auditing","windows","None","security")
+    ossem.update_windows("Microsoft-Windows-Eventlog","windows","None","security")
+    ossem.update_windows("Microsoft-Windows-AppLocker","windows","None","applocker")
+    ossem.update_windows("Microsoft-Windows-SMBClient","windows","None","smbclient-security")
+    ossem.update_windows("Microsoft-Windows-NTLM","windows","None","ntlm")
+    ossem.update_windows("Microsoft-Windows-Dhcp-Client","windows","None","dhcp")
+    ossem.update_windows("Microsoft-Windows-DriverFrameworks-UserMode","windows","None","driver-framework")
+    ossem.update_windows("Microsoft-Windows-PrintService","windows","None","printservice-admin")  # ?
+    ossem.update_windows("Microsoft-Windows-PrintService","windows","None","printservice-operational") # ?
+    ossem.update_windows("Microsoft-Windows-SMBClient","windows","None","smbclient-security") # ?
 
-print("Create default etw")
+print("Create missing windows 'default' etw")
 info.init_win_default()
 
-print("Processing :")
+print("Processing rules :")
 invalid = {}
 rule = MySigma()
 sigma_list = [yml for yml in pathlib.Path(f"{path_sigma}/rules").glob('**/*.yml')]
@@ -362,6 +385,7 @@ info.save()
 
 print(f"find {len(invalid)} elements to be considered")
 if len(invalid)>0:
+    output_yml = ask_me("Output rapport yml name","rule_rapport.yml")
     order_invalid = order_dict(invalid)
     with pathlib.Path(output_yml).open('w',encoding='UTF-8') as file:
         ruamel.yaml.dump(order_invalid, file, Dumper=ruamel.yaml.RoundTripDumper,indent=2,block_seq_indent=2)
@@ -379,4 +403,4 @@ if len(invalid)>0:
     with pathlib.Path(f"log_{output_yml}").open('w',encoding='UTF-8') as file:
         ruamel.yaml.dump(order_invalid_log, file, Dumper=ruamel.yaml.RoundTripDumper,indent=2,block_seq_indent=2)
 
-print("Bye")
+print("Have a nice day :)")

@@ -14,48 +14,180 @@ None:
             valid: []
     firewall:
         None:
-            rule:
+            rule: []
+            valid:
                 - action
-                - destination.port
                 - dst_ip
                 - dst_port
                 - src_ip
-            valid: []
+                - src_port
+                - username
     proxy:
         None:
             rule:
                 - c-uri
+            valid:
+                - audiocodec
+                - avgbandwidth
+                - c-buffercount
+                - c-bytes
+                - c-channelURL
+                - c-cpu
+                - c-dns
+                - c-hostexe
+                - c-hostexever
+                - c-ip
+                - c-max-bandwidth
+                - c-os
+                - c-osversion
+                - c-pkts-lost-client
+                - c-pkts-lost-cont-net
+                - c-pkts-lost-net
+                - c-pkts-received
+                - c-pkts-recovered-ECC
+                - c-pkts-recovered-resent
+                - c-playerid
+                - c-playerlanguage
+                - c-playerversion
+                - c-quality
+                - c-rate
+                - c-resendreqs
+                - c-starttime
+                - c-status
+                - c-totalbuffertime
                 - c-uri-extension
-                - c-uri-stem
                 - c-useragent
+                - cs-Referer
+                - cs-User-Agent
+                - cs-byte
                 - cs-cookie
                 - cs-host
+                - cs-media-name
+                - cs-media-role
                 - cs-method
+                - cs-referrer
                 - cs-uri-query
+                - cs-uri-stem
+                - cs-url
+                - cs-user-name
+                - cs-username
+                - cs-version
+                - date
+                - filelength
+                - filesize
+                - protocol
                 - r-dns
+                - s-computername
+                - s-content-path
+                - s-cpu-util
+                - s-dns
+                - s-ip
+                - s-pkts-sent
+                - s-port
+                - s-proxied
+                - s-session-id
+                - s-sitename
+                - s-totalclients
+                - sc-byte
+                - sc-bytes
                 - sc-status
-            valid: []
+                - sc-substatus
+                - sc-win32-status
+                - streamid
+                - time
+                - time-taken
+                - transport
+                - videocodec
+                - x-duration
     webserver:
         None:
             rule:
                 - c-uri
-                - c-useragent
-                - cs-method
-                - cs-referer
                 - method
                 - referer
-                - sc-status
                 - uri_query
                 - useragent
-            valid: []
+            valid:
+                - audiocodec
+                - avgbandwidth
+                - c-buffercount
+                - c-bytes
+                - c-channelURL
+                - c-cpu
+                - c-dns
+                - c-hostexe
+                - c-hostexever
+                - c-ip
+                - c-max-bandwidth
+                - c-os
+                - c-osversion
+                - c-pkts-lost-client
+                - c-pkts-lost-cont-net
+                - c-pkts-lost-net
+                - c-pkts-received
+                - c-pkts-recovered-ECC
+                - c-pkts-recovered-resent
+                - c-playerid
+                - c-playerlanguage
+                - c-playerversion
+                - c-quality
+                - c-rate
+                - c-resendreqs
+                - c-starttime
+                - c-status
+                - c-totalbuffertime
+                - c-uri-extension
+                - c-useragent
+                - cs-Referer
+                - cs-User-Agent
+                - cs-byte
+                - cs-cookie
+                - cs-host
+                - cs-media-name
+                - cs-media-role
+                - cs-method
+                - cs-referrer
+                - cs-uri-query
+                - cs-uri-stem
+                - cs-url
+                - cs-user-name
+                - cs-username
+                - cs-version
+                - date
+                - filelength
+                - filesize
+                - protocol
+                - r-dns
+                - s-computername
+                - s-content-path
+                - s-cpu-util
+                - s-dns
+                - s-ip
+                - s-pkts-sent
+                - s-port
+                - s-proxied
+                - s-session-id
+                - s-sitename
+                - s-totalclients
+                - sc-byte
+                - sc-bytes
+                - sc-status
+                - sc-substatus
+                - sc-win32-status
+                - streamid
+                - time
+                - time-taken
+                - transport
+                - videocodec
+                - x-duration
 antivirus:
     None:
         None:
-            rule:
-                - FileName
+            rule: []
+            valid:
+                - Action
                 - Filename
                 - Signature
-            valid: []
 aws:
     None:
         cloudtrail:
@@ -534,7 +666,6 @@ linux:
                 - flags
                 - format
                 - fp
-                - fp
                 - fsgid
                 - fsuid
                 - fver
@@ -810,7 +941,8 @@ macos:
                 - UtcTime
     process_creation:
         None:
-            rule: []
+            rule:
+                - ImageName
             valid:
                 - CommandLine
                 - Company
@@ -861,95 +993,6 @@ qualys:
                 - event.category
                 - host.scan.vuln
                 - host.scan.vuln_name
-            valid: []
-windows:
-    create_remote_thread:
-        None:
-            rule: []
-            valid: []
-    create_stream_hash:
-        None:
-            rule: []
-            valid: []
-    dns_query:
-        None:
-            rule: []
-            valid: []
-    driver_load:
-        None:
-            rule: []
-            valid: []
-    edr:
-        None:
-            rule: []
-            valid: []
-    file_delete:
-        None:
-            rule: []
-            valid: []
-    file_event:
-        None:
-            rule: []
-            valid: []
-    image_load:
-        None:
-            rule: []
-            valid: []
-    network_connection:
-        None:
-            rule: []
-            valid: []
-    pipe_created:
-        None:
-            rule: []
-            valid: []
-    process_access:
-        None:
-            rule: []
-            valid: []
-    process_creation:
-        None:
-            rule: []
-            valid: []
-    ps_classic_provider_start:
-        None:
-            rule: []
-            valid: []
-    ps_classic_start:
-        None:
-            rule: []
-            valid: []
-    ps_module:
-        None:
-            rule: []
-            valid: []
-    ps_script:
-        None:
-            rule: []
-            valid: []
-    raw_access_thread:
-        None:
-            rule: []
-            valid: []
-    registry_event:
-        None:
-            rule: []
-            valid: []
-    sysmon_error:
-        None:
-            rule: []
-            valid: []
-    sysmon_status:
-        None:
-            rule: []
-            valid: []
-    webserver:
-        None:
-            rule: []
-            valid: []
-    wmi_event:
-        None:
-            rule: []
             valid: []
 zeek:
     None:
@@ -1143,7 +1186,9 @@ zeek:
                 - user_agent
                 - version
         http:
-            rule: []
+            rule:
+                - c-uri
+                - c-useragent
             valid:
                 - client_header_names
                 - cookie_vars

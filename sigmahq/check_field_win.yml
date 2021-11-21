@@ -1679,12 +1679,6 @@ windows:
                     valid:
                         - EventID
                         - Provider_Name
-                '8001':
-                    rule: []
-                    valid: []
-                '8002':
-                    rule: []
-                    valid: []
         powershell:
             default:
                 '0':
@@ -10106,7 +10100,8 @@ windows:
         None:
             default:
                 '0':
-                    rule: []
+                    rule:
+                        - ImagePath
                     valid:
                         - EventID
                         - Hashes
@@ -10457,15 +10452,82 @@ windows:
         None:
             default:
                 '0':
-                    rule:
-                        - cs-method
-                        - cs-uri-query
-                        - cs-uri-stem
-                        - cs-username
-                        - sc-status
+                    rule: []
                     valid:
                         - EventID
                         - Provider_Name
+                        - audiocodec
+                        - avgbandwidth
+                        - c-buffercount
+                        - c-bytes
+                        - c-channelURL
+                        - c-cpu
+                        - c-dns
+                        - c-hostexe
+                        - c-hostexever
+                        - c-ip
+                        - c-max-bandwidth
+                        - c-os
+                        - c-osversion
+                        - c-pkts-lost-client
+                        - c-pkts-lost-cont-net
+                        - c-pkts-lost-net
+                        - c-pkts-received
+                        - c-pkts-recovered-ECC
+                        - c-pkts-recovered-resent
+                        - c-playerid
+                        - c-playerlanguage
+                        - c-playerversion
+                        - c-quality
+                        - c-rate
+                        - c-resendreqs
+                        - c-starttime
+                        - c-status
+                        - c-totalbuffertime
+                        - c-uri-extension
+                        - c-useragent
+                        - cs-Referer
+                        - cs-User-Agent
+                        - cs-byte
+                        - cs-cookie
+                        - cs-host
+                        - cs-media-name
+                        - cs-media-role
+                        - cs-method
+                        - cs-referrer
+                        - cs-uri-query
+                        - cs-uri-stem
+                        - cs-url
+                        - cs-user-name
+                        - cs-username
+                        - cs-version
+                        - date
+                        - filelength
+                        - filesize
+                        - protocol
+                        - r-dns
+                        - s-computername
+                        - s-content-path
+                        - s-cpu-util
+                        - s-dns
+                        - s-ip
+                        - s-pkts-sent
+                        - s-port
+                        - s-proxied
+                        - s-session-id
+                        - s-sitename
+                        - s-totalclients
+                        - sc-byte
+                        - sc-bytes
+                        - sc-status
+                        - sc-substatus
+                        - sc-win32-status
+                        - streamid
+                        - time
+                        - time-taken
+                        - transport
+                        - videocodec
+                        - x-duration
     wmi_event:
         None:
             default:
