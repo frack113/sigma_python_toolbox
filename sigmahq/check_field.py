@@ -28,6 +28,8 @@ change:
 """
 
 import ruamel.yaml
+import xml.etree.ElementTree as ET
+import re
 import pathlib
 import tqdm
 from collections import OrderedDict
@@ -140,10 +142,13 @@ class DataBase():
                         self.create(product,category,service,"default",eventid) 
                         self.update("rule",value,product,category,service,"default",eventid)
                 else: #service
+                    self.create(product,category,service,"default","0")
                     self.create(product,category,service,"default",eventid)         
             else: # category
+                self.create(product,category,service,"default","0")
                 self.create(product,category,service,"default",eventid)
         else: # product
+            self.create(product,category,service,"default","0")
             self.create(product,category,service,"default",eventid)
         return False
 
@@ -162,12 +167,12 @@ class DataBase():
                 else:
                     value = self.clean_rule(value)
     
-    def init_win_default(self):
-        for category in self.data_win["windows"]:
-            for service in self.data_win["windows"][category]:
-                self.create_win("windows",category,service,"default","0")
+    def update_win_default_fields(self):
+        for category in self.data_win["windows"].keys():
+            for service in self.data_win["windows"][category].keys():
                 self.update("valid","EventID","windows",category,service,"default","0")
                 self.update("valid","Provider_Name","windows",category,service,"default","0")
+                self.update("valid","EventType","windows",category,service,"default","0")
 
     def save(self):
         with pathlib.Path(self.filename_dft).open('w',encoding='UTF-8') as file:
@@ -300,6 +305,29 @@ class OSSEM_DD():
                     self.database.update("valid",str(field["name"]).replace(" ","_").replace(":","_"),product,category,service)
         cloud_bar.close()
 
+class EVTX_ETW_Resources():
+    def __init__(self,path,version,database):
+        self.path = path
+        self.version = version
+        self.database = database   
+
+    def update_windows(self,filename,product,category,service):
+        print(f"Processing etw  : {filename}")
+        self.database.create(product,category,service,"default","0")
+        win_xml = pathlib.Path(f"{self.path}/ETWProvidersManifests/{self.version}/WEPExplorer/{filename}.xml")
+        with win_xml.open('r',encoding='UTF-8') as file:
+            root = ET.parse(file).getroot()
+            xpath = './Provider/EventMetadata/Event'
+            for child in root.findall(xpath):
+                eventid = child.find('Id').text
+                Message = child.find('Template').text
+                fields = re.findall(r'data name=\"(.*?)\"',Message)
+                etw = filename
+                self.database.create(product,category,service,etw,eventid)
+                for field in fields:
+                    self.database.update("valid",str(field).replace(" ","_"),product,category,service,etw,eventid)
+
+
 def order_dict(mydict):
     out_dict ={}
     for k in sorted(mydict.keys()):
@@ -314,7 +342,7 @@ def order_dict(mydict):
 def ask_me(question,default,valid= None):
     get_rep = False
     while get_rep == False:
-        rep = input(f"{question} ? (empty = {default}) :")
+        rep = input(f"{question} ? (empty = {default}) : ")
         if rep == '':
             rep = default
             get_rep = True
@@ -326,7 +354,13 @@ def ask_me(question,default,valid= None):
     return rep
 
 print("Hello ready to check some sigma rule")
-path_sigma = ask_me("Sigma base directory","../sigma")
+with pathlib.Path("check_field.yml").open('r',encoding='UTF-8') as file:
+    yml_conf = ruamel.yaml.load(file, Loader=ruamel.yaml.RoundTripLoader)
+    path_sigma = yml_conf['path_sigma']
+    path_ossemdb = yml_conf['path_ossemdb']
+    path_etwx = yml_conf['path_etwx']
+    version_etwx = yml_conf['version_etwx']
+    dico_etw =  yml_conf['etwx']
 
 print("Load database")
 info = DataBase("check_field_dft.yml","check_field_win.yml")
@@ -334,28 +368,22 @@ print("Clean old bad rule field name")
 info.clean_rule(info.data_dft)
 info.clean_rule(info.data_win)
 
-
 update_ossem = ask_me("Update database from OSSEM_DB","n",["y","n"])
 if update_ossem == "y":
-    path_ossemdb = ask_me("Ossem-db base directory","../OSSEM-DD")
     print ("Works with OSSEM-DB")
     ossem = OSSEM_DD(path_ossemdb,info)
     ossem.update_zeek()
     ossem.update_cloud("aws")
     ossem.update_cloud("azure")
-    ossem.update_windows("Microsoft-Windows-Security-Auditing","windows","None","security")
-    ossem.update_windows("Microsoft-Windows-Eventlog","windows","None","security")
-    ossem.update_windows("Microsoft-Windows-AppLocker","windows","None","applocker")
-    ossem.update_windows("Microsoft-Windows-SMBClient","windows","None","smbclient-security")
-    ossem.update_windows("Microsoft-Windows-NTLM","windows","None","ntlm")
-    ossem.update_windows("Microsoft-Windows-Dhcp-Client","windows","None","dhcp")
-    ossem.update_windows("Microsoft-Windows-DriverFrameworks-UserMode","windows","None","driver-framework")
-    ossem.update_windows("Microsoft-Windows-PrintService","windows","None","printservice-admin")  # ?
-    ossem.update_windows("Microsoft-Windows-PrintService","windows","None","printservice-operational") # ?
-    ossem.update_windows("Microsoft-Windows-SMBClient","windows","None","smbclient-security") # ?
 
-print("Create missing windows 'default' etw")
-info.init_win_default()
+update_etw = ask_me("Update database from EVTX-ETW-Resources","n",["y","n"])
+if update_etw == 'y':
+    etwx = EVTX_ETW_Resources(path_etwx,version_etwx,info)
+    for etw_info in dico_etw:
+        etwx.update_windows(etw_info['file'],etw_info['product'],etw_info['category'],etw_info['service'])
+
+print("Update default internal windows field")
+info.update_win_default_fields()
 
 print("Processing rules :")
 invalid = {}

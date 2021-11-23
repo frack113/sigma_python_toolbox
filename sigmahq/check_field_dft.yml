@@ -14,7 +14,8 @@ None:
             valid: []
     firewall:
         None:
-            rule: []
+            rule:
+                - destination.port
             valid:
                 - action
                 - dst_ip
@@ -26,6 +27,8 @@ None:
         None:
             rule:
                 - c-uri
+                - c-uri-query
+                - c-uri-stem
             valid:
                 - audiocodec
                 - avgbandwidth
@@ -103,6 +106,7 @@ None:
         None:
             rule:
                 - c-uri
+                - cs-referer
                 - method
                 - referer
                 - uri_query
@@ -183,7 +187,8 @@ None:
 antivirus:
     None:
         None:
-            rule: []
+            rule:
+                - FileName
             valid:
                 - Action
                 - Filename
@@ -581,17 +586,17 @@ azure:
 gcp:
     None:
         gcp.audit:
-            rule:
+            rule: []
+            valid:
                 - gcp.audit.method_name
-            valid: []
 google_workspace:
     None:
         google_workspace.admin:
-            rule:
+            rule: []
+            valid:
                 - eventName
                 - eventService
                 - new_value
-            valid: []
 linux:
     None:
         auditd:
@@ -914,18 +919,18 @@ linux:
 m365:
     ThreatDetection:
         None:
-            rule:
+            rule: []
+            valid:
                 - eventName
                 - eventSource
                 - status
-            valid: []
     ThreatManagement:
         None:
-            rule:
+            rule: []
+            valid:
                 - eventName
                 - eventSource
                 - status
-            valid: []
 macos:
     file_event:
         None:
@@ -976,16 +981,16 @@ netflow:
 okta:
     None:
         okta:
-            rule:
+            rule: []
+            valid:
                 - displaymessage
                 - eventtype
-            valid: []
 onelogin:
     None:
         onelogin.events:
-            rule:
+            rule: []
+            valid:
                 - event_type_id
-            valid: []
 qualys:
     None:
         None:
@@ -1821,4 +1826,76 @@ zoho_manageengine:
         None:
             rule:
                 - c-uri
-            valid: []
+            valid:
+                - audiocodec
+                - avgbandwidth
+                - c-buffercount
+                - c-bytes
+                - c-channelURL
+                - c-cpu
+                - c-dns
+                - c-hostexe
+                - c-hostexever
+                - c-ip
+                - c-max-bandwidth
+                - c-os
+                - c-osversion
+                - c-pkts-lost-client
+                - c-pkts-lost-cont-net
+                - c-pkts-lost-net
+                - c-pkts-received
+                - c-pkts-recovered-ECC
+                - c-pkts-recovered-resent
+                - c-playerid
+                - c-playerlanguage
+                - c-playerversion
+                - c-quality
+                - c-rate
+                - c-resendreqs
+                - c-starttime
+                - c-status
+                - c-totalbuffertime
+                - c-uri-extension
+                - c-useragent
+                - cs-Referer
+                - cs-User-Agent
+                - cs-byte
+                - cs-cookie
+                - cs-host
+                - cs-media-name
+                - cs-media-role
+                - cs-method
+                - cs-referrer
+                - cs-uri-query
+                - cs-uri-stem
+                - cs-url
+                - cs-user-name
+                - cs-username
+                - cs-version
+                - date
+                - filelength
+                - filesize
+                - protocol
+                - r-dns
+                - s-computername
+                - s-content-path
+                - s-cpu-util
+                - s-dns
+                - s-ip
+                - s-pkts-sent
+                - s-port
+                - s-proxied
+                - s-session-id
+                - s-sitename
+                - s-totalclients
+                - sc-byte
+                - sc-bytes
+                - sc-status
+                - sc-substatus
+                - sc-win32-status
+                - streamid
+                - time
+                - time-taken
+                - transport
+                - videocodec
+                - x-duration

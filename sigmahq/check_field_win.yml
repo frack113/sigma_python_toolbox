@@ -6,6 +6,7 @@ windows:
                     rule: []
                     valid:
                         - EventID
+                        - EventType
                         - Provider_Name
                 '1033':
                     rule:
@@ -24,6 +25,9 @@ windows:
                     rule: []
                     valid:
                         - Status
+                '8001':
+                    rule: []
+                    valid: []
                 '8002':
                     rule: []
                     valid:
@@ -160,6 +164,36 @@ windows:
                     valid:
                         - FilePathBuffer
                         - FilePathLength
+                '8010':
+                    rule: []
+                    valid: []
+                '8011':
+                    rule: []
+                    valid: []
+                '8012':
+                    rule: []
+                    valid: []
+                '8013':
+                    rule: []
+                    valid: []
+                '8014':
+                    rule: []
+                    valid: []
+                '8015':
+                    rule: []
+                    valid: []
+                '8016':
+                    rule: []
+                    valid: []
+                '8017':
+                    rule: []
+                    valid: []
+                '8018':
+                    rule: []
+                    valid: []
+                '8019':
+                    rule: []
+                    valid: []
                 '8020':
                     rule: []
                     valid:
@@ -256,6 +290,12 @@ windows:
                         - RuleSddlLength
                         - TargetProcessId
                         - TargetUser
+                '8026':
+                    rule: []
+                    valid: []
+                '8027':
+                    rule: []
+                    valid: []
                 '8028':
                     rule: []
                     valid:
@@ -438,6 +478,7 @@ windows:
                     rule: []
                     valid:
                         - EventID
+                        - EventType
                         - Provider_Name
         dhcp:
             Microsoft-Windows-Dhcp-Client:
@@ -649,6 +690,9 @@ windows:
                     valid:
                         - InterfaceId
                         - StatusCode
+                '50036':
+                    rule: []
+                    valid: []
                 '50037':
                     rule: []
                     valid:
@@ -667,6 +711,9 @@ windows:
                     valid:
                         - InterfaceId
                         - StatusCode
+                '50041':
+                    rule: []
+                    valid: []
                 '50042':
                     rule: []
                     valid:
@@ -696,6 +743,9 @@ windows:
                     rule: []
                     valid:
                         - InterfaceId
+                '50058':
+                    rule: []
+                    valid: []
                 '50059':
                     rule: []
                     valid:
@@ -911,6 +961,24 @@ windows:
                     rule: []
                     valid:
                         - InterfaceId
+                '50101':
+                    rule: []
+                    valid: []
+                '50102':
+                    rule: []
+                    valid: []
+                '50103':
+                    rule: []
+                    valid: []
+                '50104':
+                    rule: []
+                    valid: []
+                '50105':
+                    rule: []
+                    valid: []
+                '50106':
+                    rule: []
+                    valid: []
                 '60000':
                     rule: []
                     valid:
@@ -1054,6 +1122,12 @@ windows:
                         - Address
                         - InterfaceGuid
                         - InterfaceId
+                '60026':
+                    rule: []
+                    valid: []
+                '60027':
+                    rule: []
+                    valid: []
                 '60028':
                     rule: []
                     valid:
@@ -1079,6 +1153,7 @@ windows:
                     rule: []
                     valid:
                         - EventID
+                        - EventType
                         - Provider_Name
         dns-server:
             default:
@@ -1086,6 +1161,7 @@ windows:
                     rule: []
                     valid:
                         - EventID
+                        - EventType
                         - Provider_Name
                 '257':
                     rule:
@@ -1121,6 +1197,9 @@ windows:
                     valid:
                         - Error
                         - Version
+                '1002':
+                    rule: []
+                    valid: []
                 '1003':
                     rule: []
                     valid:
@@ -1221,6 +1300,9 @@ windows:
                         - ActualFuntionTableCount
                         - ExpectedFuntionTableCount
                         - ServiceName
+                '10118':
+                    rule: []
+                    valid: []
                 '19999':
                     rule: []
                     valid:
@@ -1528,6 +1610,7 @@ windows:
                     rule: []
                     valid:
                         - EventID
+                        - EventType
                         - Provider_Name
         ldap_debug:
             default:
@@ -1536,6 +1619,7 @@ windows:
                         - SearchFilter
                     valid:
                         - EventID
+                        - EventType
                         - Provider_Name
         microsoft-servicebus-client:
             default:
@@ -1543,6 +1627,7 @@ windows:
                     rule: []
                     valid:
                         - EventID
+                        - EventType
                         - Provider_Name
         msexchange-management:
             default:
@@ -1550,6 +1635,7 @@ windows:
                     rule: []
                     valid:
                         - EventID
+                        - EventType
                         - Provider_Name
                 '6':
                     rule: []
@@ -1678,6 +1764,7 @@ windows:
                     rule: []
                     valid:
                         - EventID
+                        - EventType
                         - Provider_Name
         powershell:
             default:
@@ -1686,6 +1773,7 @@ windows:
                     valid:
                         - ContextInfo
                         - EventID
+                        - EventType
                         - Payload
                         - Provider_Name
                         - ScriptBlockText
@@ -1700,6 +1788,7 @@ windows:
                         - CommandType
                         - EngineVersion
                         - EventID
+                        - EventType
                         - HostApplication
                         - HostId
                         - HostName
@@ -2382,6 +2471,9 @@ windows:
                         - param3
                         - param4
                         - param5
+                '353':
+                    rule: []
+                    valid: []
                 '354':
                     rule: []
                     valid:
@@ -2474,6 +2566,9 @@ windows:
                         - param7
                         - param8
                         - param9
+                '373':
+                    rule: []
+                    valid: []
                 '502':
                     rule: []
                     valid:
@@ -2978,6 +3073,7 @@ windows:
                     rule: []
                     valid:
                         - EventID
+                        - EventType
                         - Provider_Name
         printservice-operational:
             Microsoft-Windows-PrintService:
@@ -3648,6 +3744,9 @@ windows:
                         - param3
                         - param4
                         - param5
+                '353':
+                    rule: []
+                    valid: []
                 '354':
                     rule: []
                     valid:
@@ -3740,6 +3839,9 @@ windows:
                         - param7
                         - param8
                         - param9
+                '373':
+                    rule: []
+                    valid: []
                 '502':
                     rule: []
                     valid:
@@ -4244,6 +4346,7 @@ windows:
                     rule: []
                     valid:
                         - EventID
+                        - EventType
                         - Provider_Name
                 '316':
                     rule: []
@@ -4317,6 +4420,9 @@ windows:
                     valid:
                         - PublisherGuid
                         - PublisherName
+                '1100':
+                    rule: []
+                    valid: []
                 '1101':
                     rule: []
                     valid:
@@ -4332,6 +4438,9 @@ windows:
                     rule: []
                     valid:
                         - PercentFull
+                '1104':
+                    rule: []
+                    valid: []
                 '1105':
                     rule: []
                     valid:
@@ -4465,6 +4574,12 @@ windows:
                     valid:
                         - Channel
             Microsoft-Windows-Security-Auditing:
+                '4608':
+                    rule: []
+                    valid: []
+                '4609':
+                    rule: []
+                    valid: []
                 '4610':
                     rule: []
                     valid:
@@ -6423,6 +6538,7 @@ windows:
                         - SiloName
                         - Status
                         - TGTLifetime
+                        - TGT_Lifetime
                         - TargetDomainName
                         - TargetSid
                         - TargetUserName
@@ -6658,6 +6774,12 @@ windows:
                         - SubjectLogonId
                         - SubjectUserName
                         - SubjectUserSid
+                '4878':
+                    rule: []
+                    valid: []
+                '4879':
+                    rule: []
+                    valid: []
                 '4880':
                     rule: []
                     valid:
@@ -7061,6 +7183,9 @@ windows:
                         - ProfileChanged
                         - RuleId
                         - RuleName
+                '4949':
+                    rule: []
+                    valid: []
                 '4950':
                     rule: []
                     valid:
@@ -7086,6 +7211,9 @@ windows:
                         - ReasonForRejection
                         - RuleId
                         - RuleName
+                '4954':
+                    rule: []
+                    valid: []
                 '4956':
                     rule: []
                     valid:
@@ -7324,6 +7452,12 @@ windows:
                         - SubjectUserName
                         - SubjectUserSid
                         - TransactionId
+                '5024':
+                    rule: []
+                    valid: []
+                '5025':
+                    rule: []
+                    valid: []
                 '5027':
                     rule: []
                     valid:
@@ -7349,6 +7483,12 @@ windows:
                     rule: []
                     valid:
                         - ErrorCode
+                '5033':
+                    rule: []
+                    valid: []
+                '5034':
+                    rule: []
+                    valid: []
                 '5035':
                     rule: []
                     valid:
@@ -7646,6 +7786,12 @@ windows:
                         - SubjectLogonId
                         - SubjectUserName
                         - SubjectUserSid
+                '5120':
+                    rule: []
+                    valid: []
+                '5121':
+                    rule: []
+                    valid: []
                 '5122':
                     rule: []
                     valid:
@@ -7855,6 +8001,7 @@ windows:
                         - SourcevSwitchPort
                         - VlanTag
                         - vSwitchID
+                        - vSwitch_ID
                 '5147':
                     rule: []
                     valid:
@@ -7869,6 +8016,7 @@ windows:
                         - SourcevSwitchPort
                         - VlanTag
                         - vSwitchID
+                        - vSwitch_ID
                 '5148':
                     rule: []
                     valid:
@@ -8311,6 +8459,9 @@ windows:
                         - RemoteTunnelEndpoint
                         - TrafficSelectorId
                         - TunnelId
+                '5453':
+                    rule: []
+                    valid: []
                 '5456':
                     rule: []
                     valid:
@@ -8343,6 +8494,24 @@ windows:
                     valid:
                         - Error
                         - Policy
+                '5463':
+                    rule: []
+                    valid: []
+                '5464':
+                    rule: []
+                    valid: []
+                '5465':
+                    rule: []
+                    valid: []
+                '5466':
+                    rule: []
+                    valid: []
+                '5467':
+                    rule: []
+                    valid: []
+                '5468':
+                    rule: []
+                    valid: []
                 '5471':
                     rule: []
                     valid:
@@ -8366,6 +8535,15 @@ windows:
                     valid:
                         - Error
                         - QuickModeFilter
+                '5478':
+                    rule: []
+                    valid: []
+                '5479':
+                    rule: []
+                    valid: []
+                '5480':
+                    rule: []
+                    valid: []
                 '5483':
                     rule: []
                     valid:
@@ -8374,6 +8552,9 @@ windows:
                     rule: []
                     valid:
                         - Error
+                '5485':
+                    rule: []
+                    valid: []
                 '5632':
                     rule: []
                     valid:
@@ -8847,12 +9028,16 @@ windows:
                         - SubjectLogonId
                         - SubjectUserName
                         - SubjectUserSid
+                '8191':
+                    rule: []
+                    valid: []
             default:
                 '0':
                     rule:
                         - FilePath
                     valid:
                         - EventID
+                        - EventType
                         - Provider_Name
                 '1102':
                     rule: []
@@ -9094,6 +9279,7 @@ windows:
                 '30203':
                     rule: []
                     valid:
+                        - ConnectionType
                         - RemoteAddress
                         - RemoteAddressLength
                         - Socket
@@ -9101,12 +9287,14 @@ windows:
                 '30204':
                     rule: []
                     valid:
+                        - ConnectionType
                         - Socket
                         - Status
                         - VcEndpoint
                 '30205':
                     rule: []
                     valid:
+                        - ConnectionType
                         - SendLength
                         - SendMdl
                         - Socket
@@ -9114,6 +9302,7 @@ windows:
                 '30206':
                     rule: []
                     valid:
+                        - ConnectionType
                         - SendLength
                         - SendMdl
                         - Socket
@@ -9122,6 +9311,7 @@ windows:
                 '30207':
                     rule: []
                     valid:
+                        - ConnectionType
                         - SendLength
                         - SendMdl
                         - Socket
@@ -9129,6 +9319,7 @@ windows:
                 '30208':
                     rule: []
                     valid:
+                        - ConnectionType
                         - SendLength
                         - SendMdl
                         - Socket
@@ -9144,6 +9335,7 @@ windows:
                 '30210':
                     rule: []
                     valid:
+                        - ConnectionType
                         - SendLength
                         - SendMdl
                         - Socket
@@ -9152,6 +9344,7 @@ windows:
                 '30211':
                     rule: []
                     valid:
+                        - ConnectionType
                         - SendLength
                         - SendMdl
                         - Socket
@@ -9474,6 +9667,9 @@ windows:
                         - Address
                         - AddressLength
                         - ConnectionType
+                        - InstanceName
+                        - InstanceNameLength
+                        - InterfaceId
                         - Reason
                         - ServerName
                         - ServerNameLength
@@ -9703,10 +9899,12 @@ windows:
                         - ObjectName
                         - ObjectNameLength
                         - Reason
+                        - RepeatCount
                         - RestartCount
                         - ShareName
                         - ShareNameLength
                         - Status
+                        - TimestampIn100ms
                 '30907':
                     rule: []
                     valid:
@@ -9731,6 +9929,9 @@ windows:
                     rule: []
                     valid:
                         - CipherSuiteOrder
+                '30912':
+                    rule: []
+                    valid: []
                 '31000':
                     rule: []
                     valid:
@@ -9908,6 +10109,7 @@ windows:
                     rule: []
                     valid:
                         - EventID
+                        - EventType
                         - Provider_Name
                 '31017':
                     rule:
@@ -9919,6 +10121,7 @@ windows:
                     rule: []
                     valid:
                         - EventID
+                        - EventType
                         - Image
                         - ImageLoaded
                         - Provider_Name
@@ -9926,13 +10129,263 @@ windows:
                         - TargetFilename
                         - TargetImage
         system:
+            Service Control Manager:
+                '1073748859':
+                    rule: []
+                    valid:
+                        - param1
+                        - param2
+                '1073748860':
+                    rule: []
+                    valid:
+                        - BinaryData
+                        - __binLength
+                        - param1
+                        - param2
+                '1073748864':
+                    rule: []
+                    valid:
+                        - param1
+                        - param2
+                        - param3
+                        - param4
+                '1073748866':
+                    rule: []
+                    valid:
+                        - BinaryData
+                        - __binLength
+                        - param1
+                        - param2
+                        - param3
+                        - param4
+                        - param5
+                '1073748869':
+                    rule: []
+                    valid:
+                        - AccountName
+                        - ImagePath
+                        - ServiceName
+                        - ServiceType
+                        - StartType
+                '2147490687':
+                    rule: []
+                    valid:
+                        - param1
+                        - param2
+                        - param3
+                '2147490692':
+                    rule: []
+                    valid:
+                        - BinaryData
+                        - __binLength
+                        - param1
+                        - param2
+                '2147490694':
+                    rule: []
+                    valid:
+                        - param1
+                '3221232472':
+                    rule: []
+                    valid:
+                        - BinaryData
+                        - __binLength
+                        - param1
+                        - param2
+                '3221232473':
+                    rule: []
+                    valid:
+                        - BinaryData
+                        - __binLength
+                        - param1
+                        - param2
+                        - param3
+                '3221232474':
+                    rule: []
+                    valid:
+                        - BinaryData
+                        - __binLength
+                        - param1
+                        - param2
+                '3221232475':
+                    rule: []
+                    valid:
+                        - BinaryData
+                        - __binLength
+                        - param1
+                        - param2
+                '3221232477':
+                    rule: []
+                    valid:
+                        - param1
+                        - param2
+                '3221232478':
+                    rule: []
+                    valid:
+                        - param1
+                        - param2
+                        - param3
+                '3221232479':
+                    rule: []
+                    valid: []
+                '3221232480':
+                    rule: []
+                    valid: []
+                '3221232481':
+                    rule: []
+                    valid:
+                        - BinaryData
+                        - __binLength
+                        - param1
+                        - param2
+                '3221232482':
+                    rule: []
+                    valid:
+                        - param1
+                '3221232483':
+                    rule: []
+                    valid:
+                        - param1
+                        - param2
+                '3221232484':
+                    rule: []
+                    valid: []
+                '3221232485':
+                    rule: []
+                    valid:
+                        - param1
+                '3221232486':
+                    rule: []
+                    valid:
+                        - param1
+                '3221232488':
+                    rule: []
+                    valid:
+                        - param1
+                        - param2
+                '3221232489':
+                    rule: []
+                    valid:
+                        - BinaryData
+                        - __binLength
+                        - param1
+                '3221232490':
+                    rule: []
+                    valid: []
+                '3221232491':
+                    rule: []
+                    valid:
+                        - BinaryData
+                        - __binLength
+                        - param1
+                '3221232492':
+                    rule: []
+                    valid:
+                        - BinaryData
+                        - __binLength
+                        - param1
+                '3221232493':
+                    rule: []
+                    valid:
+                        - param1
+                '3221232494':
+                    rule: []
+                    valid:
+                        - BinaryData
+                        - __binLength
+                        - param1
+                '3221232495':
+                    rule: []
+                    valid:
+                        - BinaryData
+                        - __binLength
+                        - param1
+                        - param2
+                '3221232496':
+                    rule: []
+                    valid:
+                        - BinaryData
+                        - __binLength
+                        - param1
+                        - param2
+                '3221232498':
+                    rule: []
+                    valid:
+                        - param1
+                '3221232499':
+                    rule: []
+                    valid: []
+                '3221232500':
+                    rule: []
+                    valid:
+                        - param1
+                '3221232501':
+                    rule: []
+                    valid: []
+                '3221232502':
+                    rule: []
+                    valid:
+                        - param1
+                '3221232503':
+                    rule: []
+                    valid:
+                        - BinaryData
+                        - __binLength
+                        - param1
+                        - param2
+                        - param3
+                        - param4
+                        - param5
+                '3221232504':
+                    rule: []
+                    valid:
+                        - param1
+                        - param2
+                        - param3
+                        - param4
+                '3221232506':
+                    rule: []
+                    valid:
+                        - BinaryData
+                        - __binLength
+                        - param1
+                        - param2
+                '3221232509':
+                    rule: []
+                    valid:
+                        - param1
+                        - param2
+                '3221232510':
+                    rule: []
+                    valid:
+                        - param1
+                        - param2
+                        - param3
+                '3221232513':
+                    rule: []
+                    valid:
+                        - param1
+                        - param2
+                '3221232515':
+                    rule: []
+                    valid:
+                        - BinaryData
+                        - __binLength
+                        - param1
+                '7045':
+                    rule: []
+                    valid:
+                        - AccountName
+                        - ImagePath
+                        - ServiceName
+                        - ServiceType
+                        - StartType
             default:
                 '0':
                     rule:
                         - ServiceFileName
-                        - ServiceName
                     valid:
                         - EventID
+                        - EventType
                         - Provider_Name
                 '1033':
                     rule: []
@@ -9958,9 +10411,7 @@ windows:
                 '7045':
                     rule:
                         - AccountName
-                        - ImagePath
                         - ServiceFileName
-                        - ServiceName
                     valid: []
                 '98':
                     rule:
@@ -9972,34 +10423,1185 @@ windows:
                     rule: []
                     valid:
                         - EventID
+                        - EventType
                         - Provider_Name
                 '106':
                     rule: []
                     valid: []
         windefend:
+            Microsoft-Windows-Windows Defender:
+                '1000':
+                    rule: []
+                    valid:
+                        - Domain
+                        - Product_Name
+                        - Product_Version
+                        - SID
+                        - Scan_ID
+                        - Scan_Parameters
+                        - Scan_Parameters_Index
+                        - Scan_Resources
+                        - Scan_Type
+                        - Scan_Type_Index
+                        - User
+                '1001':
+                    rule: []
+                    valid:
+                        - Domain
+                        - Product_Name
+                        - Product_Version
+                        - SID
+                        - Scan_ID
+                        - Scan_Parameters
+                        - Scan_Parameters_Index
+                        - Scan_Time_Hours
+                        - Scan_Time_Minutes
+                        - Scan_Time_Seconds
+                        - Scan_Type
+                        - Scan_Type_Index
+                        - User
+                '1002':
+                    rule: []
+                    valid:
+                        - Domain
+                        - Product_Name
+                        - Product_Version
+                        - SID
+                        - Scan_ID
+                        - Scan_Parameters
+                        - Scan_Parameters_Index
+                        - Scan_Type
+                        - Scan_Type_Index
+                        - User
+                '1003':
+                    rule: []
+                    valid:
+                        - Domain
+                        - Product_Name
+                        - Product_Version
+                        - SID
+                        - Scan_ID
+                        - Scan_Parameters
+                        - Scan_Parameters_Index
+                        - Scan_Type
+                        - Scan_Type_Index
+                        - User
+                '1004':
+                    rule: []
+                    valid:
+                        - Domain
+                        - Product_Name
+                        - Product_Version
+                        - SID
+                        - Scan_ID
+                        - Scan_Parameters
+                        - Scan_Parameters_Index
+                        - Scan_Type
+                        - Scan_Type_Index
+                        - User
+                '1005':
+                    rule: []
+                    valid:
+                        - Domain
+                        - Error_Code
+                        - Error_Description
+                        - Product_Name
+                        - Product_Version
+                        - SID
+                        - Scan_ID
+                        - Scan_Parameters
+                        - Scan_Parameters_Index
+                        - Scan_Type
+                        - Scan_Type_Index
+                        - User
+                '1006':
+                    rule: []
+                    valid:
+                        - Category_ID
+                        - Category_Name
+                        - Detection_ID
+                        - Detection_Origin
+                        - Detection_Origin_Index
+                        - Detection_Source
+                        - Detection_Source_Index
+                        - Detection_Type
+                        - Detection_Type_Index
+                        - Domain
+                        - Engine_Version
+                        - Execution_Status
+                        - Execution_Status_Index
+                        - FWLink
+                        - Path_Found
+                        - Process_Name
+                        - Product_Name
+                        - Product_Version
+                        - SID
+                        - Security_intelligence_Version
+                        - Severity_ID
+                        - Severity_Name
+                        - Threat_ID
+                        - Threat_Name
+                        - Unused
+                        - Unused2
+                        - Unused3
+                        - User
+                '1007':
+                    rule: []
+                    valid:
+                        - Category_ID
+                        - Category_Name
+                        - Cleaning_Action
+                        - Cleaning_Action_Index
+                        - Detection_ID
+                        - Domain
+                        - Engine_Version
+                        - FWLink
+                        - Path
+                        - Product_Name
+                        - Product_Version
+                        - SID
+                        - Security_intelligence_Version
+                        - Severity_ID
+                        - Severity_Name
+                        - Status_Code
+                        - Status_Description
+                        - Threat_ID
+                        - Threat_Name
+                        - Unused
+                        - Unused2
+                        - Unused3
+                        - Unused4
+                        - Unused5
+                        - Unused6
+                        - Unused7
+                        - Unused8
+                        - User
+                '1008':
+                    rule: []
+                    valid:
+                        - Category_ID
+                        - Category_Name
+                        - Cleaning_Action
+                        - Cleaning_Action_Index
+                        - Detection_ID
+                        - Domain
+                        - Engine_Version
+                        - Error_Code
+                        - Error_Description
+                        - FWLink
+                        - Path
+                        - Product_Name
+                        - Product_Version
+                        - SID
+                        - Security_intelligence_Version
+                        - Severity_ID
+                        - Severity_Name
+                        - Status_Code
+                        - Status_Description
+                        - Threat_ID
+                        - Threat_Name
+                        - Unused
+                        - Unused2
+                        - Unused3
+                        - Unused4
+                        - Unused5
+                        - Unused6
+                        - User
+                '1009':
+                    rule: []
+                    valid:
+                        - Category_ID
+                        - Category_Name
+                        - Domain
+                        - Engine_Version
+                        - FWLink
+                        - Path
+                        - Product_Name
+                        - Product_Version
+                        - SID
+                        - Security_intelligence_Version
+                        - Severity_ID
+                        - Severity_Name
+                        - Threat_ID
+                        - Threat_Name
+                        - Unused
+                        - Unused10
+                        - Unused11
+                        - Unused12
+                        - Unused13
+                        - Unused2
+                        - Unused3
+                        - Unused4
+                        - Unused5
+                        - Unused6
+                        - Unused7
+                        - Unused8
+                        - Unused9
+                        - User
+                '101':
+                    rule: []
+                    valid:
+                        - hc_stateid
+                '1010':
+                    rule: []
+                    valid:
+                        - Category_ID
+                        - Category_Name
+                        - Domain
+                        - Engine_Version
+                        - Error_Code
+                        - Error_Description
+                        - FWLink
+                        - Path
+                        - Product_Name
+                        - Product_Version
+                        - SID
+                        - Security_intelligence_Version
+                        - Severity_ID
+                        - Severity_Name
+                        - Threat_ID
+                        - Threat_Name
+                        - Unused
+                        - Unused10
+                        - Unused11
+                        - Unused2
+                        - Unused3
+                        - Unused4
+                        - Unused5
+                        - Unused6
+                        - Unused7
+                        - Unused8
+                        - Unused9
+                        - User
+                '1011':
+                    rule: []
+                    valid:
+                        - Category_ID
+                        - Category_Name
+                        - Domain
+                        - Engine_Version
+                        - FWLink
+                        - Path
+                        - Product_Name
+                        - Product_Version
+                        - SID
+                        - Security_intelligence_Version
+                        - Severity_ID
+                        - Severity_Name
+                        - Threat_ID
+                        - Threat_Name
+                        - Unused
+                        - Unused10
+                        - Unused11
+                        - Unused12
+                        - Unused13
+                        - Unused2
+                        - Unused3
+                        - Unused4
+                        - Unused5
+                        - Unused6
+                        - Unused7
+                        - Unused8
+                        - Unused9
+                        - User
+                '1012':
+                    rule: []
+                    valid:
+                        - Category_ID
+                        - Category_Name
+                        - Domain
+                        - Engine_Version
+                        - Error_Code
+                        - Error_Description
+                        - FWLink
+                        - Path
+                        - Product_Name
+                        - Product_Version
+                        - SID
+                        - Security_intelligence_Version
+                        - Severity_ID
+                        - Severity_Name
+                        - Threat_ID
+                        - Threat_Name
+                        - Unused
+                        - Unused10
+                        - Unused11
+                        - Unused2
+                        - Unused3
+                        - Unused4
+                        - Unused5
+                        - Unused6
+                        - Unused7
+                        - Unused8
+                        - Unused9
+                        - User
+                '1013':
+                    rule: []
+                    valid:
+                        - Domain
+                        - Product_Name
+                        - Product_Version
+                        - SID
+                        - Timestamp
+                        - Unused
+                        - Unused2
+                        - Unused3
+                        - Unused4
+                        - User
+                '1014':
+                    rule: []
+                    valid:
+                        - Domain
+                        - Error_Code
+                        - Error_Description
+                        - Product_Name
+                        - Product_Version
+                        - SID
+                        - Timestamp
+                        - Unused
+                        - Unused2
+                        - User
+                '1015':
+                    rule: []
+                    valid:
+                        - Category_ID
+                        - Category_Name
+                        - Detection_ID
+                        - Detection_Origin
+                        - Detection_Origin_Index
+                        - Detection_Source
+                        - Detection_Source_Index
+                        - Detection_Type
+                        - Detection_Type_Index
+                        - Domain
+                        - Engine_Version
+                        - Execution_Status
+                        - Execution_Status_Index
+                        - FWLink
+                        - FidelityLabel
+                        - FidelityValue
+                        - Image_File_Hash
+                        - Path_Found
+                        - Process_ID
+                        - Process_Name
+                        - Product_Name
+                        - Product_Version
+                        - SID
+                        - Security_intelligence_ID
+                        - Security_intelligence_Version
+                        - Severity_ID
+                        - Severity_Name
+                        - TargetFileHash
+                        - TargetFileName
+                        - Threat_ID
+                        - Threat_Name
+                        - Unused
+                        - Unused2
+                        - Unused3
+                        - Unused4
+                        - Unused5
+                        - User
+                '1116':
+                    rule: []
+                    valid:
+                        - Action_ID
+                        - Action_Name
+                        - Additional_Actions_ID
+                        - Additional_Actions_String
+                        - Category_ID
+                        - Category_Name
+                        - Detection_ID
+                        - Detection_Time
+                        - Detection_User
+                        - Engine_Version
+                        - Error_Code
+                        - Error_Description
+                        - Execution_ID
+                        - Execution_Name
+                        - FWLink
+                        - Origin_ID
+                        - Origin_Name
+                        - Path
+                        - Post_Clean_Status
+                        - Pre_Execution_Status
+                        - Process_Name
+                        - Product_Name
+                        - Product_Version
+                        - Remediation_User
+                        - Security_intelligence_Version
+                        - Severity_ID
+                        - Severity_Name
+                        - Source_ID
+                        - Source_Name
+                        - State
+                        - Status_Code
+                        - Status_Description
+                        - Threat_ID
+                        - Threat_Name
+                        - Type_ID
+                        - Type_Name
+                        - Unused
+                        - Unused2
+                        - Unused3
+                        - Unused4
+                        - Unused5
+                        - Unused6
+                '1117':
+                    rule: []
+                    valid:
+                        - Action_ID
+                        - Action_Name
+                        - Additional_Actions_ID
+                        - Additional_Actions_String
+                        - Category_ID
+                        - Category_Name
+                        - Detection_ID
+                        - Detection_Time
+                        - Detection_User
+                        - Engine_Version
+                        - Error_Code
+                        - Error_Description
+                        - Execution_ID
+                        - Execution_Name
+                        - FWLink
+                        - Origin_ID
+                        - Origin_Name
+                        - Path
+                        - Post_Clean_Status
+                        - Pre_Execution_Status
+                        - Process_Name
+                        - Product_Name
+                        - Product_Version
+                        - Remediation_User
+                        - Security_intelligence_Version
+                        - Severity_ID
+                        - Severity_Name
+                        - Source_ID
+                        - Source_Name
+                        - State
+                        - Status_Code
+                        - Status_Description
+                        - Threat_ID
+                        - Threat_Name
+                        - Type_ID
+                        - Type_Name
+                        - Unused
+                        - Unused2
+                        - Unused3
+                        - Unused4
+                        - Unused5
+                        - Unused6
+                '1118':
+                    rule: []
+                    valid:
+                        - Action_ID
+                        - Action_Name
+                        - Additional_Actions_ID
+                        - Additional_Actions_String
+                        - Category_ID
+                        - Category_Name
+                        - Detection_ID
+                        - Detection_Time
+                        - Detection_User
+                        - Engine_Version
+                        - Error_Code
+                        - Error_Description
+                        - Execution_ID
+                        - Execution_Name
+                        - FWLink
+                        - Origin_ID
+                        - Origin_Name
+                        - Path
+                        - Post_Clean_Status
+                        - Pre_Execution_Status
+                        - Process_Name
+                        - Product_Name
+                        - Product_Version
+                        - Remediation_User
+                        - Security_intelligence_Version
+                        - Severity_ID
+                        - Severity_Name
+                        - Source_ID
+                        - Source_Name
+                        - State
+                        - Status_Code
+                        - Status_Description
+                        - Threat_ID
+                        - Threat_Name
+                        - Type_ID
+                        - Type_Name
+                        - Unused
+                        - Unused2
+                        - Unused3
+                        - Unused4
+                        - Unused5
+                        - Unused6
+                '1119':
+                    rule: []
+                    valid:
+                        - Action_ID
+                        - Action_Name
+                        - Additional_Actions_ID
+                        - Additional_Actions_String
+                        - Category_ID
+                        - Category_Name
+                        - Detection_ID
+                        - Detection_Time
+                        - Detection_User
+                        - Engine_Version
+                        - Error_Code
+                        - Error_Description
+                        - Execution_ID
+                        - Execution_Name
+                        - FWLink
+                        - Origin_ID
+                        - Origin_Name
+                        - Path
+                        - Post_Clean_Status
+                        - Pre_Execution_Status
+                        - Process_Name
+                        - Product_Name
+                        - Product_Version
+                        - Remediation_User
+                        - Security_intelligence_Version
+                        - Severity_ID
+                        - Severity_Name
+                        - Source_ID
+                        - Source_Name
+                        - State
+                        - Status_Code
+                        - Status_Description
+                        - Threat_ID
+                        - Threat_Name
+                        - Type_ID
+                        - Type_Name
+                        - Unused
+                        - Unused2
+                        - Unused3
+                        - Unused4
+                        - Unused5
+                        - Unused6
+                '1120':
+                    rule: []
+                    valid:
+                        - Hashes
+                        - Product_Name
+                        - Product_Version
+                        - Threat_resource_path
+                        - Unused
+                '1121':
+                    rule: []
+                    valid:
+                        - Detection_Time
+                        - Engine_Version
+                        - ID
+                        - Path
+                        - Process_Name
+                        - Product_Name
+                        - Product_Version
+                        - Security_intelligence_Version
+                        - Unused
+                        - User
+                '1122':
+                    rule: []
+                    valid:
+                        - Detection_Time
+                        - Engine_Version
+                        - ID
+                        - Path
+                        - Process_Name
+                        - Product_Name
+                        - Product_Version
+                        - Security_intelligence_Version
+                        - Unused
+                        - User
+                '1123':
+                    rule: []
+                    valid:
+                        - Detection_Time
+                        - Engine_Version
+                        - ID
+                        - Path
+                        - Process_Name
+                        - Product_Name
+                        - Product_Version
+                        - Security_intelligence_Version
+                        - Unused
+                        - User
+                '1124':
+                    rule: []
+                    valid:
+                        - Detection_Time
+                        - Engine_Version
+                        - ID
+                        - Path
+                        - Process_Name
+                        - Product_Name
+                        - Product_Version
+                        - Security_intelligence_Version
+                        - Unused
+                        - User
+                '1125':
+                    rule: []
+                    valid:
+                        - Destination
+                        - Detection_Time
+                        - ID
+                        - Process_Name
+                        - Product_Name
+                        - Product_Version
+                        - User
+                '1126':
+                    rule: []
+                    valid:
+                        - Destination
+                        - Detection_Time
+                        - ID
+                        - Process_Name
+                        - Product_Name
+                        - Product_Version
+                        - User
+                '1127':
+                    rule: []
+                    valid:
+                        - Detection_Time
+                        - Engine_Version
+                        - ID
+                        - Path
+                        - Process_Name
+                        - Product_Name
+                        - Product_Version
+                        - Security_intelligence_Version
+                        - Unused
+                        - User
+                '1128':
+                    rule: []
+                    valid:
+                        - Detection_Time
+                        - Engine_Version
+                        - ID
+                        - Path
+                        - Process_Name
+                        - Product_Name
+                        - Product_Version
+                        - Security_intelligence_Version
+                        - Unused
+                        - User
+                '1131':
+                    rule: []
+                    valid:
+                        - Action
+                        - Engine_Version
+                        - ID
+                        - Process
+                        - Product_Name
+                        - Product_Version
+                        - Signature_Version
+                        - Source
+                        - State
+                        - Target
+                        - Timestamp
+                        - Unused
+                        - User
+                '1132':
+                    rule: []
+                    valid:
+                        - Action
+                        - Engine_Version
+                        - ID
+                        - Process
+                        - Product_Name
+                        - Product_Version
+                        - Signature_Version
+                        - Source
+                        - State
+                        - Target
+                        - Timestamp
+                        - Unused
+                        - User
+                '1133':
+                    rule: []
+                    valid:
+                        - Action_Type
+                        - Audit_Reason
+                        - Enforcement_Level
+                        - Engine_Version
+                        - Event_Timestamp
+                        - Policy_Rule_Id
+                        - Policy_Version
+                        - Process
+                        - Product_Name
+                        - Product_Version
+                        - Session_Id
+                        - Signature_Version
+                        - Source
+                        - Target
+                        - Unused
+                        - User_Sid
+                '1134':
+                    rule: []
+                    valid:
+                        - Action_Type
+                        - Audit_Reason
+                        - Enforcement_Level
+                        - Engine_Version
+                        - Event_Timestamp
+                        - Policy_Rule_Id
+                        - Policy_Version
+                        - Process
+                        - Product_Name
+                        - Product_Version
+                        - Session_Id
+                        - Signature_Version
+                        - Source
+                        - Target
+                        - Unused
+                        - User_Sid
+                '1150':
+                    rule: []
+                    valid:
+                        - Engine_version
+                        - Platform_version
+                        - Product_Name
+                        - Security_intelligence_version
+                        - Unused
+                '1151':
+                    rule: []
+                    valid:
+                        - AS_security_intelligence_creation_time
+                        - AS_security_intelligence_version
+                        - AV_security_intelligence_creation_time
+                        - AV_security_intelligence_version
+                        - BM_state
+                        - Engine_version
+                        - IOAV_state
+                        - Last_AS_security_intelligence_age
+                        - Last_AV_security_intelligence_age
+                        - Last_full_scan_age
+                        - Last_full_scan_end_time
+                        - Last_full_scan_source
+                        - Last_full_scan_start_time
+                        - Last_quick_scan_age
+                        - Last_quick_scan_end_time
+                        - Last_quick_scan_source
+                        - Last_quick_scan_start_time
+                        - NRI_engine_version
+                        - NRI_security_intelligence_version
+                        - OA_state
+                        - Platform_version
+                        - Product_Name
+                        - Product_status
+                        - RTP_state
+                        - Unused
+                '1160':
+                    rule: []
+                    valid:
+                        - Action_ID
+                        - Action_Name
+                        - Additional_Actions_ID
+                        - Additional_Actions_String
+                        - Category_ID
+                        - Category_Name
+                        - Detection_ID
+                        - Detection_Time
+                        - Detection_User
+                        - Engine_Version
+                        - Error_Code
+                        - Error_Description
+                        - Execution_ID
+                        - Execution_Name
+                        - FWLink
+                        - Origin_ID
+                        - Origin_Name
+                        - Path
+                        - Post_Clean_Status
+                        - Pre_Execution_Status
+                        - Process_Name
+                        - Product_Name
+                        - Product_Version
+                        - Remediation_User
+                        - Security_intelligence_Version
+                        - Severity_ID
+                        - Severity_Name
+                        - Source_ID
+                        - Source_Name
+                        - State
+                        - Status_Code
+                        - Status_Description
+                        - Threat_ID
+                        - Threat_Name
+                        - Type_ID
+                        - Type_Name
+                        - Unused
+                        - Unused2
+                        - Unused3
+                        - Unused4
+                        - Unused5
+                        - Unused6
+                '2000':
+                    rule: []
+                    valid:
+                        - Current_Engine_Version
+                        - Current_security_intelligence_Version
+                        - Domain
+                        - Previous_Engine_Version
+                        - Previous_security_intelligence_Version
+                        - Product_Name
+                        - Product_Version
+                        - SID
+                        - Security_intelligence_Type
+                        - Security_intelligence_Type_Index
+                        - Unused
+                        - Unused2
+                        - Unused3
+                        - Update_Type
+                        - Update_Type_Index
+                        - User
+                '2001':
+                    rule: []
+                    valid:
+                        - Current_Engine_Version
+                        - Current_security_intelligence_Version
+                        - Domain
+                        - Error_Code
+                        - Error_Description
+                        - Previous_Engine_Version
+                        - Previous_security_intelligence_Version
+                        - Product_Name
+                        - Product_Version
+                        - SID
+                        - Security_intelligence_Type
+                        - Security_intelligence_Type_Index
+                        - Source_Path
+                        - Unused
+                        - Update_Source
+                        - Update_Source_Index
+                        - Update_State
+                        - Update_State_Index
+                        - Update_Type
+                        - Update_Type_Index
+                        - User
+                '2002':
+                    rule: []
+                    valid:
+                        - Current_Engine_Version
+                        - Domain
+                        - Feature_Index
+                        - Feature_Name
+                        - Previous_Engine_Version
+                        - Product_Name
+                        - Product_Version
+                        - SID
+                        - Unused
+                        - Unused2
+                        - Unused3
+                        - Unused4
+                        - Unused5
+                        - User
+                '2003':
+                    rule: []
+                    valid:
+                        - Current_Engine_Version
+                        - Domain
+                        - Error_Code
+                        - Error_Description
+                        - Previous_Engine_Version
+                        - Product_Name
+                        - Product_Version
+                        - SID
+                        - Unused
+                        - Unused2
+                        - Unused3
+                        - Update_State
+                        - Update_State_Index
+                        - User
+                '2004':
+                    rule: []
+                    valid:
+                        - Error_Code
+                        - Error_Description
+                        - Loading_engine_version
+                        - Loading_security_intelligence_version
+                        - Product_Name
+                        - Product_Version
+                        - Security_intelligence_Attempted
+                        - Security_intelligence_Attempted_Index
+                        - Unused
+                        - Unused2
+                '2005':
+                    rule: []
+                    valid:
+                        - Product_Name
+                        - Product_Version
+                '2006':
+                    rule: []
+                    valid:
+                        - Error_Code
+                        - Error_Description
+                        - Product_Name
+                        - Product_Version
+                        - Unused
+                '2007':
+                    rule: []
+                    valid:
+                        - Product_Name
+                        - Product_Version
+                '2010':
+                    rule: []
+                    valid:
+                        - Current_Engine_Version
+                        - Current_security_intelligence_Version
+                        - Domain
+                        - Dynamic_security_intelligence_Compilation_Timestamp
+                        - Dynamic_security_intelligence_Type
+                        - Dynamic_security_intelligence_Type_Index
+                        - Dynamic_security_intelligence_Version
+                        - Persistence_Limit_Type
+                        - Persistence_Limit_Type_Index
+                        - Persistence_Limit_Value
+                        - Persistence_Path
+                        - Product_Name
+                        - Product_Version
+                        - SID
+                        - Security_intelligence_Type
+                        - Security_intelligence_Type_Index
+                        - Unused
+                        - Unused10
+                        - Unused11
+                        - Unused12
+                        - Unused2
+                        - Unused3
+                        - Unused4
+                        - Unused5
+                        - Unused6
+                        - Unused7
+                        - Unused8
+                        - Unused9
+                        - User
+                '2011':
+                    rule: []
+                    valid:
+                        - Current_Engine_Version
+                        - Current_security_intelligence_Version
+                        - Domain
+                        - Dynamic_security_intelligence_Compilation_Timestamp
+                        - Dynamic_security_intelligence_Type
+                        - Dynamic_security_intelligence_Type_Index
+                        - Dynamic_security_intelligence_Version
+                        - Persistence_Limit_Type
+                        - Persistence_Limit_Type_Index
+                        - Persistence_Limit_Value
+                        - Persistence_Path
+                        - Product_Name
+                        - Product_Version
+                        - Removal_Reason_Index
+                        - Removal_Reason_Value
+                        - SID
+                        - Security_intelligence_Type
+                        - Security_intelligence_Type_Index
+                        - Unused
+                        - Unused10
+                        - Unused11
+                        - Unused12
+                        - Unused2
+                        - Unused3
+                        - Unused4
+                        - Unused5
+                        - Unused6
+                        - Unused7
+                        - Unused8
+                        - Unused9
+                        - User
+                '2012':
+                    rule: []
+                    valid:
+                        - Current_Engine_Version
+                        - Current_security_intelligence_Version
+                        - Domain
+                        - Dynamic_security_intelligence_Compilation_Timestamp
+                        - Dynamic_security_intelligence_Type
+                        - Dynamic_security_intelligence_Type_Index
+                        - Dynamic_security_intelligence_Version
+                        - Error_Code
+                        - Error_Description
+                        - Persistence_Limit_Type
+                        - Persistence_Limit_Type_Index
+                        - Persistence_Limit_Value
+                        - Persistence_Path
+                        - Product_Name
+                        - Product_Version
+                        - SID
+                        - Security_intelligence_Type
+                        - Security_intelligence_Type_Index
+                        - Unused
+                        - Unused10
+                        - Unused2
+                        - Unused3
+                        - Unused4
+                        - Unused5
+                        - Unused6
+                        - Unused7
+                        - Unused8
+                        - Unused9
+                        - User
+                '2013':
+                    rule: []
+                    valid:
+                        - Current_Engine_Version
+                        - Current_security_intelligence_Version
+                        - Domain
+                        - Product_Name
+                        - Product_Version
+                        - SID
+                        - Security_intelligence_Type
+                        - Security_intelligence_Type_Index
+                        - Unused
+                        - Unused2
+                        - Unused3
+                        - Unused4
+                        - Unused5
+                        - Unused6
+                        - User
+                '2030':
+                    rule: []
+                    valid:
+                        - Product_Name
+                        - Product_Version
+                '2031':
+                    rule: []
+                    valid:
+                        - Error_Code
+                        - Error_Description
+                        - Product_Name
+                        - Product_Version
+                        - Unused
+                '2040':
+                    rule: []
+                    valid:
+                        - Product_Name
+                        - Unused
+                        - Unused2
+                '2041':
+                    rule: []
+                    valid:
+                        - Product_Name
+                        - Unused
+                        - Unused2
+                '2042':
+                    rule: []
+                    valid:
+                        - Product_Name
+                        - Unused
+                        - Unused2
+                '2050':
+                    rule: []
+                    valid:
+                        - Filename
+                        - Product_Name
+                        - Product_Version
+                        - Sha256
+                '2051':
+                    rule: []
+                    valid:
+                        - Current_Engine_Version
+                        - Current_security_intelligence_Version
+                        - Error_Code
+                        - Filename
+                        - Product_Name
+                        - Product_Version
+                        - Sha256
+                '3002':
+                    rule: []
+                    valid:
+                        - Error_Code
+                        - Error_Description
+                        - Feature_ID
+                        - Feature_Name
+                        - Product_Name
+                        - Product_Version
+                        - Reason
+                '3007':
+                    rule: []
+                    valid:
+                        - Feature_ID
+                        - Feature_Name
+                        - Product_Name
+                        - Product_Version
+                        - Reason
+                        - Unused
+                        - Unused2
+                '5000':
+                    rule: []
+                    valid:
+                        - Product_Name
+                        - Product_Version
+                '5001':
+                    rule: []
+                    valid:
+                        - Product_Name
+                        - Product_Version
+                '5004':
+                    rule: []
+                    valid:
+                        - Configuration
+                        - Feature_ID
+                        - Feature_Name
+                        - Product_Name
+                        - Product_Version
+                        - Unused
+                '5007':
+                    rule: []
+                    valid:
+                        - New_Value
+                        - Old_Value
+                        - Product_Name
+                        - Product_Version
+                '5008':
+                    rule: []
+                    valid:
+                        - Exception_Code
+                        - Failure_Type
+                        - Failure_Type_Index
+                        - Product_Name
+                        - Product_Version
+                        - Resource
+                '5009':
+                    rule: []
+                    valid:
+                        - Product_Name
+                        - Product_Version
+                '5010':
+                    rule: []
+                    valid:
+                        - Product_Name
+                        - Product_Version
+                '5011':
+                    rule: []
+                    valid:
+                        - Product_Name
+                        - Product_Version
+                '5012':
+                    rule: []
+                    valid:
+                        - Product_Name
+                        - Product_Version
+                '5013':
+                    rule: []
+                    valid:
+                        - Changed_Type
+                        - Product_Name
+                        - Product_Version
+                        - Value
             default:
                 '0':
-                    rule:
-                        - Value
+                    rule: []
                     valid:
                         - EventID
-                        - Provider_Name
-                '1013':
-                    rule:
                         - EventType
-                    valid: []
-                '1116':
-                    rule:
-                        - Source_Name
-                    valid: []
+                        - Provider_Name
                 '1121':
                     rule:
-                        - Path
                         - ProcessName
-                    valid: []
-                '5007':
-                    rule:
-                        - New_Value
                     valid: []
         wmi:
             default:
@@ -10029,6 +11631,7 @@ windows:
                         - Archived
                         - ClientInfo
                         - EventID
+                        - EventType
                         - Hashes
                         - Image
                         - ProcessGuid
@@ -10045,6 +11648,7 @@ windows:
                     rule: []
                     valid:
                         - EventID
+                        - EventType
                         - NewThreadId
                         - Provider_Name
                         - RuleName
@@ -10069,6 +11673,7 @@ windows:
                         - Contents
                         - CreationUtcTime
                         - EventID
+                        - EventType
                         - Hash
                         - Image
                         - Imphash
@@ -10086,6 +11691,7 @@ windows:
                     rule: []
                     valid:
                         - EventID
+                        - EventType
                         - Image
                         - ProcessGuid
                         - ProcessId
@@ -10104,6 +11710,7 @@ windows:
                         - ImagePath
                     valid:
                         - EventID
+                        - EventType
                         - Hashes
                         - ImageLoaded
                         - Provider_Name
@@ -10118,11 +11725,11 @@ windows:
                 '0':
                     rule:
                         - EventLog
-                        - EventType
                         - Image
                         - WMIcommand
                     valid:
                         - EventID
+                        - EventType
                         - Provider_Name
     file_create:
         None:
@@ -10132,6 +11739,7 @@ windows:
                     valid:
                         - CreationUtcTime
                         - EventID
+                        - EventType
                         - Image
                         - PreviousCreationUtcTime
                         - ProcessGuid
@@ -10149,6 +11757,7 @@ windows:
                     valid:
                         - Archived
                         - EventID
+                        - EventType
                         - Hashes
                         - Image
                         - IsExecutable
@@ -10167,6 +11776,7 @@ windows:
                     valid:
                         - CreationUtcTime
                         - EventID
+                        - EventType
                         - Image
                         - ProcessGuid
                         - ProcessId
@@ -10179,12 +11789,12 @@ windows:
         None:
             default:
                 '0':
-                    rule:
-                        - CommandLine
+                    rule: []
                     valid:
                         - Company
                         - Description
                         - EventID
+                        - EventType
                         - FileVersion
                         - Hashes
                         - Image
@@ -10212,6 +11822,7 @@ windows:
                         - DestinationPort
                         - DestinationPortName
                         - EventID
+                        - EventType
                         - Image
                         - Initiated
                         - ProcessGuid
@@ -10250,6 +11861,7 @@ windows:
                     valid:
                         - CallTrace
                         - EventID
+                        - EventType
                         - GrantedAccess
                         - Provider_Name
                         - RuleName
@@ -10274,6 +11886,7 @@ windows:
                         - CurrentDirectory
                         - Description
                         - EventID
+                        - EventType
                         - FileVersion
                         - Hashes
                         - Image
@@ -10303,6 +11916,7 @@ windows:
                     rule: []
                     valid:
                         - EventID
+                        - EventType
                         - Image
                         - ProcessGuid
                         - ProcessId
@@ -10318,6 +11932,7 @@ windows:
                     rule: []
                     valid:
                         - EventID
+                        - EventType
                         - Image
                         - ProcessGuid
                         - ProcessId
@@ -10337,6 +11952,7 @@ windows:
                         - CommandType
                         - EngineVersion
                         - EventID
+                        - EventType
                         - HostApplication
                         - HostId
                         - HostName
@@ -10360,6 +11976,7 @@ windows:
                         - CommandType
                         - EngineVersion
                         - EventID
+                        - EventType
                         - HostApplication
                         - HostId
                         - HostName
@@ -10379,6 +11996,7 @@ windows:
                     valid:
                         - ContextInfo
                         - EventID
+                        - EventType
                         - Payload
                         - Provider_Name
     ps_script:
@@ -10388,6 +12006,7 @@ windows:
                     rule: []
                     valid:
                         - EventID
+                        - EventType
                         - Provider_Name
                         - ScriptBlockText
     raw_access_thread:
@@ -10398,6 +12017,7 @@ windows:
                     valid:
                         - Device
                         - EventID
+                        - EventType
                         - Image
                         - ProcessGuid
                         - ProcessId
@@ -10431,6 +12051,7 @@ windows:
                     valid:
                         - Description
                         - EventID
+                        - EventType
                         - ID
                         - Provider_Name
                         - UtcTime
@@ -10443,6 +12064,7 @@ windows:
                         - Configuration
                         - ConfigurationFileHash
                         - EventID
+                        - EventType
                         - Provider_Name
                         - SchemaVersion
                         - State
@@ -10455,6 +12077,7 @@ windows:
                     rule: []
                     valid:
                         - EventID
+                        - EventType
                         - Provider_Name
                         - audiocodec
                         - avgbandwidth
