@@ -43,6 +43,17 @@ fix sigma rule and make a PR
 ### Thanks
 https://github.com/OTRF/OSSEM-DD
 
+## promote_status.py
+Update status if no change in the last 365 days
+
+### use
+
+### My todo
+fix some yml bug 
+### Evolution
+
+### Thanks
+
 ## rule_history.yml
 Keep track of remove rule from SigmaHQ
 
@@ -53,3 +64,4 @@ Keep track of remove rule from SigmaHQ
 ### Evolution
 
 ### Thanks
+
