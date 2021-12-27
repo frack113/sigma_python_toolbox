@@ -9,25 +9,38 @@ $list_channel = ('Application','Security','System','Microsoft-Windows-Sysmon/Ope
 
 foreach ($info in $csv)
 {
-	$technique=$info.technique
-	$nmr=$info.nmr_test
+	$technique = $info.technique
+	$nmr = $info.nmr_test
+	$valid = $info.sigma
+	$name =  $info.name
+	if ($info.os -like '*windows*'){
+		if ($valid -eq 'False') {
+			write-host "Test $name - $technique test : $nmr" 
+			write-host "Make environnement" 
+			Invoke-AtomicTest $technique -TestNumbers $nmr -GetPrereqs
+			$list_channel | Clear-WinEvents -Verbose
+			Start-Sleep -s 5
 
-	write-host "Test $technique test : $nmr" 
+			write-host "Start Aurora" 
+			Start-Process C:\aurora-beta\aurora-agent-64.exe -WorkingDirectory C:\aurora-beta\ -ArgumentList "-c agent-config-standard.yml","--minimum-level low","--json","-l c:\Tests\$($technique)_test_$($nmr)_aurora.json"
+			Start-Sleep -s 15
+		
+			write-host "Start test" 
+			Invoke-AtomicTest $technique -TestNumbers $nmr
 
-	Invoke-AtomicTest $technique -GetPrereqs
-	$list_channel | Clear-WinEvents -Verbose
-	Start-Sleep -s 5
+			Start-Sleep -s 5
+			$list_channel | Export-WinEvents -TimeBucket 'Last 5 Minutes' -OutputPath "$($technique)_test_$($nmr)_dataset.json" -Verbose
 
-	write-host "Start Aurora" 
-	Start-Process C:\aurora-beta\aurora-agent-64.exe -WorkingDirectory C:\aurora-beta\ -ArgumentList "-c agent-config-standard.yml","--minimum-level low","--json","-l c:\Tests\$($technique)_test_$($nmr)_aurora.json"
-	Start-Sleep -s 15
+			write-host "Stop Aurora" 
+			Stop-Process -name aurora-agent-64
+		
+			write-host "Cleanup" 
+			Invoke-AtomicTest $technique -TestNumbers $nmr -Cleanup
+		} Else {
+			write-host "$name / $technique test: $nmr allready done"
+		}
+	} Else {
+		write-host "$name / $technique test: $nmr  Not windows"
+	}
 	
-	write-host "Start test" 
-	Invoke-AtomicTest $technique -TestNumbers $nmr
-
-	Start-Sleep -s 5
-	$list_channel | Export-WinEvents -TimeBucket 'Last 5 Minutes' -OutputPath "$($technique)_test_$($nmr)_dataset.json" -Verbose
-
-	write-host "Stop Aurora" 
-	Stop-Process -name aurora-agent-64
 }
