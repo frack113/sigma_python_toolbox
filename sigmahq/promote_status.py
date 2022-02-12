@@ -93,7 +93,7 @@ yaml.width = 2000
 
 yaml.indent(sequence=4, offset=2)
 
-path_sigma = '../sigma'
+path_sigma = '../../sigma'
 sigma_list = [yml for yml in pathlib.Path(f"{path_sigma}/rules").glob('**/*.yml')]
 sigma_bar = tqdm.tqdm(total=len(sigma_list),unit='file',desc="Parse sigma rule")
 
@@ -108,7 +108,7 @@ for sigma_file in sigma_list:
         if not 'status' in yml_sigma:
             print(sigma_file.name)
             continue
-        if yml_sigma['status'] in ["experimental","test"]:
+        if yml_sigma['status'] in ["experimental"]:
             update_str = yml_sigma['modified'] if 'modified' in yml_sigma else yml_sigma['date']
             update_date = datetime.datetime.strptime(update_str,'%Y/%m/%d')
             delta = today_date - update_date
