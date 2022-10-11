@@ -1,3 +1,6 @@
+# Version 20221011
+# Fix related indentation
+
 from ruamel.yaml import YAML
 import tqdm
 import pathlib
@@ -125,21 +128,33 @@ for sigma_file in sigma_list:
     local_path = str(sigma_file.parent).replace('..','./temp')
     with sigma_file.open('r',encoding='UTF-8',newline='') as file:
         yml_sigma = yaml.load(file)
+        
         if not 'status' in yml_sigma:
             print(sigma_file.name)
             continue
+            
         if yml_sigma['status'] in ["experimental"]:
             update_str = yml_sigma['modified'] if 'modified' in yml_sigma else yml_sigma['date']
             update_date = datetime.datetime.strptime(update_str,'%Y/%m/%d')
             delta = today_date - update_date
+            
             if delta.days >365:
                 print (f"Update : {sigma_file.name} last change {update_str} get {delta.days} days")
+                
                 val = order(yml_sigma)
                 val['status'] = 'stable' if val['status']=='test' else 'test'
                 val['modified'] = today_date_str
+                
                 filepath = pathlib.Path(f"{local_path}/{sigma_file.name}")
                 filepath.parent.mkdir(parents=True, exist_ok=True)
                 with filepath.open('w',encoding='UTF-8',newline='') as file_out:
                     yaml.dump(val,file_out)
+
+                #fix related indentation miss 2 space :)
+                if 'related' in yml_sigma:
+                    with filepath.open('r',encoding='UTF-8',newline='') as file_out:
+                        text=file_out.read().replace('    type: ','      type: ') 
+                    with filepath.open('w',encoding='UTF-8',newline='') as file_out:
+                        file_out.write(text)
 
 #sigma_bar.close()
