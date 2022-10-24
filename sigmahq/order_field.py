@@ -69,7 +69,7 @@ def order(yml):
 
     new_yml['date'] = old_yml['date']
     del old_yml['date']
-    new_yml['modified'] = "2021/12/02"
+    
     if 'modified' in old_yml:
         new_yml['modified'] = old_yml['modified']
         del old_yml['modified']
@@ -83,7 +83,10 @@ def order(yml):
     
     new_yml['detection'] = old_yml['detection']
     del old_yml['detection']
-   
+
+    if 'fields' in old_yml:
+        new_yml['fields'] = old_yml['fields']
+        del old_yml['fields']  
 
     if 'falsepositives' in old_yml:
         new_yml['falsepositives'] = old_yml['falsepositives']
@@ -92,10 +95,6 @@ def order(yml):
     if 'level' in old_yml:
         new_yml['level'] = old_yml['level']
         del old_yml['level']               
-
-    if 'fields' in old_yml:
-        new_yml['fields'] = old_yml['fields']
-        del old_yml['fields']
 
     for key in old_yml.keys():
         new_yml[key] = old_yml[key]
