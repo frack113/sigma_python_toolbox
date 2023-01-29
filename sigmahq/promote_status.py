@@ -8,36 +8,6 @@ import datetime
 from collections import OrderedDict
 import copy
 
-''' SigmaHQ ref
-title
-id [optional]
-related [optional]
-   - type {type-identifier}
-     id {rule-id}
-status [optional]
-description [optional]
-author [optional]
-references [optional]
-date + modified
-logsource
-   category [optional]
-   product [optional]
-   service [optional]
-   definition [optional]
-   ...
-detection
-   {search-identifier} [optional]
-      {string-list} [optional]
-      {field: value} [optional]
-   ...
-   timeframe [optional]
-   condition
-fields [optional]
-falsepositives [optional]
-level [optional]
-tags [optional]
-'''
-
 def order(yml):
     old_yml = copy.deepcopy(yml)
     new_yml = {}
@@ -69,7 +39,7 @@ def order(yml):
 
     new_yml['date'] = old_yml['date']
     del old_yml['date']
-    new_yml['modified'] = "2021/12/02"
+    #new_yml['modified'] = "2021/12/02"
     if 'modified' in old_yml:
         new_yml['modified'] = old_yml['modified']
         del old_yml['modified']
@@ -85,6 +55,10 @@ def order(yml):
     del old_yml['detection']
    
 
+    if 'fields' in old_yml:
+        new_yml['fields'] = old_yml['fields']
+        del old_yml['fields']
+
     if 'falsepositives' in old_yml:
         new_yml['falsepositives'] = old_yml['falsepositives']
         del old_yml['falsepositives']
@@ -92,10 +66,6 @@ def order(yml):
     if 'level' in old_yml:
         new_yml['level'] = old_yml['level']
         del old_yml['level']               
-
-    if 'fields' in old_yml:
-        new_yml['fields'] = old_yml['fields']
-        del old_yml['fields']
 
     for key in old_yml.keys():
         new_yml[key] = old_yml[key]
@@ -111,7 +81,7 @@ yaml = YAML()
 yaml.preserve_quotes = True
 yaml.explicit_start = False
 yaml.preserve_quotes =True
-yaml.width = 2000
+yaml.width = 5000
 
 yaml.indent(mapping=4, sequence=4, offset=4)
 
@@ -123,6 +93,7 @@ today_date = datetime.datetime.now()
 today_date_str = datetime.datetime.strftime(today_date,'%Y/%m/%d')
 print (f"Today is {today_date_str}")
 
+total = 0
 for sigma_file in sigma_list:
     #sigma_bar.update(1)
     local_path = str(sigma_file.parent).replace('..','./temp')
@@ -138,12 +109,13 @@ for sigma_file in sigma_list:
             update_date = datetime.datetime.strptime(update_str,'%Y/%m/%d')
             delta = today_date - update_date
             
-            if delta.days >365:
+            if delta.days >300:
+                total += 1
                 print (f"Update : {sigma_file.name} last change {update_str} get {delta.days} days")
                 
                 val = order(yml_sigma)
                 val['status'] = 'stable' if val['status']=='test' else 'test'
-                val['modified'] = today_date_str
+                #val['modified'] = today_date_str
                 
                 filepath = pathlib.Path(f"{local_path}/{sigma_file.name}")
                 filepath.parent.mkdir(parents=True, exist_ok=True)
@@ -158,3 +130,4 @@ for sigma_file in sigma_list:
                         file_out.write(text)
 
 #sigma_bar.close()
+print (f"{total} rules changes")
