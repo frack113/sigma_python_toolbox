@@ -44,7 +44,7 @@ def get_sigma_info():
 
     yaml.indent(mapping=4, sequence=4, offset=4)
 
-    path_sigma = '../sigma'
+    path_sigma = '../../sigma'
     sigma_list = [yml for yml in pathlib.Path(f"{path_sigma}/rules").glob('**/*.yml')]
 
     for sigma_file in sigma_list:
@@ -65,14 +65,19 @@ nofound= []
 for dll_record in hijacklibs:
     print (f'Search for {dll_record["Name"]}')
     found =  False
+    
     for rule in sigma:
         if dll_record["Name"] in str(sigma[rule]['detection']):
-            print (f'Found in {rule}')
+            #print (f'Found in {rule}')
             found = True
+   
     if not found:
         nofound.append(dll_record)
 
 if len(nofound) > 0:
-    for work_on_me in nofound:
-        print ('-------------')
-        print (work_on_me)
+    print(f'Found {len(nofound)} missing dll')
+    with pathlib.Path('dll_missing.json').open("w", encoding="UTF-8", newline="\n") as file:
+        for element in nofound:
+            json.dump(element,file)
+            file.write(',\n')
+        
